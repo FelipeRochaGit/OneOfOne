@@ -22,17 +22,17 @@ namespace WebApplicationOneOfOne
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dtProducto = new DataTable();
+            DataTable dtProductoGeneral = new DataTable();
             long idProducto;
             try
             {
                 if (!IsPostBack)
                 {
                     idProducto = long.Parse(Request["idProducto"].ToString());
-                    dtProducto = _productoService.ObtenerProducto(idProducto);
+                    dtProductoGeneral = _productoService.ObtenerProducto(idProducto);
 
-                    //ValidarStockTalles(dtProducto);
-                    VerProducto(dtProducto);
+                    ValidarStockTalles(dtProductoGeneral);
+                    VerProducto(dtProductoGeneral);
                 }
             }
             catch (Exception ex)
@@ -41,26 +41,24 @@ namespace WebApplicationOneOfOne
             }
         }
 
-        public void VerProducto(DataTable dtProducto)
+        public void VerProducto(DataTable dtProductoGeneral)
         {
-            Session["dtProducto"] = new DataTable();
+            Session["dtProductoGeneral"] = new DataTable(); //tabla que va a tener los 2 registros del producto (los 2 talles)
             string imgURL;
             string descripcion;
             string precio;
 
             try
             {
-                dtProducto.Columns.Add("Cantidad"); //ver
-
-                imgURL = dtProducto.Rows[0]["ImgURL"].ToString();
-                descripcion = dtProducto.Rows[0]["Descripcion"].ToString();
-                precio = $"$ {dtProducto.Rows[0]["Precio"].ToString()}";
+                imgURL = dtProductoGeneral.Rows[0]["ImgURL"].ToString();
+                descripcion = dtProductoGeneral.Rows[0]["Descripcion"].ToString();
+                precio = $"$ {dtProductoGeneral.Rows[0]["Precio"].ToString()}";
 
                 imgProducto.ImageUrl = imgURL;
                 lblDescripcion.Text = descripcion;
                 lblPrecio.Text = precio;
 
-                Session["dtProducto"] = dtProducto;
+                Session["dtProductoGeneral"] = dtProductoGeneral;
             }
             catch (Exception ex)
             {
@@ -77,21 +75,24 @@ namespace WebApplicationOneOfOne
         {
             long idProducto;
             int cantidad;
+            string talle;
             bool existe = false;
 
             try
             {
                 idProducto = long.Parse(dtProducto.Rows[0]["Id"].ToString());
                 cantidad = int.Parse(dtProducto.Rows[0]["Cantidad"].ToString());
+                talle = dtProducto.Rows[0]["Talle"].ToString();
 
                 //recorro los productos del carrito y busco el IdProducto que se esta queriendo agregar
                 foreach (DataRow row in dtCarrito.Rows)
                 {
                     long i = long.Parse(row["Id"].ToString());
                     int c = int.Parse(row["Cantidad"].ToString());
+                    string t = row["Talle"].ToString();
 
-                    //si lo encuentro incremento la cantidad
-                    if (i == idProducto)
+                    //si encuentro el producto en el carrito y es el mismo talle incrementamos la cantidad
+                    if (i == idProducto && t == talle)
                     {
                         c += cantidad;
                         row["Cantidad"] = c;
@@ -99,7 +100,7 @@ namespace WebApplicationOneOfOne
                     }
                 }
 
-                //si el producto no se encuentra en el carrito mergeo todo el row
+                //si el producto no se encuentra, o es el mismo producto pero talle diferente, mergeamos todo el row
                 if (!existe)
                 {
                     dtCarrito.Merge(dtProducto);
@@ -115,43 +116,55 @@ namespace WebApplicationOneOfOne
         /// <summary>
         /// Vemos si hay stock de los talles y habilitamos/deshabilitamos los checkbox de c/tallle
         /// </summary>
-        /// <param name="dtProducto"></param>
-        //public void ValidarStockTalles(DataTable dtProducto)
-        //{
-        //    int stockTalle1;
-        //    int stockTalle2;
-
-        //    try
-        //    {
-        //        stockTalle1 = int.Parse(dtProducto.Rows[0]["Stock"].ToString());
-        //        stockTalle2 = int.Parse(dtProducto.Rows[1]["Stock"].ToString());
-
-        //        chkTalle1.Enabled = stockTalle1 > 0;
-        //        chkTalle2.Enabled = stockTalle2 > 0;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
-        protected void btnAgregarAlCarrito_Click(object sender, EventArgs e)
+        /// <param name="dtProductoGeneral"></param>
+        public void ValidarStockTalles(DataTable dtProductoGeneral)
         {
-            DataTable dtCarrito = (DataTable)Session["dtCarrito"];
-            DataTable dtProducto = (DataTable)Session["dtProducto"];
+            int stockTalle1;
+            int stockTalle2;
 
             try
             {
-                dtProducto.Rows[0]["Cantidad"] = txtCantidadProductos.Text;
+                stockTalle1 = int.Parse(dtProductoGeneral.Rows[0]["Stock"].ToString());
+                stockTalle2 = int.Parse(dtProductoGeneral.Rows[1]["Stock"].ToString());
 
+                chkTalle1.Enabled = stockTalle1 > 0;
+                chkTalle2.Enabled = stockTalle2 > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected void btnAgregarAlCarrito_Click(object sender, EventArgs e)
+        {
+            DataTable dtCarrito = (DataTable)Session["dtCarrito"]; //tabla general del carrito
+            DataTable dtProductoGeneral = (DataTable)Session["dtProductoGeneral"]; //tabla del producto con los 2 rows de c/talle y su stock
+            DataTable dtProductoIndividual = dtProductoGeneral.Clone(); //tabla que va a tener solamente el row del talle seleccionado
+            try
+            {
+                //vemos que talle se selecciono
+                var talleSeleccionado = chkTalle1.Checked ? "1" : "2";
+
+                //de la tabla general filtramos por el talle seleccionado
+                DataRow rowTalleElegido = dtProductoGeneral.Select($"Talle = {talleSeleccionado}")[0];
+
+                //seteamos la tabla individual que va a tener solamente el row del talle seleccionado
+                dtProductoIndividual.ImportRow(rowTalleElegido);
+
+                //agregamos columna Cantidad y la seteamos
+                dtProductoIndividual.Columns.Add("Cantidad");
+                dtProductoIndividual.Rows[0]["Cantidad"] = txtCantidadProductos.Text;
+
+                //si el carrito es null copiamos directamente
                 if (Session["dtCarrito"] == null)
                 {
                     dtCarrito = new DataTable();
-                    dtCarrito = dtProducto.Copy();
+                    dtCarrito = dtProductoIndividual.Copy();
                 }
-                else
+                else //si ya existe validamos si el carrito ya tiene el producto seleccionado o no
                 {
-                    AgregarProducto(dtCarrito, dtProducto);
+                    AgregarProducto(dtCarrito, dtProductoIndividual);
                 }
 
                 Session["dtCarrito"] = dtCarrito;
@@ -161,6 +174,5 @@ namespace WebApplicationOneOfOne
                 throw ex;
             }
         }
-
     }
 }

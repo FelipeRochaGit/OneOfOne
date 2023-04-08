@@ -57,6 +57,15 @@
             cantidadProductos.value = cantidad;
         }
 
+        function validarTalle() {
+            debugger
+            if (!$("#chkTalle1").prop("checked") && !$("#chkTalle2").prop("checked")) {
+                alert('Seleccionar talle');
+                return false;
+            }
+
+            return true;
+        }
 
 
     </script>
@@ -67,14 +76,14 @@
     <br />
     <asp:Label ID="lblPrecio" runat="server"></asp:Label>
     <br />
-    <asp:CheckBox ID="chkTalle1" ClientIDMode="Static" runat="server" Checked="true" Text="Talle 1" />
+    <asp:CheckBox ID="chkTalle1" ClientIDMode="Static" runat="server" Text="Talle 1" />
     <asp:CheckBox ID="chkTalle2" ClientIDMode="Static" runat="server" Text="Talle 2" />
     <br />
     <label for="cantidad-productos">Cantidad de productos:</label>
     <asp:TextBox ID="txtCantidadProductos" runat="server" TextMode="number" ClientIDMode="Static" Width="50px" Value="1"></asp:TextBox>
     <button onclick="aumentarCantidad()">+</button>
     <button onclick="disminuirCantidad()">-</button>
-    <asp:Button ID="btnAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" />
+    <asp:Button ID="btnAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()"/>
 
     <div class="carrito">
     </div>
