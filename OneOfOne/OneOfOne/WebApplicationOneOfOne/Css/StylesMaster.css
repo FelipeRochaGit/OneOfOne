@@ -1,0 +1,293 @@
+﻿body {
+    padding-top: 150px;
+}
+
+
+.container {
+    position: relative;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+/*NAV*/
+.mainNav {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 80px;
+    background-color: transparent;
+    transition: all 0.9s ease-in-out;
+}
+    /*ICONO MENU*/
+    .mainNav .Bars {
+        position: fixed;
+        top: 40px;
+        margin-left: 20px;
+        color: #ced2d9;
+        text-decoration: none !important;
+    }
+
+/*ICONO LOGO*/
+.divNavLogo {
+    text-align: center;
+}
+
+/*TAMAÑO DEL LOGO*/
+.mainNav .Navlogo {
+    display: inline-block;
+    vertical-align: middle;
+    height: 70px;
+}
+/*ICONO CARRITO*/
+.mainNav .Cart {
+    position: fixed;
+    top: 40px;
+    right: 20px;
+    color: #ced2d9;
+}
+/*TERMINA NAV*/
+
+/*MENU*/
+
+.menu {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background-color: white;
+    color: white;
+    z-index: 1;
+}
+
+
+/*ESTILOS HOVER*/
+/*Cuando se pasa el mouse por encima del nav en jquery se cambian las clases y se les agrega el .active y muestra los siguientes estilos*/
+
+.navContainer.active .mainNav {
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+}
+
+.navContainer.active .Bars {
+    color: black;
+}
+
+.navContainer.active .Cart {
+    color: black;
+}
+
+/*    .navContainer.active .logo {
+        color: black;
+    }*/
+
+
+
+
+
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.menu li {
+    padding: 10px;
+}
+
+.menu a {
+    color: black;
+    text-decoration: none;
+}
+
+    .menu a:hover {
+        text-decoration: underline;
+    }
+
+
+
+/*FOOTER*/
+.separador {
+    width:100%;
+    border-top: 1px solid grey;
+    margin:20px 0;
+}
+.formularioMail {
+    display: inline-block;
+    text-align: center;
+}
+
+.TextMail {
+    color:white;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width:50%;
+    border-bottom:1px solid grey;
+}
+
+.btnSubcribirse {
+    color:white;
+    border-radius: 5px;
+
+}
+
+
+
+/*COLUMNAS*/
+.footerContainer {
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+.RedesSociales{
+
+    padding:20px;
+    text-decoration:none;
+    display:inline-block;
+    outline:none;
+}
+.RedesSociales a {
+    color: white ;
+}
+
+
+
+
+
+/*ICONOS FLOTANTES*/
+
+
+.container-red {
+    position: fixed;
+    bottom: 2%;
+    right: 1%;
+}
+
+    .container-red a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        width: 50px;
+        height: 50px;
+        background-color: #25d366;
+        border-radius: 50%;
+        text-decoration: none;
+    }
+
+        .container-red a i {
+            font-size: 35px;
+        }
+
+.wsp {
+    text-align: center;
+    font-size: 40px;
+}
+
+
+/*MOVIL*/
+/*NAV*/
+@media (max-width: 700px) {
+    .menu {
+        display: block;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background-color: black;
+        color: white;
+        z-index: 1;
+        opacity: 0.8;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-out;
+    }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20%;
+            text-align: center;
+        }
+
+
+    /*NAV*/
+    .mainNav {
+        position: fixed;
+        top: 0;
+        left: 0%;
+        width: 100%;
+        height: 80px;
+        background-color: black;
+        opacity:0.4;
+        transform: translateY(0);
+        transition: transform 0.3s ease-out;
+        /*transition: all 0.9s ease-in-out;*/
+    }
+
+
+    /*ICONO LOGO*/
+    .divNavLogo {
+        text-align: center;
+    }
+
+    /*TAMAÑO DEL LOGO*/
+    .mainNav .Navlogo {
+        display: inline-block;
+        vertical-align: middle;
+        height: 70px;
+    }
+    /*ICONO CARRITO*/
+    .mainNav .Cart {
+        position: absolute;
+        text-decoration: none;
+        right: 20px;
+        color: #ced2d9;
+    }
+    /*ICONO MENU*/
+    .mainNav .Bars {
+        position: absolute;
+        color: #ced2d9;
+    }
+}
+
+/*ICONOS FLOTANTES*/
+@media (max-width:700px){
+    .container-red {
+        position: fixed;
+        bottom: 2%;
+        right: 1%;
+    }
+
+        .container-red a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            width: 40px;
+            height: 40px;
+            background-color: #25d366;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+
+            .container-red a i {
+                font-size: 30px;
+            }
+
+    .wsp {
+        text-align: center;
+        font-size: 40px;
+    }
+
+}
+
+
+
+

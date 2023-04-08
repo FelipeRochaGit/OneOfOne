@@ -1,0 +1,311 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplicationOneOfOne.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/ba5307ef8c.js" crossorigin="anonymous"></script>
+    <!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <asp:ContentPlaceHolder ID="title" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+    </script>
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/ba5307ef8c.js" crossorigin="anonymous"></script>
+
+
+   
+
+    <!-- SweetAlert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css?V=2" />
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js?V=2"></script>
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <link href="Css\StylesHome.css" rel="stylesheet">
+    <link href="Css\StylesMaster.css" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="js" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+
+    <form id="form1" runat="server">
+        <div>
+            <nav class="navContainer">
+                <div class="mainNav">
+                    <asp:LinkButton runat="server" CssClass="Bars fa-solid fa-bars fa-xl" OnClientClick="return false;"></asp:LinkButton>
+                    <div class="divNavLogo">
+                        <img src="Imagenes/Logo.png" class="Navlogo" />
+                    </div>
+                    <asp:LinkButton runat="server" CssClass="Cart fas fa-cart-plus fa-xl" OnClientClick="return false;"></asp:LinkButton>
+                </div>
+                <div class="menu">
+                    <ul class="ul">
+                        <li><a href="#">Opción 1</a></li>
+                        <li><a href="#">Opción 2</a></li>
+                        <li><a href="#">Opción 3</a></li>
+                        <li><a href="#">Opción 4</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+
+
+
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <footer class="footerContainer">
+            <div class="container-fluid">
+                <div class="formularioMail row ">
+                    <h3>Subscribite para enterarte de nuestras ofertas</h3>
+                    <br />
+                    <asp:TextBox CssClass="TextMail" ID="txtMail" placeholder="example@gmail.com" runat="server"></asp:TextBox>
+                    <asp:LinkButton class="btnSubcribirse" runat="server" OnClientClick="return false;"><i class="fa-solid fa-check"></i></asp:LinkButton>
+                </div>
+
+                <div class="separador"></div>
+                <div class="row">
+                    <div class="col-4">
+                        COLUMNA 1
+                    <br />
+                        <div class="RedesSociales">
+                            <a href="#"><i class="fa-brands fa-instagram fa-xl"></i></a>
+                            <a href="#"><i class="fa-brands fa-whatsapp fa-xl"></i></a>
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-4">COLUMNA 2</div>
+                    <div class="col-4">COLUMNA 3</div>
+                </div>
+            </div>
+        </footer>
+
+
+        <div class="container-red">
+            <a href="https://wa.me/1234567890" target="_blank">
+                <i class="fa fa-whatsapp"></i>
+            </a>
+        </div>
+
+
+
+    </form>
+
+    <script>    
+        const container = document.querySelector('.mainNav');
+        const btnMenu = document.querySelector('.Bars');
+        const menu = document.querySelector('.menu');
+        const image = container.querySelector('img');
+        var lastScrollTop = 0;
+        var subiendo = false;
+        var menuAbierto = false
+        var width = $(window).width();
+        console.log(width)
+        if (width >= 701) {
+
+
+
+            btnMenu.addEventListener('mouseover', function () {
+
+                image.src = 'Imagenes/LogoNegro.png';
+                image.style.opacity = '1';
+                $(".menu").stop().slideDown();
+                menuAbierto = true;
+
+                $('.Bars').addClass('fa-xmark');
+
+
+
+
+            });
+
+            menu.addEventListener('mouseover', function () {
+                image.src = 'Imagenes/LogoNegro.png';
+                image.style.opacity = '1';
+
+            });
+
+            menu.addEventListener('mouseleave', function () {
+                image.src = 'Imagenes/LogoNegro.png';
+                image.style.opacity = '1';
+                $(".menu").stop().slideUp();
+                menuAbierto = false;
+                $('.navContainer').removeClass('active');
+                $('.Bars').removeClass('fa-xmark');
+                $('.Bars').addClass('fa-bars');
+                if ($(window).scrollTop() == 0) {
+                    image.src = 'Imagenes/Logo.png';
+                }
+
+            });
+
+            container.addEventListener('mouseover', function () {
+                if ($(window).scrollTop() == 0) {
+                    $('.navContainer').addClass('active');
+                    image.src = 'Imagenes/LogoNegro.png';
+                    image.style.opacity = '1';
+                }
+            });
+
+            container.addEventListener('mouseout', function () {
+                if ($(window).scrollTop() == 0) {
+                    if (menuAbierto == false) {
+                        $('.navContainer').removeClass('active');
+                        image.src = 'Imagenes/Logo.png';
+                        image.style.opacity = '1';
+                    }
+
+
+
+                }
+            });
+
+
+            $(document).ready(function () {
+                $(".Bars").click(function () {
+                    if ($(".menu").is(":visible")) {
+                        $(".menu").stop().slideUp();
+                        $('.Bars').removeClass('fa-xmark');
+                        $('.Bars').addClass('fa-bars');
+                        menuAbierto = false;
+                    }
+                    else {
+                        $(".menu").stop().slideDown();
+                        $('.Bars').addClass('fa-xmark');
+                        $('.Bars').removeClass('fa-bars');
+
+                    }
+
+                });
+            });
+
+
+
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 0) {
+                        if (menuAbierto == false) {
+                            $('.navContainer').addClass('active');
+                            image.src = 'Imagenes/LogoNegro.png';
+                            subiendo = false;
+                        }
+                    }
+                });
+            });
+
+
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() == 0) {
+                        if (menuAbierto == false) {
+                            $('.navContainer').removeClass('active');
+                            image.src = 'Imagenes/Logo.png';
+                            subiendo = false;
+                        }
+                    }
+                });
+            });
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //MOVIMIENTO DEL MENU EN CELULAR
+        if (width <= 700) {
+            console.log(width);
+            image.src = 'Imagenes/Logo.png';
+            $(btnMenu).click(function () {
+
+
+                if ($('.Bars').hasClass('fa-bars')) {
+                    $('.menu').css('transform', 'translateX(0)');
+                } else {
+                    $('.menu').css('transform', 'translateX(-100%)');
+                }
+                /*console.log(parseInt($('.menu').css('left')));*/
+
+                //SI ESTA ABIERTO EL MENU CAMBIA EL BOTON DE MENU DE HAMBURGUESA A CRUZ
+                $('.Bars').toggleClass('fa-bars fa-xmark');
+                if ($('.Bars').hasClass('fa-bars')) {
+                    menuAbierto = false;
+                }
+                else {
+                    menuAbierto = true;
+                }
+
+            });
+
+
+            $(document).ready(function () {
+
+                $(window).on("scroll", function () {
+                    var scrollTop = $(this).scrollTop();
+                    if (scrollTop < lastScrollTop && menuAbierto == false) {
+                        /*console.log(scrollTop);*/
+                        $('.mainNav').css('transform', 'translateY(0)');
+                        subiendo = true;
+                    }
+                    else {
+                        if (menuAbierto == false)
+                            $('.mainNav').css('transform', 'translateY(-100%)');
+                    }
+                    lastScrollTop = scrollTop;
+                });
+            });
+
+
+
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
