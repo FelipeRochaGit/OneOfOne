@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -21,11 +22,17 @@ namespace WebApplicationOneOfOne
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            DataTable dtProducto = new DataTable();
+            long idProducto;
             try
             {
                 if (!IsPostBack)
                 {
-                    VerProducto();
+                    idProducto = long.Parse(Request["idProducto"].ToString());
+                    dtProducto = _productoService.ObtenerProducto(idProducto);
+
+                    //ValidarStockTalles(dtProducto);
+                    VerProducto(dtProducto);
                 }
             }
             catch (Exception ex)
@@ -34,41 +41,117 @@ namespace WebApplicationOneOfOne
             }
         }
 
-        public void VerProducto()
+        public void VerProducto(DataTable dtProducto)
         {
             Session["dtProducto"] = new DataTable();
-            DataTable dt = new DataTable();
-            long idProducto;
-            string imgURL; 
+            string imgURL;
+            string descripcion;
+            string precio;
+
             try
             {
-                idProducto = long.Parse(Request["IdProducto"].ToString());
-                dt = _productoService.ObtenerProducto(idProducto);
+                dtProducto.Columns.Add("Cantidad"); //ver
 
-                imgURL =dt.Rows[0]["ImgURL"].ToString();
+                imgURL = dtProducto.Rows[0]["ImgURL"].ToString();
+                descripcion = dtProducto.Rows[0]["Descripcion"].ToString();
+                precio = $"$ {dtProducto.Rows[0]["Precio"].ToString()}";
+
                 imgProducto.ImageUrl = imgURL;
-                Session["dtProducto"] = dt;
+                lblDescripcion.Text = descripcion;
+                lblPrecio.Text = precio;
+
+                Session["dtProducto"] = dtProducto;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Valida si el producto que se esta agregando existe en el carrito, si existe acumula la cantidad, si no existe mergea todo el row
+        /// </summary>
+        /// <param name="dtCarrito"></param>
+        /// <param name="dtProducto"></param>
+        public void AgregarProducto(DataTable dtCarrito, DataTable dtProducto)
+        {
+            long idProducto;
+            int cantidad;
+            bool existe = false;
+
+            try
+            {
+                idProducto = long.Parse(dtProducto.Rows[0]["Id"].ToString());
+                cantidad = int.Parse(dtProducto.Rows[0]["Cantidad"].ToString());
+
+                //recorro los productos del carrito y busco el IdProducto que se esta queriendo agregar
+                foreach (DataRow row in dtCarrito.Rows)
+                {
+                    long i = long.Parse(row["Id"].ToString());
+                    int c = int.Parse(row["Cantidad"].ToString());
+
+                    //si lo encuentro incremento la cantidad
+                    if (i == idProducto)
+                    {
+                        c += cantidad;
+                        row["Cantidad"] = c;
+                        existe = true;
+                    }
+                }
+
+                //si el producto no se encuentra en el carrito mergeo todo el row
+                if (!existe)
+                {
+                    dtCarrito.Merge(dtProducto);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Vemos si hay stock de los talles y habilitamos/deshabilitamos los checkbox de c/tallle
+        /// </summary>
+        /// <param name="dtProducto"></param>
+        //public void ValidarStockTalles(DataTable dtProducto)
+        //{
+        //    int stockTalle1;
+        //    int stockTalle2;
+
+        //    try
+        //    {
+        //        stockTalle1 = int.Parse(dtProducto.Rows[0]["Stock"].ToString());
+        //        stockTalle2 = int.Parse(dtProducto.Rows[1]["Stock"].ToString());
+
+        //        chkTalle1.Enabled = stockTalle1 > 0;
+        //        chkTalle2.Enabled = stockTalle2 > 0;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         protected void btnAgregarAlCarrito_Click(object sender, EventArgs e)
         {
             DataTable dtCarrito = (DataTable)Session["dtCarrito"];
             DataTable dtProducto = (DataTable)Session["dtProducto"];
+
             try
             {
-                if(Session["dtCarrito"] == null)
+                dtProducto.Rows[0]["Cantidad"] = txtCantidadProductos.Text;
+
+                if (Session["dtCarrito"] == null)
                 {
                     dtCarrito = new DataTable();
-                    dtCarrito = dtProducto;
+                    dtCarrito = dtProducto.Copy();
                 }
                 else
                 {
-                    dtCarrito.Merge(dtProducto);
+                    AgregarProducto(dtCarrito, dtProducto);
                 }
 
                 Session["dtCarrito"] = dtCarrito;
@@ -78,5 +161,6 @@ namespace WebApplicationOneOfOne
                 throw ex;
             }
         }
+
     }
 }
