@@ -1,0 +1,15 @@
+﻿body {
+}
+.fotoInicio {
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width:100%;
+    height:50%;
+}
+
+.FotoCatalogo {
+    margin-top: 100px;
+}
