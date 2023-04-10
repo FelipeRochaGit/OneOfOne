@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- JQUERY-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Fontawesome -->
@@ -21,7 +21,8 @@
     </title>
 
     <!-- Required meta tags -->
-    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
@@ -39,14 +40,14 @@
     <script src="https://kit.fontawesome.com/ba5307ef8c.js" crossorigin="anonymous"></script>
 
 
-   
+
 
     <!-- SweetAlert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css?V=2" />
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js?V=2"></script>
-    
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
@@ -65,7 +66,8 @@
                 <div class="mainNav">
                     <asp:LinkButton runat="server" CssClass="Bars fa-solid fa-bars fa-xl" OnClientClick="return false;"></asp:LinkButton>
                     <div class="divNavLogo">
-                        <img src="Imagenes/Logo.png" class="Navlogo" />
+                        <a href="index.aspx">
+                            <img src="Imagenes/Logo.png" class="Navlogo" /></a>
                     </div>
                     <asp:LinkButton runat="server" CssClass="Cart fas fa-cart-plus fa-xl" OnClientClick="return false;"></asp:LinkButton>
                 </div>
@@ -78,27 +80,15 @@
                     </ul>
                 </div>
                 <div class="carrito">
-            <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
+                    <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
+                    <div id="rpCarrito" class=" pt-5">
+                    </div>
+
                 </div>
             </nav>
             <div class="overlay">
-
             </div>
-            
+
 
 
 
@@ -182,7 +172,7 @@
                 image.style.opacity = '1';
                 $(".menu").stop().slideUp();
                 menuAbierto = false;
-                
+
                 $('.Bars').removeClass('fa-xmark');
                 $('.Bars').addClass('fa-bars');
                 if ($(window).scrollTop() == 0) {
@@ -231,7 +221,7 @@
 
                 });
 
-               
+
 
 
             });
@@ -277,17 +267,110 @@
         });
 
         $(".Cart").click(function () {
+
+            //CARGAR CARRITO
+
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/CargarCarrito",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var data = JSON.parse(response.d);
+                    var html = "";
+                    $.each(data, function (index, item) {
+                        html += "<div class='row ml-2 mt-5'>";
+                        html += "<div class='col-4'>";
+                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
+                        html += "</div > ";
+                        html += "<div class='col-4 '>";
+                        html += item.Descripcion + "<br />";
+                        html += "Talle: " + item.Talle + "<br />";
+                        html += item.Cantidad + "<br />";
+                        html += "Precio: " + item.Precio + "<br />";
+                        html += "</div > ";
+                        html += "<div class='col-3 '>";
+                        html += "<button type='button' class='w-100 eliminarItem' data-id='" + index + "'>Eliminar</button>";
+                        html += "</div > ";
+                        html += "</div > ";
+
+                    });
+                    if (html == "") {
+                        html += "<div class='row ml-5'>";
+                        html += "Su carrito esta vacio";
+                        html += "</div > ";
+
+                    }
+                    $('[id=rpCarrito]').html(html);
+
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+
+                
+                
+
+            });
+            
             if ($('.Cart').hasClass('fa-cart-plus')) {
                 $('.carrito').css('transform', 'translateX(0)');
                 $('.overlay').css('display', 'block');
                 menuAbierto = true;
-                //color del header
             }
+
             /*console.log(parseInt($('.menu').css('left')));*/
         });
 
 
+        
 
+
+
+        $(document).on('click', '.eliminarItem', function () {
+            var index = $(this).data('id');
+
+            $.ajax({
+                method: 'POST',
+                url: "LlamadosAjax.asmx/EliminarItem",
+                data: JSON.stringify({ itemIndex: index }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var data = JSON.parse(response.d);
+                    var html = "";
+                    $.each(data, function (index, item) {
+                        html += "<div class='row ml-2 mt-5'>";
+                        html += "<div class='col-4'>";
+                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
+                        html += "</div > ";
+                        html += "<div class='col-4 '>";
+                        html += item.Descripcion + "<br />";
+                        html += "Talle: " + item.Talle + "<br />";
+                        html += item.Cantidad + "<br />";
+                        html += "Precio: " + item.Precio + "<br />";
+                        html += "</div > ";
+                        html += "<div class='col-3 '>";
+                        html += "<button type='button' class='w-100 eliminarItem' data-id='" + index + "'>Eliminar</button>";
+                        html += "</div > ";
+                        html += "</div > ";
+                    });
+                    if (html == "") {
+                        html += "<div class='row ml-5'>";
+                        html += "Su carrito esta vacio";
+                        html += "</div > ";
+
+                    }
+                    $('[id=rpCarrito]').html(html);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
 
 
 
@@ -333,7 +416,7 @@
                         $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
                         $('.mainNav').css('transform', 'translateY(0)');
                         subiendo = true;
-                    } 
+                    }
                     else {
                         if (scrollTop == 0) {
                             if (menuAbierto == false) {
@@ -347,14 +430,14 @@
                         }
                         lastScrollTop = scrollTop;
                     }
-                    
+
                 });
 
-                    
+
 
             });
 
-           
+
 
         }
 

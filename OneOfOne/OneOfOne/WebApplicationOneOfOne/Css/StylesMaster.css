@@ -1,6 +1,4 @@
 ﻿body {
-    padding-top: 150px;
-    overflow: auto;
 }
 
 
@@ -69,12 +67,21 @@
 /*BOTON DENTRO DE CARRITO*/
 .CerrarCarrito{
     position:fixed;
-    right:2%;
+    left:2%;
     top:4%;
     text-decoration:none;
     color:black;
+    z-index:9999;
+    
 
 }
+/*LISTA CARRITO*/
+#rpCarrito img{
+    width:100px;
+    height:100px;
+}
+
+
 
 .overlay {
     display: none;

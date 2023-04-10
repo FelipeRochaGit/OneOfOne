@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <link href="Css\StylesProducto.css" rel="stylesheet">
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
     <script type="text/javascript">
@@ -58,7 +60,6 @@
         }
 
         function validarTalle() {
-            debugger
             if (!$("#chkTalle1").prop("checked") && !$("#chkTalle2").prop("checked")) {
                 alert('Seleccionar talle');
                 return false;
@@ -71,7 +72,16 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
-    <asp:Image ID="imgProducto" runat="server" CssClass="w-100 FotoCatalogo" />
+
+    <div class="producto row">
+        <div class="col-6 ">
+    <asp:Image ID="imgProducto" runat="server" CssClass="w-100 Imagenes" />
+    <asp:Image ID="imgProducto1" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
+    <asp:Image ID="imgProducto2" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
+    <asp:Image ID="imgProducto3" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
+    <asp:Image ID="imgProducto4" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
+            </div>
+        <div class="DetallesProducto">
     <asp:Label ID="lblDescripcion" runat="server"></asp:Label>
     <br />
     <asp:Label ID="lblPrecio" runat="server"></asp:Label>
@@ -84,8 +94,6 @@
     <button onclick="aumentarCantidad()">+</button>
     <button onclick="disminuirCantidad()">-</button>
     <asp:Button ID="btnAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()"/>
-
-    <div class="carrito">
+            </div>
     </div>
-
 </asp:Content>

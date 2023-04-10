@@ -7,30 +7,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
+    <div>
     <img src="Imagenes/FondoInicio2.png" class="fotoInicio img-fluid" />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
 
+        </div>
 </asp:Content>
