@@ -76,7 +76,6 @@ namespace WebApplicationOneOfOne
             long idProducto;
             int cantidad;
             string talle;
-            bool existe = false;
 
             try
             {
@@ -84,31 +83,23 @@ namespace WebApplicationOneOfOne
                 cantidad = int.Parse(dtProducto.Rows[0]["Cantidad"].ToString());
                 talle = dtProducto.Rows[0]["Talle"].ToString();
 
-                //recorro los productos del carrito y busco el IdProducto que se esta queriendo agregar
-                foreach (DataRow row in dtCarrito.Rows)
-                {
-                    long i = long.Parse(row["Id"].ToString());
-                    int c = int.Parse(row["Cantidad"].ToString());
-                    string t = row["Talle"].ToString();
+                //buscamos en el carrito el producto elegido y el talle
+                var rowProducto = dtCarrito.Select($"Id = {idProducto} and Talle = {talle}");
 
-                    //si encuentro el producto en el carrito y es el mismo talle incrementamos la cantidad
-                    if (i == idProducto && t == talle)
-                    {
-                        c += cantidad;
-                        row["Cantidad"] = c;
-                        existe = true;
-                    }
-                }
-
-                //si el producto no se encuentra, o es el mismo producto pero talle diferente, mergeamos todo el row
-                if (!existe)
+                //si no encuentra ese producto y talle, mergeamos
+                if(rowProducto.Length == 0)
                 {
                     dtCarrito.Merge(dtProducto);
+                }
+                else //si el producto y talle ya estaban agregados, incrementamos la cantidad
+                {
+                    int c = int.Parse(rowProducto[0]["Cantidad"].ToString());
+                    c += cantidad;
+                    rowProducto[0]["Cantidad"] = c;
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
