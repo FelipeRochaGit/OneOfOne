@@ -1,0 +1,33 @@
+﻿body {
+    padding-top: 90px;
+}
+
+.row {
+    max-width: 100vw;
+}
+
+.producto img {
+    max-height: 100vh;
+    max-width: 100%;
+}
+
+.overlayImg {
+    position: absolute;
+    background: rgb(0 0 0 /0.4);
+    width:100%;
+    height:100%;
+}
+
+.Imagenes {
+    margin-left:2%;
+    background: rgb(230 226 226 / 1 );
+    width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.DetallesProducto {
+    position: fixed;
+    width: 50%;
+    right: 0;
+}

@@ -44,6 +44,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -68,10 +71,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Css\StylesHome.css" />
+    <Content Include="Css\StylesIndex.css" />
     <Content Include="Css\StylesMaster.css" />
+    <Content Include="Css\StylesProducto.css" />
     <Content Include="Home.aspx" />
+    <Content Include="Imagenes\1Of1.png" />
+    <Content Include="Imagenes\Buzo1.png" />
+    <Content Include="Imagenes\FondoCatalogo.png" />
+    <Content Include="Imagenes\FondoCatalogo1.png" />
+    <Content Include="Imagenes\FondoInicio.png" />
+    <Content Include="Imagenes\FondoInicio2.png" />
+    <Content Include="Imagenes\Logo.png" />
+    <Content Include="Imagenes\Logo1Of1.png" />
+    <Content Include="Imagenes\LogoNegro.png" />
+    <Content Include="Imagenes\Remera1.png" />
+    <Content Include="Imagenes\Remera2.png" />
+    <Content Include="Index.aspx" />
     <Content Include="Producto.aspx" />
     <Content Include="Web.config" />
+    <Content Include="LlamadosAjax.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Home.aspx.cs">
@@ -80,6 +98,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Producto.aspx.cs">
       <DependentUpon>Producto.aspx</DependentUpon>
@@ -95,6 +120,10 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="LlamadosAjax.asmx.cs">
+      <DependentUpon>LlamadosAjax.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +142,7 @@
       <Name>OneOfOne.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Imagenes\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

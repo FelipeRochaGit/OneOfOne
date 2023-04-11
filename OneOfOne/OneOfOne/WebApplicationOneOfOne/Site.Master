@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- JQUERY-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Fontawesome -->
@@ -21,7 +21,8 @@
     </title>
 
     <!-- Required meta tags -->
-    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
@@ -39,19 +40,18 @@
     <script src="https://kit.fontawesome.com/ba5307ef8c.js" crossorigin="anonymous"></script>
 
 
-   
+
 
     <!-- SweetAlert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css?V=2" />
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js?V=2"></script>
-    
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-    <link href="Css\StylesHome.css" rel="stylesheet">
     <link href="Css\StylesMaster.css" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -66,19 +66,28 @@
                 <div class="mainNav">
                     <asp:LinkButton runat="server" CssClass="Bars fa-solid fa-bars fa-xl" OnClientClick="return false;"></asp:LinkButton>
                     <div class="divNavLogo">
-                        <img src="Imagenes/Logo.png" class="Navlogo" />
+                        <a href="index.aspx">
+                            <img src="Imagenes/Logo.png" class="Navlogo" /></a>
                     </div>
                     <asp:LinkButton runat="server" CssClass="Cart fas fa-cart-plus fa-xl" OnClientClick="return false;"></asp:LinkButton>
                 </div>
                 <div class="menu">
                     <ul class="ul">
-                        <li><a href="#">Opción 1</a></li>
-                        <li><a href="#">Opción 2</a></li>
+                        <li><a href="index.aspx">index.aspx</a></li>
+                        <li><a href="home.aspx">home.aspx</a></li>
                         <li><a href="#">Opción 3</a></li>
                         <li><a href="#">Opción 4</a></li>
                     </ul>
                 </div>
+                <div class="carrito">
+                    <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
+                    <div id="rpCarrito" class=" pt-5">
+                    </div>
+
+                </div>
             </nav>
+            <div class="overlay">
+            </div>
 
 
 
@@ -133,7 +142,7 @@
         var subiendo = false;
         var menuAbierto = false
         var width = $(window).width();
-        console.log(width)
+        //console.log(width)
         if (width >= 701) {
 
 
@@ -163,10 +172,11 @@
                 image.style.opacity = '1';
                 $(".menu").stop().slideUp();
                 menuAbierto = false;
-                $('.navContainer').removeClass('active');
+
                 $('.Bars').removeClass('fa-xmark');
                 $('.Bars').addClass('fa-bars');
                 if ($(window).scrollTop() == 0) {
+                    $('.navContainer').removeClass('active');
                     image.src = 'Imagenes/Logo.png';
                 }
 
@@ -180,7 +190,7 @@
                 }
             });
 
-            container.addEventListener('mouseout', function () {
+            container.addEventListener('mouseleave', function () {
                 if ($(window).scrollTop() == 0) {
                     if (menuAbierto == false) {
                         $('.navContainer').removeClass('active');
@@ -210,6 +220,10 @@
                     }
 
                 });
+
+
+
+
             });
 
 
@@ -246,10 +260,117 @@
 
 
 
+        $('[id$=cerrarCarrito]').click(function () {
+            $('.carrito').css('transform', 'translateX(100%)');
+            $('.overlay').css('display', 'none');
+            menuAbierto = false;
+        });
+
+        $(".Cart").click(function () {
+
+            //CARGAR CARRITO
+
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/CargarCarrito",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var data = JSON.parse(response.d);
+                    var html = "";
+                    $.each(data, function (index, item) {
+                        html += "<div class='row ml-2 mt-5'>";
+                        html += "<div class='col-4'>";
+                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
+                        html += "</div > ";
+                        html += "<div class='col-4 '>";
+                        html += item.Descripcion + "<br />";
+                        html += "Talle: " + item.Talle + "<br />";
+                        html += item.Cantidad + "<br />";
+                        html += "Precio: " + item.Precio + "<br />";
+                        html += "</div > ";
+                        html += "<div class='col-3 '>";
+                        html += "<button type='button' class='w-100 eliminarItem' data-id='" + index + "'>Eliminar</button>";
+                        html += "</div > ";
+                        html += "</div > ";
+
+                    });
+                    if (html == "") {
+                        html += "<div class='row ml-5'>";
+                        html += "Su carrito esta vacio";
+                        html += "</div > ";
+
+                    }
+                    $('[id=rpCarrito]').html(html);
+
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+
+                
+                
+
+            });
+            
+            if ($('.Cart').hasClass('fa-cart-plus')) {
+                $('.carrito').css('transform', 'translateX(0)');
+                $('.overlay').css('display', 'block');
+                menuAbierto = true;
+            }
+
+            /*console.log(parseInt($('.menu').css('left')));*/
+        });
+
+
+        
 
 
 
+        $(document).on('click', '.eliminarItem', function () {
+            var index = $(this).data('id');
 
+            $.ajax({
+                method: 'POST',
+                url: "LlamadosAjax.asmx/EliminarItem",
+                data: JSON.stringify({ itemIndex: index }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var data = JSON.parse(response.d);
+                    var html = "";
+                    $.each(data, function (index, item) {
+                        html += "<div class='row ml-2 mt-5'>";
+                        html += "<div class='col-4'>";
+                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
+                        html += "</div > ";
+                        html += "<div class='col-4 '>";
+                        html += item.Descripcion + "<br />";
+                        html += "Talle: " + item.Talle + "<br />";
+                        html += item.Cantidad + "<br />";
+                        html += "Precio: " + item.Precio + "<br />";
+                        html += "</div > ";
+                        html += "<div class='col-3 '>";
+                        html += "<button type='button' class='w-100 eliminarItem' data-id='" + index + "'>Eliminar</button>";
+                        html += "</div > ";
+                        html += "</div > ";
+                    });
+                    if (html == "") {
+                        html += "<div class='row ml-5'>";
+                        html += "Su carrito esta vacio";
+                        html += "</div > ";
+
+                    }
+                    $('[id=rpCarrito]').html(html);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
 
 
 
@@ -257,15 +378,19 @@
 
         //MOVIMIENTO DEL MENU EN CELULAR
         if (width <= 700) {
-            console.log(width);
+            //console.log(width);
             image.src = 'Imagenes/Logo.png';
             $(btnMenu).click(function () {
 
 
                 if ($('.Bars').hasClass('fa-bars')) {
                     $('.menu').css('transform', 'translateX(0)');
+                    //color del header
+                    $('.mainNav').css('background', 'rgba(0, 0, 0, .8)');
                 } else {
                     $('.menu').css('transform', 'translateX(-100%)');
+                    $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
+
                 }
                 /*console.log(parseInt($('.menu').css('left')));*/
 
@@ -285,17 +410,31 @@
 
                 $(window).on("scroll", function () {
                     var scrollTop = $(this).scrollTop();
-                    if (scrollTop < lastScrollTop && menuAbierto == false) {
+                    if (scrollTop < lastScrollTop && scrollTop != 0 && menuAbierto == false) {
                         /*console.log(scrollTop);*/
+                        //color del header
+                        $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
                         $('.mainNav').css('transform', 'translateY(0)');
                         subiendo = true;
                     }
                     else {
-                        if (menuAbierto == false)
-                            $('.mainNav').css('transform', 'translateY(-100%)');
+                        if (scrollTop == 0) {
+                            if (menuAbierto == false) {
+                                $('.mainNav').css('background-color', 'transparent');
+                                image.src = 'Imagenes/Logo.png';
+                                subiendo = false;
+                            }
+                        } else {
+                            if (menuAbierto == false)
+                                $('.mainNav').css('transform', 'translateY(-100%)');
+                        }
+                        lastScrollTop = scrollTop;
                     }
-                    lastScrollTop = scrollTop;
+
                 });
+
+
+
             });
 
 
