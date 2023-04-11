@@ -37,7 +37,7 @@ namespace WebApplicationOneOfOne
                 
                 throw;
             }
-            return "";
+            return JsonConvert.SerializeObject("");
         }
         
         [WebMethod(EnableSession = true)]
@@ -59,7 +59,7 @@ namespace WebApplicationOneOfOne
 
                 throw;
             }
-            return "";
+            
         }
     }
 }

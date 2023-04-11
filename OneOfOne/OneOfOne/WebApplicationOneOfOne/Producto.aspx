@@ -74,15 +74,15 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
 
     <div class="producto row">
-        <div class="col-6 ">
-    <asp:Image ID="imgProducto" runat="server" CssClass="w-100 Imagenes" />
-    <asp:Image ID="imgProducto1" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
-    <asp:Image ID="imgProducto2" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
-    <asp:Image ID="imgProducto3" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
-    <asp:Image ID="imgProducto4" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="w-100 Imagenes mt-2" />
+        <div class="col-6 mb-5">
+    <asp:Image ID="imgProducto" runat="server" CssClass="Imagenes" />
+    <asp:Image ID="imgProducto1" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+    <asp:Image ID="imgProducto2" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+    <asp:Image ID="imgProducto3" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+    <asp:Image ID="imgProducto4" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
             </div>
-        <div class="DetallesProducto">
-    <asp:Label ID="lblDescripcion" runat="server"></asp:Label>
+        <div class=" DetallesProducto">
+            <h1><asp:Label ID="lblDescripcion" runat="server"></asp:Label></h1>
     <br />
     <asp:Label ID="lblPrecio" runat="server"></asp:Label>
     <br />

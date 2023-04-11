@@ -73,8 +73,8 @@
                 </div>
                 <div class="menu">
                     <ul class="ul">
-                        <li><a href="#">Opción 1</a></li>
-                        <li><a href="#">Opción 2</a></li>
+                        <li><a href="index.aspx">index.aspx</a></li>
+                        <li><a href="home.aspx">home.aspx</a></li>
                         <li><a href="#">Opción 3</a></li>
                         <li><a href="#">Opción 4</a></li>
                     </ul>
@@ -142,7 +142,7 @@
         var subiendo = false;
         var menuAbierto = false
         var width = $(window).width();
-        console.log(width)
+        //console.log(width)
         if (width >= 701) {
 
 
@@ -378,7 +378,7 @@
 
         //MOVIMIENTO DEL MENU EN CELULAR
         if (width <= 700) {
-            console.log(width);
+            //console.log(width);
             image.src = 'Imagenes/Logo.png';
             $(btnMenu).click(function () {
 
