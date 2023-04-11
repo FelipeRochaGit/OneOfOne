@@ -25,3 +25,12 @@ C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Cor
 C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.csproj.CopyComplete
 C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.dll
 C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.pdb
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\bin\Debug\OneOfOne.Core.dll
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\bin\Debug\OneOfOne.Core.pdb
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\bin\Debug\DBConnection.dll
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\bin\Debug\DBConnection.pdb
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.csproj.AssemblyReference.cache
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.csproj.CoreCompileInputs.cache
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.csproj.CopyComplete
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.dll
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\OneOfOne.Core\obj\Debug\OneOfOne.Core.pdb

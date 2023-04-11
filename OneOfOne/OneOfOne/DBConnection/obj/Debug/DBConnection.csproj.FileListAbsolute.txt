@@ -15,3 +15,9 @@ C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\DBConnection
 C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.csproj.CoreCompileInputs.cache
 C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.dll
 C:\Users\joaqu\Desktop\Trabajo\Freelance\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.pdb
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\DBConnection\bin\Debug\DBConnection.dll
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\DBConnection\bin\Debug\DBConnection.pdb
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.csproj.AssemblyReference.cache
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.csproj.CoreCompileInputs.cache
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.dll
+C:\Users\Felipe\source\repos\OneOfOne\OneOfOne\OneOfOne\DBConnection\obj\Debug\DBConnection.pdb
