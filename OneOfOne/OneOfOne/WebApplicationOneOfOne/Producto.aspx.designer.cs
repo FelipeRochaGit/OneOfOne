@@ -87,6 +87,15 @@ namespace WebApplicationOneOfOne
         protected global::System.Web.UI.WebControls.CheckBox chkTalle1;
 
         /// <summary>
+        /// Control lblTalle1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTalle1;
+
+        /// <summary>
         /// Control chkTalle2.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace WebApplicationOneOfOne
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkTalle2;
+
+        /// <summary>
+        /// Control lblTalle2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTalle2;
 
         /// <summary>
         /// Control txtCantidadProductos.

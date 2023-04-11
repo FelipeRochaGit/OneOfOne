@@ -4,23 +4,73 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <link href="Css\StylesProducto.css" rel="stylesheet">
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
     <script type="text/javascript">
 
+
+
         $(document).ready(function () {
-            $("#chkTalle2").click(function () {
-                if ($(this).is(":checked")) {
+            if ($("#chkTalle1").is(":checked")) {
+                $(".divCheckBox1").addClass("Selected");
+            } else {
+                $(".divCheckBox1").removeClass("Selected");
+            }
+            if ($("#chkTalle2").is(":checked")) {
+                $(".divCheckBox2").addClass("Selected");
+            } else {
+                $(".divCheckBox2").removeClass("Selected");
+
+            }
+
+            $(".divCheckBox1").click(function () {
+                
+                if ($("#chkTalle1").is(":checked")) {
                     $("#chkTalle1").prop("checked", false);
+                    $(".divCheckBox1").removeClass("Selected");
+
+
+
+                } else {
+                    $("#chkTalle1").prop("checked", true);
+                    $("#chkTalle2").prop("checked", false);
+                    $(".divCheckBox1").addClass("Selected");
+                    $(".divCheckBox2").removeClass("Selected");
+
+
                 }
+
+
             });
 
-            $("#chkTalle1").click(function () {
-                if ($(this).is(":checked")) {
+            $(".divCheckBox2").click(function () {
+                if ($("#chkTalle2").is(":checked")) {
                     $("#chkTalle2").prop("checked", false);
+                    $(".divCheckBox2").removeClass("Selected");
+
+                } else {
+                    $("#chkTalle2").prop("checked", true);
+                    $("#chkTalle1").prop("checked", false);
+                    $(".divCheckBox2").addClass("Selected");
+                    $(".divCheckBox1").removeClass("Selected");
+
                 }
+
+
             });
+
+
+            //$("#chkTalle2").click(function () {
+            //    if ($(this).is(":checked")) {
+            //        $("#chkTalle1").prop("checked", false);
+            //    }
+            //});
+
+            //$("#chkTalle1").click(function () {
+            //    if ($(this).is(":checked")) {
+            //        $("#chkTalle2").prop("checked", false);
+            //    }
+            //});
 
             var botones = document.getElementsByTagName("button");
             for (var i = 0; i < botones.length; i++) {
@@ -73,27 +123,43 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
 
+    <div class="container-fluid">
     <div class="producto row">
         <div class="col-6 mb-5">
-    <asp:Image ID="imgProducto" runat="server" CssClass="Imagenes" />
-    <asp:Image ID="imgProducto1" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
-    <asp:Image ID="imgProducto2" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
-    <asp:Image ID="imgProducto3" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
-    <asp:Image ID="imgProducto4" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
-            </div>
-        <div class=" DetallesProducto">
+            <asp:Image ID="imgProducto" runat="server" CssClass="Imagenes" />
+            <asp:Image ID="imgProducto1" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+            <asp:Image ID="imgProducto2" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+            <asp:Image ID="imgProducto3" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+            <asp:Image ID="imgProducto4" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes mt-2" />
+        </div>
+        <div class="DetallesProducto">
             <h1><asp:Label ID="lblDescripcion" runat="server"></asp:Label></h1>
-    <br />
-    <asp:Label ID="lblPrecio" runat="server"></asp:Label>
-    <br />
-    <asp:CheckBox ID="chkTalle1" ClientIDMode="Static" runat="server" Text="Talle 1" />
-    <asp:CheckBox ID="chkTalle2" ClientIDMode="Static" runat="server" Text="Talle 2" />
-    <br />
-    <label for="cantidad-productos">Cantidad de productos:</label>
-    <asp:TextBox ID="txtCantidadProductos" runat="server" TextMode="number" ClientIDMode="Static" Width="50px" Value="1"></asp:TextBox>
-    <button onclick="aumentarCantidad()">+</button>
-    <button onclick="disminuirCantidad()">-</button>
-    <asp:Button ID="btnAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()"/>
+            <h4><asp:Label ID="lblPrecio" runat="server"></asp:Label></h4>
+            <div class="row m-0">
+                <div class="divCheckBox1 mr-3 mb-2">
+                    <asp:CheckBox ID="chkTalle1" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
+                    <asp:Label ID="lblTalle1" CssClass="lblTalle1" Text="Talle 1" runat="server" />
+                </div>
+                <div class="divCheckBox2">
+                    <asp:CheckBox ID="chkTalle2" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
+                    <asp:Label ID="lblTalle2" CssClass="lblTalle1" Text="Talle 2" runat="server" />
+                </div>
             </div>
+            <a href="#">Medidas de talles</a>
+            <br />
+            <br />
+
+            <label for="cantidad-productos">Cantidad de productos:</label>
+            <asp:TextBox ID="txtCantidadProductos" runat="server" TextMode="number" ClientIDMode="Static" Width="50px" Value="1"></asp:TextBox>
+            <button onclick="aumentarCantidad()">+</button>
+            <button onclick="disminuirCantidad()">-</button><br />
+            <asp:Button ID="btnAgregarAlCarrito" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()" />
+        </div>
     </div>
+        </div>
+    <script>
+
+
+
+    </script>
 </asp:Content>
