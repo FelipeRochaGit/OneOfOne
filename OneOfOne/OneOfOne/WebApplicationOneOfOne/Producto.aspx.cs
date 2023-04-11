@@ -129,6 +129,7 @@ namespace WebApplicationOneOfOne
 
         protected void btnAgregarAlCarrito_Click(object sender, EventArgs e)
         {
+            
             DataTable dtCarrito = (DataTable)Session["dtCarrito"]; //tabla general del carrito
             DataTable dtProductoGeneral = (DataTable)Session["dtProductoGeneral"]; //tabla del producto con los 2 rows de c/talle y su stock
             DataTable dtProductoIndividual = dtProductoGeneral.Clone(); //tabla que va a tener solamente el row del talle seleccionado
@@ -159,6 +160,7 @@ namespace WebApplicationOneOfOne
                 }
 
                 Session["dtCarrito"] = dtCarrito;
+                
             }
             catch (Exception ex)
             {
