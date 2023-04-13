@@ -240,7 +240,7 @@
 
 /*MOVIL*/
 /*NAV*/
-@media (max-width: 700px) {
+@media (max-width: 732px) {
     /*CARRITO*/
     .carrito {
         display: block;
@@ -323,7 +323,7 @@
 }
 
 /*ICONOS FLOTANTES*/
-@media (max-width:700px){
+@media (max-width:732px){
     .container-red {
         position: fixed;
         bottom: 2%;

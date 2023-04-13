@@ -12,5 +12,6 @@ namespace OneOfOne.Core.Services.Interfaces
     {
         DataTable Listar();
         DataTable ObtenerProducto(long IdProducto);
+        DataTable ObtenerFotosProducto(long idProducto);
     }
 }

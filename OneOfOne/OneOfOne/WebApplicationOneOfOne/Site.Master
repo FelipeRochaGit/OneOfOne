@@ -69,7 +69,7 @@
                         <a href="index.aspx">
                             <img src="Imagenes/Logo.png" class="Navlogo" /></a>
                     </div>
-                    <asp:LinkButton runat="server" CssClass="Cart fas fa-cart-plus fa-xl" OnClientClick="return false;"></asp:LinkButton>
+                    <asp:LinkButton ID="btnCarrito" runat="server" CssClass="Cart fas fa-cart-plus fa-xl" OnClientClick="return false;"></asp:LinkButton>
                 </div>
                 <div class="menu">
                     <ul class="ul">
@@ -143,7 +143,7 @@
         var menuAbierto = false
         var width = $(window).width();
         //console.log(width)
-        if (width >= 701) {
+        if (width >= 733) {
 
 
 
@@ -338,6 +338,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
+                    
                     var data = JSON.parse(response.d);
                     var html = "";
                     $.each(data, function (index, item) {
@@ -377,7 +378,7 @@
 
 
         //MOVIMIENTO DEL MENU EN CELULAR
-        if (width <= 700) {
+        if (width <= 732) {
             //console.log(width);
             image.src = 'Imagenes/Logo.png';
             $(btnMenu).click(function () {

@@ -47,5 +47,18 @@ namespace OneOfOne.Core.Services
             }
             return dt;        
         }
+        public DataTable ObtenerFotosProducto(long IdProducto)
+        {
+            DataTable dt;
+            try
+            {
+                dt = _productoDao.ObtenerFotosProducto(IdProducto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return dt;        
+        }
     }
 }

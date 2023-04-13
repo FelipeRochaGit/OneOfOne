@@ -30,9 +30,10 @@ namespace WebApplicationOneOfOne
                 {
                     idProducto = long.Parse(Request["idProducto"].ToString());
                     dtProductoGeneral = _productoService.ObtenerProducto(idProducto);
-
+                    DataTable dtFotos = _productoService.ObtenerFotosProducto(idProducto);
                     ValidarStockTalles(dtProductoGeneral);
                     VerProducto(dtProductoGeneral);
+                    CargarFotosDelProducto(dtFotos);
                 }
             }
             catch (Exception ex)
@@ -53,17 +54,29 @@ namespace WebApplicationOneOfOne
                 imgURL = dtProductoGeneral.Rows[0]["ImgURL"].ToString();
                 descripcion = dtProductoGeneral.Rows[0]["Descripcion"].ToString();
                 precio = $"$ {dtProductoGeneral.Rows[0]["Precio"].ToString()}";
+                imgProductoPC.ImageUrl = imgURL;
+                imgProductoMovil.ImageUrl = imgURL;
 
-                imgProducto.ImageUrl = imgURL;
+
                 lblDescripcion.Text = descripcion;
                 lblPrecio.Text = precio;
-
                 Session["dtProductoGeneral"] = dtProductoGeneral;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+        }
+
+        private void CargarFotosDelProducto(DataTable dtFotos)
+        {
+            rpFotosProductosPC.DataSource = dtFotos;
+            rpFotosProductosPC.DataBind();
+
+            rpFotosProductosMovil.DataSource = dtFotos;
+            rpFotosProductosMovil.DataBind();
+
+
         }
 
         /// <summary>
@@ -87,7 +100,7 @@ namespace WebApplicationOneOfOne
                 var rowProducto = dtCarrito.Select($"Id = {idProducto} and Talle = {talle}");
 
                 //si no encuentra ese producto y talle, mergeamos
-                if(rowProducto.Length == 0)
+                if (rowProducto.Length == 0)
                 {
                     dtCarrito.Merge(dtProducto);
                 }
@@ -129,12 +142,13 @@ namespace WebApplicationOneOfOne
 
         protected void btnAgregarAlCarrito_Click(object sender, EventArgs e)
         {
-            
+
             DataTable dtCarrito = (DataTable)Session["dtCarrito"]; //tabla general del carrito
             DataTable dtProductoGeneral = (DataTable)Session["dtProductoGeneral"]; //tabla del producto con los 2 rows de c/talle y su stock
             DataTable dtProductoIndividual = dtProductoGeneral.Clone(); //tabla que va a tener solamente el row del talle seleccionado
             try
             {
+
                 //vemos que talle se selecciono
                 var talleSeleccionado = chkTalle1.Checked ? "1" : "2";
 
@@ -146,7 +160,7 @@ namespace WebApplicationOneOfOne
 
                 //agregamos columna Cantidad y la seteamos
                 dtProductoIndividual.Columns.Add("Cantidad");
-                dtProductoIndividual.Rows[0]["Cantidad"] = txtCantidadProductos.Text;
+                dtProductoIndividual.Rows[0]["Cantidad"] = hfCantidadSeleccionada.Value;
 
                 //si el carrito es null copiamos directamente
                 if (Session["dtCarrito"] == null)
@@ -160,7 +174,8 @@ namespace WebApplicationOneOfOne
                 }
 
                 Session["dtCarrito"] = dtCarrito;
-                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "clientScript", "$(function (){" +
+                       "$('[id$=btnCarrito]').click(); $('[id$=hfCantidadSeleccionada]').val(1) })", true);
             }
             catch (Exception ex)
             {
