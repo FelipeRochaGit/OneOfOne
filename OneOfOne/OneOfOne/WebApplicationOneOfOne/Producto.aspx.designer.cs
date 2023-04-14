@@ -15,49 +15,40 @@ namespace WebApplicationOneOfOne
     {
 
         /// <summary>
-        /// Control imgProducto.
+        /// Control imgProductoPC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProducto;
+        protected global::System.Web.UI.WebControls.Image imgProductoPC;
 
         /// <summary>
-        /// Control imgProducto1.
+        /// Control rpFotosProductosPC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProducto1;
+        protected global::System.Web.UI.WebControls.Repeater rpFotosProductosPC;
 
         /// <summary>
-        /// Control imgProducto2.
+        /// Control imgProductoMovil.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProducto2;
+        protected global::System.Web.UI.WebControls.Image imgProductoMovil;
 
         /// <summary>
-        /// Control imgProducto3.
+        /// Control rpFotosProductosMovil.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProducto3;
-
-        /// <summary>
-        /// Control imgProducto4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProducto4;
+        protected global::System.Web.UI.WebControls.Repeater rpFotosProductosMovil;
 
         /// <summary>
         /// Control lblDescripcion.
@@ -114,13 +105,22 @@ namespace WebApplicationOneOfOne
         protected global::System.Web.UI.WebControls.Label lblTalle2;
 
         /// <summary>
-        /// Control txtCantidadProductos.
+        /// Control txtCantidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidadProductos;
+        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
+
+        /// <summary>
+        /// Control hfCantidadSeleccionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfCantidadSeleccionada;
 
         /// <summary>
         /// Control btnAgregarAlCarrito.

@@ -3,17 +3,21 @@
     background: rgb(244 244 244 / 1 );
 }
 
-.producto{
-    display:flex;
+.producto {
+    display: flex;
 }
-.producto img {
-    max-height: 100vh;
-    max-width: 100%;
+
+    .producto img {
+        max-height: 100vh;
+        max-width: 100%;
+    }
+
+.columnaImagen {
+    padding-left: 20px;
+    width: 65%;
+
 }
-.columnaImagen{
-    padding-left:20px;
-    width:65%;
-}
+
 .overlayImg {
     position: absolute;
     background: rgb(0 0 0 /0.4);
@@ -24,15 +28,19 @@
 .Imagenes {
     background: rgb(230 226 226 / 1 );
     max-height: 100vh;
-    /*height:80vh;*/
 }
+.carousel-item {
+    transition-duration: 0.1s; /* ajusta el valor según sea necesario */
+}
+
+
 
 .DetallesProducto {
     position: fixed;
     width: 35%;
     left: 65%;
-    height:100%;
-    padding:0px 20px;
+    height: 100%;
+    padding: 0px 20px;
 }
 /*CHECKBOX*/
 .divCheckBox1 {
@@ -69,44 +77,96 @@
     }
 
 /* ESTILOS DEL DESPLEGABLE DE CANTIDAD PRODUCTO*/
-.ddlCantidadProducto{
-    border:none;
-    background-color:transparent;
-    outline-style:none;
-    border-bottom:1px solid;
+.ddlCantidadProducto {
+    display:flex;
+    cursor: pointer;
+    justify-content:center;
+    align-content:center;
+    height:65%;
 }
+
+.ddlCantidadProducto label{
+    cursor: pointer;
+}
+
+    .ddlCantidadProducto #btnCantidad {
+        border: none;
+        outline-style: none;
+        margin-left:2px;
+    }
+    .ddlCantidadProducto .divBtnIcono {
+        border: none;
+        outline-style: none;
+        border-bottom: 1px solid;
+        margin-left: 2px;
+    }
+
+
 
 .dropdown-content {
     display: none;
-    position:absolute;
-    top:30px;
-    left:0;
+    position: absolute;
+    top: 30px;
+    left: 0;
     background-color: #f9f9f9;
+    width:180px;
     min-width: 30%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
 
-        .dropdown-content a:hover {
+    .dropdown-content span {
+        display: block;
+        color: black;
+        padding: 12px 0;
+        text-decoration: none;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+    .dropdown-content .divSpan {
+        cursor: pointer;
+    }
+        .dropdown-content .divSpan:hover {
             background-color: #f1f1f1;
         }
 
-.ddlCantidadProducto:focus + .dropdown-content {
-    display: inline-grid;
-}
-    /*BOTON AGREGAR CARRITO*/
-    .btn-dark {
-        width: 100%;
-        height: 8%;
+
+    .dropdown-content .anadirCantidad {
+        display:none;
+        margin-right: 20%;
+        margin-left: 20%;
     }
+    .dropdown-content .formAnadir {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        border: 1px solid;
+        height: 40px;
+        border-radius: 5px;
+    }
+    .dropdown-content button {
+        border: 0;
+        margin:5px 0px;
 
 
-@media (min-width:700px) {
+    }
+    .dropdown-content .textboxDentroDdl {
+        width: 30%;
+        border: 0;
+        background-color: transparent
+    }
+    .textboxDentroDdl:focus {
+        border: 0;
+        outline:none;
+        background-color: transparent
+    }
+/*BOTON AGREGAR CARRITO*/
+.btn-dark {
+    width: 100%;
+    height: 8%;
+}
+
+
+@media (min-width:733px) {
     .divCheckBox1:hover {
         border: 1px solid black;
         transition: box-shadow 0.3s ease-in-out;
@@ -118,17 +178,45 @@
         transition: box-shadow 0.3s ease-in-out;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     }
+    .PC {
+        display: block;
+    }
 
-
+    .Movil {
+        display: none;
+    }
 }
 
-@media (max-width:700px) {
+@media (max-width:732px) {
+    .producto{
+        display:block;
+    }
+
     .columnaImagen {
+        padding-left:0;
         width: 100%;
         text-align: center;
     }
+    .DetallesProducto {
+        position: relative;
+        width: 100%;
+        left: 0;
+        height: 100%;
+        padding: 0px 20px;
+        margin-bottom:10%;
+    }
+    .Movil {
+        display: block;
+    }
 
-
+    .PC {
+        display: none;
+    }
+    .Imagenes {
+        background: rgb(230 226 226 / 1 );
+        max-height: 100vh;
+        width:100%;
+    }
 }
 
 
@@ -139,3 +227,31 @@
 
 .lblTalle1 {
 }
+
+/*STYLES CAROUSEL*/
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    text-decoration:none;
+    z-index:1
+}
+
+.slick-prev {
+    left: 60px;
+}
+
+.slick-next {
+    right: 60px;
+
+}
+
+.carousel {
+    width: 100%!important;
+    height:40%;
+}
+

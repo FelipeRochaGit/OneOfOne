@@ -3,14 +3,42 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
     <link href="Css\StylesProducto.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script type="text/javascript">
 
-
-
         $(document).ready(function () {
+
+            var width = $(window).width();
+            //INICIA EL CAROUSEL
+            if (width < 732) {
+                $(document).ready(function () {
+                    $('.carousel').slick({
+                        dots: true,
+                        slidesToShow: 1,
+                        
+                        prevArrow: '<a href="#" class="slick-prev"></a>',
+                        nextArrow: '<a href="#" class="slick-next"></a>',
+                        responsive: [
+                            {
+                                breakpoint: 10,
+                                settings: {
+                                    slidesToShow: 1,
+                                    centerMode: true,
+                                    variableWidth: false
+                                }
+                            }
+                        ]
+                    });
+                });
+            }
+
+
             if ($("#chkTalle1").is(":checked")) {
                 $(".divCheckBox1").addClass("Selected");
             } else {
@@ -59,18 +87,81 @@
 
             });
 
+            /*TODA LA LOGICA DEL DROP DOWN LIST CANTIDAD*/
+            $('.dropdown-content .divSpan').click(function () {
+                var cantidadSeleccionada = $(this).text();
+                if (cantidadSeleccionada != 'Mas de 5 Unidades') {
+                    $('.iconoDdl').removeClass('fa-chevron-up')
+                    $('.iconoDdl').addClass('fa-chevron-down')
+                    $('#btnCantidad').text(cantidadSeleccionada);
+                    $("[id$=hfCantidadSeleccionada]").val(parseInt(cantidadSeleccionada));
+                    $(".dropdown-content").slideUp();
 
-            //$("#chkTalle2").click(function () {
-            //    if ($(this).is(":checked")) {
-            //        $("#chkTalle1").prop("checked", false);
-            //    }
-            //});
+                } else {
+                    $("[id$=btnAplicar]").prop("disabled", true);
+                    $(".anadirCantidad").attr("style", "display: block;")
 
-            //$("#chkTalle1").click(function () {
-            //    if ($(this).is(":checked")) {
-            //        $("#chkTalle2").prop("checked", false);
-            //    }
-            //});
+                }
+            });
+
+
+
+
+            /*SI SE TOCA EL DDL Y ESTA NO VISIBLE SE ABRE EL DDL Y SI ESTA VISIBLE SE CIERRA, Y CUANDO SE CIERRA EL DDL SE BORRA EL CAMPO DE CANTIDAD*/
+            $('.ddlCantidadProducto').click(function () {
+                if ($(".dropdown-content").css('display') == 'none') {
+                    $(".anadirCantidad").attr("style", "display: none;")
+                    $('.dropdown-content').slideDown();
+                    $('.iconoDdl').removeClass('fa-chevron-down')
+                    $('.iconoDdl').addClass('fa-chevron-up')
+
+                    // Cierra el drop down si se toca otro lugar de la pantalla
+                    $(document).on('click.dropdown', function (event) {
+                        // Si el clic ha sido en un elemento que no es el dropdown ni sus hijos
+                        if (!$(event.target).closest('.dropdown').length) {
+                            // Ocultamos el dropdown
+                            $('.dropdown-content').slideUp();
+                            $('.iconoDdl').removeClass('fa-chevron-up')
+                            $('.iconoDdl').addClass('fa-chevron-down')
+                            // Quitamos el listener
+                            $(document).off('click.dropdown');
+                        }
+                    });
+
+                } else {
+                    $('.dropdown-content').slideUp();
+                    $('.iconoDdl').removeClass('fa-chevron-up')
+                    $('.iconoDdl').addClass('fa-chevron-down')
+                    $("[id$=txtCantidad]").val("");
+                    // Quitamos el listener
+                    $(document).off('click.dropdown');
+                }
+            });
+
+            $("[id$=txtCantidad]").on("keyup input", function () {
+                // Solo permite agregar numeros y no deja iniciar con 0
+                var value = $(this).val().replace(/^0+|[^0-9]/g, "");
+                // Establecer el valor del campo de texto en el valor filtrado
+                $(this).val(value);
+                // Desactiva el boton si el campo de texto esta vacío o es igual a cero
+                $("[id$=btnAplicar]").prop("disabled", value === "" || value === "0");
+            });
+
+            $("[id$=btnAplicar]").click(function () {
+                $("[id$=hfCantidadSeleccionada]").val($("[id$=txtCantidad]").val());
+                var cantidadSeleccionada = $("[id$=hfCantidadSeleccionada]").val();
+                if (cantidadSeleccionada > 1) {
+                    $('#btnCantidad').text(cantidadSeleccionada + " Unidades");
+                }
+                else {
+                    $('#btnCantidad').text(cantidadSeleccionada + " Unidad");
+                }
+                $('.dropdown-content').slideUp();
+                $("[id$=txtCantidad]").val("");
+                $('.iconoDdl').removeClass('fa-chevron-up')
+                $('.iconoDdl').addClass('fa-chevron-down')
+                /*alert($("[id$=hfCantidadSeleccionada]").val())*/
+            });
 
             var botones = document.getElementsByTagName("button");
             for (var i = 0; i < botones.length; i++) {
@@ -78,36 +169,9 @@
                     e.preventDefault();
                 });
             }
+            $('.carouselExampleControls').carousel('pause')
         });
 
-
-        function aumentarCantidad() {
-            // Obtenemos el valor actual del campo de cantidad de productos
-            var cantidadProductos = document.getElementById("txtCantidadProductos");
-            var cantidad = parseInt(cantidadProductos.value);
-
-            // Incrementamos la cantidad de productos
-            if (cantidad < 10) {
-                cantidad++;
-            }
-
-            // Actualizamos el campo de cantidad de productos
-            cantidadProductos.value = cantidad;
-        }
-
-        function disminuirCantidad() {
-            // Obtenemos el valor actual del campo de cantidad de productos
-            var cantidadProductos = document.getElementById("txtCantidadProductos");
-            var cantidad = parseInt(cantidadProductos.value);
-
-            // Decrementamos la cantidad de productos
-            if (cantidad > 1) {
-                cantidad--;
-            }
-
-            // Actualizamos el campo de cantidad de productos
-            cantidadProductos.value = cantidad;
-        }
 
         function validarTalle() {
             if (!$("#chkTalle1").prop("checked") && !$("#chkTalle2").prop("checked")) {
@@ -117,60 +181,84 @@
 
             return true;
         }
-
-
     </script>
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
+    <div class="producto">
+        <div class="PC columnaImagen mb-5">
+            <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes" />
 
-    <div class="">
-        <div class="producto">
-            <div class="columnaImagen mb-5">
-                <asp:Image ID="imgProducto" runat="server" CssClass="Imagenes" />
-                <asp:Image ID="imgProducto1" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes img-fluid mt-2" />
-                <asp:Image ID="imgProducto2" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes img-fluid mt-2" />
-                <asp:Image ID="imgProducto3" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes img-fluid mt-2" />
-                <asp:Image ID="imgProducto4" ImageUrl="~/Imagenes/Buzo1.png" runat="server" CssClass="Imagenes img-fluid mt-2" />
+            <asp:Repeater ID="rpFotosProductosPC" runat="server">
+                <ItemTemplate>
+                    <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes img-fluid mt-2" />
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
+
+
+        <div class="Movil columnaImagen mb-5">
+
+            <div class="carousel">
+                <asp:Image ID="imgProductoMovil" runat="server" CssClass="Imagenes" />
+                <asp:Repeater ID="rpFotosProductosMovil" runat="server">
+                    <ItemTemplate>
+                        <asp:Image ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes" />
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
-            <div class="DetallesProducto">
-                <h1>
-                    <asp:Label ID="lblDescripcion" runat="server"></asp:Label></h1>
-                <h4>
-                    <asp:Label ID="lblPrecio" runat="server"></asp:Label></h4>
-                <div class="row m-0">
-                    <div class="divCheckBox1 mr-3 mb-2">
-                        <asp:CheckBox ID="chkTalle1" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
-                        <asp:Label ID="lblTalle1" CssClass="lblTalle1" Text="Talle 1" runat="server" />
-                    </div>
-                    <div class="divCheckBox2">
-                        <asp:CheckBox ID="chkTalle2" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
-                        <asp:Label ID="lblTalle2" CssClass="lblTalle1" Text="Talle 2" runat="server" />
-                    </div>
                 </div>
-                <a href="#">Medidas de talles</a>
-                <br />
-                <br />
+            <%--fin del carousel--%>
 
-                <div class="dropdown d-flex w-100">
-                    <label for="cantidad-productos">Cantidad:</label>
-                    <div>
-                        <button class="ddlCantidadProducto ">1 Unidad</button>
-                        <div class="dropdown-content">
-                            <a href="#">1 Unidad</a>
-                            <a href="#">2 Unidad</a>
-                            <a href="#">3 Unidad</a>
-                            <a href="#">4 Unidad</a>
-                            <a href="#">5 Unidad</a>
-                            <a href="#">6 Unidad</a>
+        <div class="DetallesProducto">
+            <h1>
+                <asp:Label ID="lblDescripcion" runat="server"></asp:Label></h1>
+            <h4>
+                <asp:Label ID="lblPrecio" runat="server"></asp:Label></h4>
+            <div class="row m-0">
+                <div class="divCheckBox1 mr-3 mb-2">
+                    <asp:CheckBox ID="chkTalle1" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
+                    <asp:Label ID="lblTalle1" CssClass="lblTalle1" Text="Talle 1" runat="server" />
+                </div>
+                <div class="divCheckBox2">
+                    <asp:CheckBox ID="chkTalle2" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
+                    <asp:Label ID="lblTalle2" CssClass="lblTalle1" Text="Talle 2" runat="server" />
+                </div>
+            </div>
+            <a href="#">Medidas de talles</a>
+            <br />
+            <br />
+
+            <div class="d-flex w-100">
+
+                <div class="dropdown ">
+                    <div class="ddlCantidadProducto mb-2">
+                        <label>Cantidad:</label>
+                        <div class="divBtnIcono">
+                            <label id="btnCantidad">1 Unidad </label>
+                            <label class="iconoDdl fa-solid fa-chevron-down "></label>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        <div class="divSpan"><span>1 Unidad</span></div>
+                        <div class="divSpan"><span>2 Unidades</span></div>
+                        <div class="divSpan"><span>3 Unidades</span></div>
+                        <div class="divSpan"><span>4 Unidades</span></div>
+                        <div class="divSpan"><span>5 Unidades</span></div>
+                        <div class="divSpan"><span>Mas de 5 Unidades</span></div>
+                        <div class="anadirCantidad mb-3">
+                            Cantidad:
+                                <div class="formAnadir">
+                                    <asp:TextBox ID="txtCantidad" CssClass="textboxDentroDdl" runat="server" />
+                                    <button id="btnAplicar" disabled>Aplicar</button>
+                                </div>
                         </div>
                     </div>
                 </div>
-                <asp:TextBox ID="txtCantidadProductos" runat="server" TextMode="number" ClientIDMode="Static" Width="50px" Value="1"></asp:TextBox>
-                <button onclick="aumentarCantidad()">+</button>
-                <button onclick="disminuirCantidad()">-</button><br />
-                <br />
-                <asp:Button ID="btnAgregarAlCarrito" CssClass="btn btn-dark" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()" />
             </div>
+            <asp:HiddenField runat="server" ID="hfCantidadSeleccionada" Value="1" />
+            <asp:Button ID="btnAgregarAlCarrito" CssClass="btn btn-dark" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()" />
         </div>
     </div>
     <script>
