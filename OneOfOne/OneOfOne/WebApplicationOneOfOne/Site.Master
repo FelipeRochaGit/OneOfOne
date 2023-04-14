@@ -84,15 +84,34 @@
                 <div class="carrito content-wrapper">
                     <div class="tituloCarritoDesplazable">
                         <h5>Carrito de compras</h5>
-                    <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
-                        </div>
+                        <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
+                    </div>
 
                     <div id="rpCarrito" class="contenidoCarrito pt-2">
                     </div>
-                    <footer class="footerContainer ConfirmarCarrito">
+
+                    <footer class="footerCarrito container ConfirmarCarrito ">
+                        <div class="SubTotalEnvio">
+                            <div class="SubTotal">
+                                <div>
+                                <asp:Label Text="SubTotal: " runat="server" />
+                                <asp:Label Text="123" runat="server" />
+                                    </div>
+                            </div>
+                            <div class="Envio">
+                                <asp:Label Text="Envio:" runat="server" />
+                                <asp:Label Text="321" runat="server" />
+                            </div>
+                        </div>
+                        <div class="Total">
+                            <asp:Label Text="Total:" runat="server" />
+                            <asp:Label Text="123" runat="server" />
+                        </div>
                         <asp:Button Text="Ir al carrito" CssClass="btn btn-dark" runat="server" />
                     </footer>
                 </div>
+
+
             </nav>
             <div class="overlay">
             </div>
@@ -279,7 +298,7 @@
             menuAbierto = false;
         });
 
-        
+
 
         $(".Cart").click(function () {
 
