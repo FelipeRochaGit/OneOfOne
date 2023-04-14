@@ -15,24 +15,6 @@ namespace WebApplicationOneOfOne
     {
 
         /// <summary>
-        /// Control TipoDeDispositivo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField TipoDeDispositivo;
-
-        /// <summary>
-        /// Control pnlPC.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPC;
-
-        /// <summary>
         /// Control imgProductoPC.
         /// </summary>
         /// <remarks>
@@ -49,15 +31,6 @@ namespace WebApplicationOneOfOne
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rpFotosProductosPC;
-
-        /// <summary>
-        /// Control pnlMovil.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlMovil;
 
         /// <summary>
         /// Control imgProductoMovil.

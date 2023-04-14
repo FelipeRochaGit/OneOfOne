@@ -72,10 +72,8 @@ namespace WebApplicationOneOfOne
         {
             rpFotosProductosPC.DataSource = dtFotos;
             rpFotosProductosPC.DataBind();
-
             rpFotosProductosMovil.DataSource = dtFotos;
             rpFotosProductosMovil.DataBind();
-
 
         }
 

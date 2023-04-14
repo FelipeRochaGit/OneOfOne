@@ -3,23 +3,41 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
     <link href="Css\StylesProducto.css" rel="stylesheet">
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="js" runat="server">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
+
             var width = $(window).width();
-            if (width <= 732) {
-                $('[id$=pnlMovil]').attr('Style', 'display:block');
-                $('[id$=pnlPC]').attr('Style', 'display:none');
-                $('[id$=TipoDeDispositivo]').val("Movil");
-            } else {
-                $('[id$=pnlPC]').attr('Style', 'display:block');
-                $('[id$=pnlMovil]').attr('Style', 'display:none');
+            //INICIA EL CAROUSEL
+            if (width < 732) {
+                $(document).ready(function () {
+                    $('.carousel').slick({
+                        dots: true,
+                        slidesToShow: 1,
+                        
+                        prevArrow: '<a href="#" class="slick-prev"></a>',
+                        nextArrow: '<a href="#" class="slick-next"></a>',
+                        responsive: [
+                            {
+                                breakpoint: 10,
+                                settings: {
+                                    slidesToShow: 1,
+                                    centerMode: true,
+                                    variableWidth: false
+                                }
+                            }
+                        ]
+                    });
+                });
             }
+
 
             if ($("#chkTalle1").is(":checked")) {
                 $(".divCheckBox1").addClass("Selected");
@@ -167,48 +185,32 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
-                <asp:HiddenField runat="server" ID="TipoDeDispositivo" Value="" />
     <div class="producto">
-        <asp:Panel ID="pnlPC" Visible="true" runat="server">
-            <div class="columnaImagen mb-5">
-                <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes" />
-                <asp:Repeater ID="rpFotosProductosPC" runat="server">
+        <div class="PC columnaImagen mb-5">
+            <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes" />
+
+            <asp:Repeater ID="rpFotosProductosPC" runat="server">
+                <ItemTemplate>
+                    <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes img-fluid mt-2" />
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+
+
+
+        <div class="Movil columnaImagen mb-5">
+
+            <div class="carousel">
+                <asp:Image ID="imgProductoMovil" runat="server" CssClass="Imagenes" />
+                <asp:Repeater ID="rpFotosProductosMovil" runat="server">
                     <ItemTemplate>
-                        <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes img-fluid mt-2" />
+                        <asp:Image ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes" />
                     </ItemTemplate>
                 </asp:Repeater>
             </div>
-        </asp:Panel>
-
-        <asp:Panel ID="pnlMovil" Visible="true" runat="server">
-
-            <div class="columnaImagen mb-5">
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <%--empieza el carousel--%>
-                        <div class="carousel-item active">
-                            <asp:Image runat="server" ID="imgProductoMovil" class="Imagenes" alt="First slide" />
-                        </div>
-                        <asp:Repeater ID="rpFotosProductosMovil" runat="server">
-                            <ItemTemplate>
-                                <div class="carousel-item">
-                                    <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes" />
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
-                <%--fin del carousel--%>
-            </div>
-        </asp:Panel>
+            <%--fin del carousel--%>
+
         <div class="DetallesProducto">
             <h1>
                 <asp:Label ID="lblDescripcion" runat="server"></asp:Label></h1>

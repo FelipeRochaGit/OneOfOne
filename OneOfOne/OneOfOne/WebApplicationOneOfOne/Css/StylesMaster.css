@@ -1,6 +1,19 @@
 ﻿body {
 }
+/* Cambiar el color de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+}
 
+::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+
+/* Cambiar el color del track */
+::-webkit-scrollbar-track {
+    background-color: #FFFFFF;
+}
 
 .container {
     position: relative;
@@ -11,13 +24,13 @@
 /*NAV*/
 .mainNav {
     position: fixed;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 70px;
     background-color: transparent;
     transition: all 0.9s ease-in-out;
-    z-index:1;
+    z-index: 9996;
 }
     /*ICONO MENU*/
     .mainNav .Bars {
@@ -46,68 +59,18 @@
     top: 35px;
     right: 20px;
     color: white;
+    text-decoration:none;
     /*color: #ced2d9;*/
 }
 /*TERMINA NAV*/
 
 
-/*CARRITO*/
-.carrito {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 30%;
-    height: 100%;
-    background: rgb(255,255,255,1);
-    color: black;
-    transform: translateX(100%);
-    transition: transform 0.3s ease-out;
-    z-index: 9998;
-}
-
-/*BOTON DENTRO DE CARRITO*/
-.CerrarCarrito{
-    position:fixed;
-    left:2%;
-    top:4%;
-    text-decoration:none;
-    color:black;
-    z-index:9999;
-    
-
-}
-/*LISTA CARRITO*/
-#rpCarrito img{
-    width:100px;
-    height:100px;
-}
 
 
 
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.4;
-    z-index: 9997;
-}
-/*MENU*/
-.menu {
-    display: none;
-    position: fixed;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    height: 80%;
-    background-color: white;
-    color: white;
-    z-index: 1;
-}
+
+
+
 
 
 /*ESTILOS HOVER*/
@@ -135,52 +98,34 @@
 
 
 
-.menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-}
 
-.menu li {
-    padding: 10px;
-}
-
-.menu a {
-    color: black;
-    text-decoration: none;
-}
-
-    .menu a:hover {
-        text-decoration: underline;
-    }
 
 
 
 /*FOOTER*/
 .separador {
-    width:100%;
+    width: 100%;
     border-top: 1px solid grey;
-    margin:20px 0;
+    margin: 20px 0;
 }
+
 .formularioMail {
     display: inline-block;
     text-align: center;
 }
 
 .TextMail {
-    color:white;
+    color: white;
     border: none;
     outline: none;
     background-color: transparent;
-    width:50%;
-    border-bottom:1px solid grey;
+    width: 50%;
+    border-bottom: 1px solid grey;
 }
 
 .btnSubcribirse {
-    color:white;
+    color: white;
     border-radius: 5px;
-
 }
 
 
@@ -192,16 +137,17 @@
     text-align: center;
     color: white;
 }
-.RedesSociales{
 
-    padding:20px;
-    text-decoration:none;
-    display:inline-block;
-    outline:none;
+.RedesSociales {
+    padding: 20px;
+    text-decoration: none;
+    display: inline-block;
+    outline: none;
 }
-.RedesSociales a {
-    color: white ;
-}
+
+    .RedesSociales a {
+        color: white;
+    }
 
 
 
@@ -241,57 +187,22 @@
 /*MOVIL*/
 /*NAV*/
 @media (max-width: 732px) {
-    /*CARRITO*/
-    .carrito {
-        display: block;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 1);
-        transform: translateX(100%);
-        transition: transform 0.3s ease-out;
-        z-index: 9998;
-    }
 
 
-
-    .menu {
-        display: block;
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 50%;
-        height: 100%;
-        background: rgba(0, 0, 0, .8);
-        z-index: 1;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-out;
-    }
-        .menu a {
-            color: white !important;
-        }
-
-        .menu ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 20%;
-            text-align: center;
-        }
 
 
     /*NAV*/
     .mainNav {
         position: fixed;
         top: 0;
-        left: 0%;
+        left: 0;
         width: 100%;
         height: 70px;
         opacity: 1;
         transform: translateY(0);
         transition: transform 0.3s ease-out;
         transition: all 0.3s ease-in-out;
+        z-index: 9996;
     }
 
 
@@ -323,7 +234,7 @@
 }
 
 /*ICONOS FLOTANTES*/
-@media (max-width:732px){
+@media (max-width:732px) {
     .container-red {
         position: fixed;
         bottom: 2%;
@@ -350,8 +261,4 @@
         text-align: center;
         font-size: 40px;
     }
-
 }
-
-
-
