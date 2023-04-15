@@ -205,13 +205,6 @@
         padding: 0px 20px;
         margin-bottom:10%;
     }
-    .Movil {
-        display: block;
-    }
-
-    .PC {
-        display: none;
-    }
     .Imagenes {
         background: rgb(230 226 226 / 1 );
         max-height: 100vh;

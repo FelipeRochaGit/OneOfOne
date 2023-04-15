@@ -55,7 +55,6 @@ namespace WebApplicationOneOfOne
                 descripcion = dtProductoGeneral.Rows[0]["Descripcion"].ToString();
                 precio = $"$ {dtProductoGeneral.Rows[0]["Precio"].ToString()}";
                 imgProductoPC.ImageUrl = imgURL;
-                imgProductoMovil.ImageUrl = imgURL;
 
 
                 lblDescripcion.Text = descripcion;
@@ -72,8 +71,6 @@ namespace WebApplicationOneOfOne
         {
             rpFotosProductosPC.DataSource = dtFotos;
             rpFotosProductosPC.DataBind();
-            rpFotosProductosMovil.DataSource = dtFotos;
-            rpFotosProductosMovil.DataBind();
 
         }
 

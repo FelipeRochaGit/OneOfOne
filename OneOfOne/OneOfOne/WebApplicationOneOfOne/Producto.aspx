@@ -21,7 +21,7 @@
                     $('.carousel').slick({
                         dots: true,
                         slidesToShow: 1,
-                        
+
                         prevArrow: '<a href="#" class="slick-prev"></a>',
                         nextArrow: '<a href="#" class="slick-next"></a>',
                         responsive: [
@@ -186,30 +186,19 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
     <div class="producto">
-        <div class="PC columnaImagen mb-5">
-            <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes" />
-
+        <div class="columnaImagen mb-5">
+            <div class="carousel">
+            <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes img-fluid mt-2" />
             <asp:Repeater ID="rpFotosProductosPC" runat="server">
                 <ItemTemplate>
                     <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes img-fluid mt-2" />
                 </ItemTemplate>
             </asp:Repeater>
+                </div>
         </div>
 
 
-
-        <div class="Movil columnaImagen mb-5">
-
-            <div class="carousel">
-                <asp:Image ID="imgProductoMovil" runat="server" CssClass="Imagenes" />
-                <asp:Repeater ID="rpFotosProductosMovil" runat="server">
-                    <ItemTemplate>
-                        <asp:Image ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes" />
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-                </div>
-            <%--fin del carousel--%>
+        <%--fin del carousel--%>
 
         <div class="DetallesProducto">
             <h1>
