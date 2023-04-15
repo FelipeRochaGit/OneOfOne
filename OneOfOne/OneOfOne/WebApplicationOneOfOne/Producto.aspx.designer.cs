@@ -33,24 +33,6 @@ namespace WebApplicationOneOfOne
         protected global::System.Web.UI.WebControls.Repeater rpFotosProductosPC;
 
         /// <summary>
-        /// Control imgProductoMovil.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProductoMovil;
-
-        /// <summary>
-        /// Control rpFotosProductosMovil.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rpFotosProductosMovil;
-
-        /// <summary>
         /// Control lblDescripcion.
         /// </summary>
         /// <remarks>
