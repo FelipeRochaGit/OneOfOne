@@ -1,1 +1,4 @@
 *.vs/
+
+*.WebApplicationOneOfOne/obj
+*.WebApplicationOneOfOne/bin
