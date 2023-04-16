@@ -16,8 +16,17 @@ namespace WebApplicationOneOfOne
         {
             var dtCarrito = (DataTable)Session["dtCarrito"];
         }
-       
-        
 
+        protected void btnComprar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("Datos.aspx");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

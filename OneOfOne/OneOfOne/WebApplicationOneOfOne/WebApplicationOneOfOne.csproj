@@ -70,10 +70,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Css\StylesCarritoDesplazable.css" />
     <Content Include="Css\StylesHome.css" />
     <Content Include="Css\StylesIndex.css" />
     <Content Include="Css\StylesMaster.css" />
+    <Content Include="Css\StylesMenuDesplazable.css" />
     <Content Include="Css\StylesProducto.css" />
+    <Content Include="Datos.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Imagenes\1Of1.png" />
     <Content Include="Imagenes\Buzo1.png" />
@@ -92,6 +95,13 @@
     <Content Include="LlamadosAjax.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos.aspx.cs">
+      <DependentUpon>Datos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Datos.aspx.designer.cs">
+      <DependentUpon>Datos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

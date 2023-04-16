@@ -107,7 +107,7 @@
                             <asp:Label Text="Total:" runat="server" />
                             <asp:Label Text="123" runat="server" />
                         </div>
-                        <asp:Button Text="Ir al carrito" CssClass="btn btn-dark" runat="server" />
+                        <asp:Button ID="btnComprar" Text="Comprar" CssClass="btn btn-dark" runat="server" OnClick="btnComprar_Click" />
                     </footer>
                 </div>
 

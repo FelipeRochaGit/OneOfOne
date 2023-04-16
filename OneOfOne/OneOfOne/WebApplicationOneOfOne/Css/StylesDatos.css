@@ -1,0 +1,26 @@
+﻿body {
+    padding-top:80px
+}
+.form-border {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: 65%;
+    padding:2%;
+    margin-bottom:2%;
+}
+
+.form-control{
+    margin-bottom:2%;
+    
+}
+
+.divProductos{
+width: 35%;
+position: fixed;
+right:0;
+top: 100px;
+}
+
+.divProductos img{
+   max-width:100%
+}
