@@ -117,39 +117,7 @@
         </div>
     </div>
 
-    <%--<div class="form-border">
-        <h3>Datos de contacto</h3>
-        <asp:TextBox ID="txtMail" runat="server" CssClass="form-control mb-2" placeholder="Email" />
-        <asp:TextBox ID="txtMail2" runat="server" CssClass="form-control mb-2" placeholder="Repetir email" />
-        <asp:TextBox ID="txtCelular" runat="server" CssClass="form-control mb-2" placeholder="Celular" />
-    </div>
-
-    <div class="form-border">
-        <h3>Datos de envío</h3>
-        <asp:DropDownList ID="ddlPais" runat="server" CssClass="form-select mb-2">
-            <asp:ListItem Text="Pais" Disabled="true" Selected="True" />
-            <asp:ListItem Text="Argentina" />
-        </asp:DropDownList>
-        <asp:DropDownList ID="ddlProvincias" runat="server" CssClass="form-select mb-2">
-            <asp:ListItem Text="Provincia" Disabled="true" Selected="True" />
-            <asp:ListItem Text="Capital Federal (CABA)" />
-            <asp:ListItem Text="Gran Buenos Aires (GBA)" />
-        </asp:DropDownList>
-        <asp:TextBox ID="txtCalle" runat="server" CssClass="form-control mb-2" placeholder="Calle" />
-        <asp:TextBox ID="txtAltura" runat="server" CssClass="form-control mb-2" placeholder="Altura" />
-        <asp:TextBox ID="txtPiso" runat="server" CssClass="form-control mb-2" placeholder="Piso (opcional)" />
-        <asp:TextBox ID="txtDepartamento" runat="server" CssClass="form-control mb-2" placeholder="Depto (opcional)" />
-        <asp:TextBox ID="txtCodigoPostal" runat="server" CssClass="form-control mb-0" placeholder="Código postal" />
-        <a href="https://www.correoargentino.com.ar/formularios/cpa" target="_blank">Buscá tu C.P</a>
-    </div>
-
-    <div class="form-border">
-        <h3>Datos personales</h3>
-        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control mb-2" placeholder="Nombre" />
-        <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control mb-2" placeholder="Apellido" />
-        <asp:TextBox ID="txtDniCuil" runat="server" CssClass="form-control mb-2" placeholder="Dni/Cuil" />
-        <asp:CheckBox ID="chkRecepcion" runat="server" CssClass="form-control " Text="Otra persona recibe el producto" />
-    </div>--%>
+    
             </div>
         <div class="d-block columnaDivProducto">
     <div class="divProductos">
