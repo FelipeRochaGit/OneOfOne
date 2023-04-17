@@ -10,7 +10,7 @@
     height: 80%;
     background-color: white;
     color: white;
-    z-index: 9999;
+    z-index: 9996;
 }
 
     .menu ul {
@@ -45,7 +45,7 @@
         width: 50%;
         height: 100%;
         background: rgba(0, 0, 0, .8);
-        z-index: 9999;
+        z-index: 9996;
         transform: translateX(-100%);
         transition: transform 0.3s ease-out;
         margin: 0 !important;

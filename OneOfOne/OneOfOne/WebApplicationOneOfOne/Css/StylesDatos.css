@@ -1,12 +1,18 @@
 ﻿body {
     padding-top:80px
 }
+
+.formulario {
+    margin:20px auto;
+    
+}
+
 .form-border {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    width: 65%;
-    padding:2%;
-    margin-bottom:2%;
+    width: 100%;
+    padding: 2%;
+    margin-bottom: 2%;
 }
 
 .form-control{
@@ -14,13 +20,46 @@
     
 }
 
-.divProductos{
-width: 35%;
-position: fixed;
-right:0;
-top: 100px;
+.columnaDivProducto{
+    width:30%;
+    margin-right:10%;
+}
+
+.divProductos {
+    width: 100%;
+    position: sticky;
+    right: 100px;
+    top: 155px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 5px;
 }
 
 .divProductos img{
-   max-width:100%
+   width:100px;
+   
+}
+
+
+.ItemCompras{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    /*height:100px;*/
+}
+
+.divImagen{
+    width:25%;
+    height:100%;
+
+}
+
+.divDescripcion {
+    width: 25%;
+    height: 100%;
+}
+
+.divPrecio {
+    width: 25%;
+    height: 100%;
 }

@@ -314,9 +314,9 @@
                     var html = "";
                     $.each(data, function (index, item) {
                         html += "<div class='ContainerCarrito'>";
-                        html += "<div class='itemCarrito ml-2 mt-2'>";
+                        html += "<div class='itemCarrito'>";
                         html += "<div class=' col-4'>";
-                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
+                        html += "<img src='" + item.ImgURL + "' class='img-fluid' alt='Alternate Text' /> <br />";
                         html += "</div > ";
                         html += "<div class='col-4 '>";
                         html += item.Descripcion + "<br />";
