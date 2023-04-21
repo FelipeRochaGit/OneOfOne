@@ -2,17 +2,14 @@
     padding-top:80px
 }
 
-.formulario {
-    margin:20px auto;
-    
-}
+
 
 .form-border {
-    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     width: 100%;
     padding: 2%;
     margin-bottom: 2%;
+    border-radius: 10px;
 }
 
 .form-control{
@@ -20,18 +17,32 @@
     
 }
 
+.divformulario {
+    display:flex;
+    margin: 0 auto;
+    min-width: 600px;
+    width:80%;
+    /*padding-left:5%;*/
+    justify-content:right;
+}
+.formulario {
+    width: 70%;
+    min-width:600px;
+}
+
 .columnaDivProducto{
-    width:30%;
-    margin-right:10%;
+    width:50%;
+    min-width:400px;
+    padding:0 5% 0 1% ;
 }
 
 .divProductos {
-    width: 100%;
+    width: 400px;
     position: sticky;
-    right: 100px;
-    top: 155px;
+    top: 135px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 5px;
+    padding:2%;
 }
 
 .divProductos img{
@@ -40,26 +51,45 @@
 }
 
 
-.ItemCompras{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+.ItemCompras {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10px -20px;
     /*height:100px;*/
 }
+.divitemsCarrito {
+    margin:0 5%;
+}
 
-.divImagen{
-    width:25%;
-    height:100%;
 
+.divImagen {
+    width: 33%;
+    height: 100%;
 }
 
 .divDescripcion {
-    width: 25%;
+    width: 33%;
     height: 100%;
 }
 
 .divPrecio {
-    width: 25%;
+    width: 33%;
     height: 100%;
 }
+
+
+.divPrecioDatos {
+    border-top: 1px solid rgb(0,0,0, 0.1);
+}
+    .divPrecioDatos .precioDatos {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+    }
+
+.precioDatos .Total{
+    font-size:20px;
+}
+

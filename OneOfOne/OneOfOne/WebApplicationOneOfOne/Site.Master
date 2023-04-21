@@ -39,7 +39,10 @@
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/ba5307ef8c.js" crossorigin="anonymous"></script>
 
-
+    <%--FUENTE--%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
 
     <!-- SweetAlert -->
@@ -87,16 +90,44 @@
                         <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
                     </div>
 
-                    <div id="rpCarrito" class="contenidoCarrito pt-2">
+                    <div class="contenidoCarrito">
+                        <asp:Repeater ID="rpCarrito" runat="server">
+                            <ItemTemplate>
+                                <div>
+                                    <div class='itemCarrito mt-2'>
+                                        <div class='imagen'>
+                                            <img src='<%#Eval("imgURL") %>' class='img-fluid' alt='Alternate Text' />
+                                            <br />
+                                        </div>
+                                        <div class='descripcion'>
+                                            <b> <asp:Label CssClass="desc" Text='<%# Eval("Descripcion") %>' runat="server" /></b>
+                                            <div class="talle">
+                                            <asp:Label  Text='Talle: ' runat="server" />
+                                            <asp:Label Text='<%#Eval("Talle")%>' runat="server" /> </div>
+                                            <asp:Button ClientIDMode="Static" class="btnRestar" data-index='<%# Container.ItemIndex %>' Text="-" OnClientClick="return false" runat="server" />
+                                            <asp:TextBox ClientIDMode="Static" runat="server" CssClass="txtCantidad text-center" Text='<%#Eval("Cantidad") %>' disabled="true"></asp:TextBox>
+                                            <asp:Button ClientIDMode="Static" class="btnSumar" data-index='<%# Container.ItemIndex %>' CssClass="" Text="+" OnClientClick="return false" runat="server" />
+                                        </div>
+                                        <div class='precioEliminar'>
+                                            <asp:LinkButton Text="text" CssClass="btnEliminar" class="btnEliminar" OnClientClick="return false;" data-index='<%# Eval("id") + "," + Eval("Talle") %>' runat="server" ><i class="fa-solid fa-trash"></i></asp:LinkButton>
+                                            <div class="precio">
+                                            <asp:Label Text="$" runat="server" />
+                                            <asp:Label Text='<%#Eval("Precio") %>' runat="server" /><br />
+                                                </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
 
                     <footer class="footerCarrito container ConfirmarCarrito ">
                         <div class="SubTotalEnvio">
                             <div class="SubTotal">
                                 <div>
-                                <asp:Label Text="SubTotal: " runat="server" />
-                                <asp:Label Text="123" runat="server" />
-                                    </div>
+                                    <asp:Label Text="SubTotal: " runat="server" />
+                                    <asp:Label Text="123" runat="server" />
+                                </div>
                             </div>
                             <div class="Envio">
                                 <asp:Label Text="Envio:" runat="server" />
@@ -302,117 +333,15 @@
 
         $(".Cart").click(function () {
 
-            //CARGAR CARRITO
-
-            $.ajax({
-                type: "POST",
-                url: "LlamadosAjax.asmx/CargarCarrito",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var data = JSON.parse(response.d);
-                    var html = "";
-                    $.each(data, function (index, item) {
-                        html += "<div class='ContainerCarrito'>";
-                        html += "<div class='itemCarrito'>";
-                        html += "<div class=' col-4'>";
-                        html += "<img src='" + item.ImgURL + "' class='img-fluid' alt='Alternate Text' /> <br />";
-                        html += "</div > ";
-                        html += "<div class='col-4 '>";
-                        html += item.Descripcion + "<br />";
-                        html += "Talle: " + item.Talle + "<br />";
-                        html += item.Cantidad + "<br />";
-                        html += "Precio: " + item.Precio + "<br />";
-                        html += "</div > ";
-                        html += "<div class='col-3 '>";
-                        html += "<a href='#' class='fa-solid fa-trash eliminarItem' data-id='" + index + "'></a>";
-                        html += "</div > ";
-                        html += "</div > ";
-                        html += "</div > ";
-
-
-                    });
-                    if (html == "") {
-                        html += "<div class='ContainerCarrito'>";
-                        html += "Su carrito esta vacio";
-                        html += "</div > ";
-
-                    }
-                    $('[id=rpCarrito]').html(html);
-
-
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-
-
-
-
-            });
-
             if ($('.Cart').hasClass('fa-cart-plus')) {
                 $('.carrito').css('transform', 'translateX(0)');
                 $('.overlay').css('display', 'block');
                 menuAbierto = true;
             }
 
-            /*console.log(parseInt($('.menu').css('left')));*/
         });
 
 
-
-
-
-
-        $(document).on('click', '.eliminarItem', function () {
-            var index = $(this).data('id');
-
-            $.ajax({
-                method: 'POST',
-                url: "LlamadosAjax.asmx/EliminarItem",
-                data: JSON.stringify({ itemIndex: index }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-
-                    var data = JSON.parse(response.d);
-                    var html = "";
-                    $.each(data, function (index, item) {
-                        html += "<div class='ContainerCarrito'>";
-                        html += "<div class='itemCarrito ml-2 mt-2'>";
-                        html += "<div class=' col-4'>";
-                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
-                        html += "</div > ";
-                        html += "<div class='col-4 '>";
-                        html += item.Descripcion + "<br />";
-                        html += "Talle: " + item.Talle + "<br />";
-                        html += item.Cantidad + "<br />";
-                        html += "Precio: " + item.Precio + "<br />";
-                        html += "</div > ";
-                        html += "<div class='col-3 '>";
-                        html += "<a href='#' class='fa-solid fa-trash eliminarItem' data-id='" + index + "'></a>";
-                        html += "</div > ";
-                        html += "</div > ";
-                        html += "</div > ";
-
-
-                    });
-                    if (html == "") {
-                        html += "<div class='ContainerCarrito '>";
-                        html += "Su carrito esta vacio";
-                        html += "</div > ";
-
-                    }
-                    $('[id=rpCarrito]').html(html);
-
-
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
 
 
 
@@ -479,9 +408,72 @@
 
             });
 
-
-
         }
+
+        $('.btnRestar').click(function () {
+            var index = $(this).data('index');
+            var btnRestar = $(this);
+            var txtCantidad = btnRestar.closest('.itemCarrito').find('.txtCantidad');
+            var cantidad = parseInt(txtCantidad.val());
+            if (cantidad > 1) {
+                cantidad--;
+                txtCantidad.val(cantidad);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/ActualizarCantidad",
+                data: {
+                    index: index,
+                    cantidad: cantidad
+                },
+                success: function (response) {
+                    // hacer algo con la respuesta del servidor
+                },
+                error: function (xhr, status, error) {
+                    // manejar el error
+                }
+            });
+        });
+
+        $('.btnSumar').click(function () {
+            var index = $(this).data('index');
+            var btnSumar = $(this);
+            var txtCantidad = btnSumar.closest('.itemCarrito').find('.txtCantidad');
+            var cantidad = parseInt(txtCantidad.val());
+
+            cantidad++;
+            txtCantidad.val(cantidad);
+
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/ActualizarCantidad",
+                data: {
+                    index: index,
+                    cantidad: cantidad
+                },
+                success: function (response) {
+                    // hacer algo con la respuesta del servidor
+                },
+                error: function (xhr, status, error) {
+                    // manejar el error
+                }
+            });
+
+        });
+
+        $('.btnEliminar').click(function () {
+            $(this).closest('.itemCarrito').remove();
+            var index = $(this).data('index');
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/EliminarItem",
+                data: {
+                    index: index
+                }
+            });
+        });
+
 
 
 
@@ -490,3 +482,6 @@
 </body>
 
 </html>
+
+
+

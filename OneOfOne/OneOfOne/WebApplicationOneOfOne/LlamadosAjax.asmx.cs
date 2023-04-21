@@ -19,39 +19,56 @@ namespace WebApplicationOneOfOne
     public class WebService1 : System.Web.Services.WebService
     {
 
+        //[WebMethod(EnableSession = true)]
+        //public void CargarCarrito()
+        //{
+        //    try
+        //    {
+        //        if (Session["dtCarrito"] != null)
+        //        {
+        //            rpCarrito.datasource = Session["dtCarrito"];
+        //            rpCarrito.dataBind()
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+            
+        //}
+
         [WebMethod(EnableSession = true)]
-        public string CargarCarrito()
+        public void EliminarItem(string index)
         {
             try
             {
-                if (Session["dtCarrito"] != null)
-                {
+                string id = index.Split(',')[0];
+                string talle = index.Split(',')[1];
+                DataTable carrito = (DataTable)Session["dtCarrito"];
+                DataRow rowProducto = carrito.Select($"Id = {id} and Talle = {talle}")[0];
+                rowProducto.Delete();
+                carrito.AcceptChanges();
+                Session["dtcarrito"] = carrito;
 
-                
-                string jsonString = JsonConvert.SerializeObject(Session["dtCarrito"]);
-                return jsonString;
-                }
+
             }
             catch (Exception ex)
             {
-                
                 throw;
             }
-            return JsonConvert.SerializeObject("");
+            
         }
-        
+
         [WebMethod(EnableSession = true)]
-        public string EliminarItem(string itemIndex)
+        public void ActualizarCantidad(int index,int cantidad)
         {
             try
             {
-                int index=Convert.ToInt32(itemIndex.ToString());
                 DataTable carrito = (DataTable)Session["dtCarrito"];
-                carrito.Rows[index].Delete();
+                carrito.Rows[index]["cantidad"] = cantidad;
                 carrito.AcceptChanges();
                 Session["carrito"] = carrito;
-                return CargarCarrito();
-
 
             }
             catch (Exception ex)

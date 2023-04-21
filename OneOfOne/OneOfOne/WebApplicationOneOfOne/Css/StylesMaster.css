@@ -1,4 +1,5 @@
 ﻿body {
+    font-family: 'Mukta', sans-serif;
 }
 /* Cambiar el color de la barra de desplazamiento */
 ::-webkit-scrollbar {
@@ -59,7 +60,7 @@
     top: 35px;
     right: 20px;
     color: white;
-    text-decoration:none;
+    text-decoration: none;
     /*color: #ced2d9;*/
 }
 /*TERMINA NAV*/
@@ -130,6 +131,10 @@
 
 
 
+.txtCantidad {
+    border: none;
+    background-color: transparent;
+}
 /*COLUMNAS*/
 .footerContainer {
     width: 100%;

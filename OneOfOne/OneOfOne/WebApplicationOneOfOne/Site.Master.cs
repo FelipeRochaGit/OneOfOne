@@ -14,8 +14,18 @@ namespace WebApplicationOneOfOne
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var dtCarrito = (DataTable)Session["dtCarrito"];
+            DataTable dtCarrito = (DataTable)Session["dtCarrito"];
+            if (dtCarrito != null) { 
+            if (dtCarrito.Rows.Count > 0)
+            {
+                rpCarrito.DataSource = dtCarrito;
+                rpCarrito.DataBind();
+            }
+            }
+
         }
+
+
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {

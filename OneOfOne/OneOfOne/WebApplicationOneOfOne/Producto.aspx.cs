@@ -29,11 +29,18 @@ namespace WebApplicationOneOfOne
                 if (!IsPostBack)
                 {
                     idProducto = long.Parse(Request["idProducto"].ToString());
+                    bool MostrarCarrito = Convert.ToBoolean(Request["Agregar"].ToString());
                     dtProductoGeneral = _productoService.ObtenerProducto(idProducto);
                     DataTable dtFotos = _productoService.ObtenerFotosProducto(idProducto);
                     ValidarStockTalles(dtProductoGeneral);
                     VerProducto(dtProductoGeneral);
                     CargarFotosDelProducto(dtFotos);
+                    DataTable dtCarrito = (DataTable)Session["dtCarrito"];
+                    if (MostrarCarrito)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "clientScript", "$(function (){" +
+                       "$('[id$=btnCarrito]').click(); $('[id$=hfCantidadSeleccionada]').val(1) })", true);
+                    }
                 }
             }
             catch (Exception ex)
@@ -169,8 +176,10 @@ namespace WebApplicationOneOfOne
                 }
 
                 Session["dtCarrito"] = dtCarrito;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "clientScript", "$(function (){" +
-                       "$('[id$=btnCarrito]').click(); $('[id$=hfCantidadSeleccionada]').val(1) })", true);
+                var url = Request.Url.ToString().Split('&')[0];
+                url += "&Agregar=True";
+                Response.Redirect(url);
+
             }
             catch (Exception ex)
             {

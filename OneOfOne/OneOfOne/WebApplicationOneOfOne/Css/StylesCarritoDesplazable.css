@@ -15,8 +15,8 @@
     /*transform: translateX(0);*/ /*mostrar carrito*/
     transition: transform 0.3s ease-out;
     z-index: 9998;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /*footer CARRITO*/
@@ -34,7 +34,6 @@
         height: 40px !important;
         width: 90%;
         margin: 5% 0;
-        
     }
 
 .SubTotalEnvio {
@@ -71,21 +70,70 @@
 
 .itemCarrito {
     border-bottom: 1px solid rgb(0 0 0/0.1);
+    height: 120px !important;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-    .itemCarrito img {
-        margin-bottom: 2%;
+
+    .itemCarrito .descripcion {
+        text-align: left;
+        height: 100% !important;
+        width: 30%;
+        margin-top:23px;
     }
+
+
+
+    .itemCarrito .descripcion .desc {
+        font-size: 18px;
+    }
+
+
+    .itemCarrito .imagen {
+        height: 100% !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 37%;
+    }
+
+    .itemCarrito img {
+        max-height: 80px !important;
+    }
+
+
+
 
     .itemCarrito a {
         display: flex;
         justify-content: center;
         color: black;
         text-decoration: none;
+    }
+
+    .itemCarrito .precioEliminar {
+        height: 100% !important;
+        width: 30%;
+        position: relative;
+        display: flex;
+    }
+
+    .itemCarrito .precio {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        bottom: 30px;
+    }
+
+    .itemCarrito .btnEliminar {
+        height: 16px;
+        display: flex;
+        width: 100%;
+        justify-content: right;
     }
 
 .tituloCarritoDesplazable {
@@ -110,21 +158,26 @@
     }
 
 
-.ContainerCarrito {
-    display: flex;
-    justify-items: center;
-    justify-content: center;
-}
+
 /*BOTON DENTRO DE CARRITO*/
+.btnRestar, .btnSumar {
+    text-align: center;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    border: none;
+}
 
-
+.txtCantidad{
+    width:15%;
+}
 /*LISTA CARRITO*/
-#rpCarrito img {
+/*#rpCarrito img {
     width: 100px;
     height: 100px;
-}
-
-
+}*/
 .overlay {
     display: none;
     position: fixed;
@@ -157,6 +210,7 @@
     .contenidoCarrito {
         max-height: 60%;
         overflow-y: scroll;
+        overflow-x: hidden;
         height: 100%
     }
 

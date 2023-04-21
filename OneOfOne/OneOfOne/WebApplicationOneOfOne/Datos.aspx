@@ -38,12 +38,15 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
+
     <div class="text-center">
         <h1>Datos de la compra</h1>
     </div>
     <div class="d-flex">
-        <div class="formulario col-6">
-    <div class="form-border accordion-item">
+
+        <div class="divformulario">
+            <div class="formulario">
+    <div class="form-border ">
         <h3 class="accordion-header">
             <button id="btnDatosContacto" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <div class="d-flex w-100">
@@ -63,7 +66,7 @@
         </div>
     </div>
 
-    <div class="form-border accordion-item ">
+    <div class="form-border ">
         <h3 class="accordion-header">
             <button id="btnDatosEnvio" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
                 <div class="d-flex w-100">
@@ -95,7 +98,7 @@
         </div>
     </div>
 
-    <div class="form-border accordion-item">
+    <div class="form-border ">
         <h3 class="accordion-header">
             <button id="btnDatosPersonales" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
 
@@ -117,10 +120,15 @@
         </div>
     </div>
 
-    
+    </div>
             </div>
+
+
+
+
         <div class="d-block columnaDivProducto">
     <div class="divProductos">
+        <div class="divitemsCarrito">
         <div class="ItemCompras">
             <div class="divImagen">
                 <img src="Imagenes/Buzo1.png" alt="Alternate Text" />
@@ -145,8 +153,24 @@
             </div>
 
         </div>
-        <div>SubTotal</div> 
-            <div>Total</div> 
+            </div>
+        <div class="divPrecioDatos">
+            <div class="precioDatos">
+            <asp:Label Text="SubTotal" runat="server" />
+            <asp:Label CssClass="Precio" Text='10' runat="server" />
+            </div>
+
+            <div class="precioDatos">
+            <asp:Label Text="Costo De Envio" runat="server" />
+            <asp:Label CssClass="Precio" Text='10' runat="server" />
+            </div>
+        </div> 
+            <div class="divPrecioDatos">
+                <div class="precioDatos">
+            <asp:Label CssClass="Total" Text="Total" runat="server" />
+            <asp:Label CssClass="Precio" Text='10' runat="server" />
+                    </div>
+                </div> 
     </div>
             
             </div>
