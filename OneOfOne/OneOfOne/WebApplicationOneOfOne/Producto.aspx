@@ -52,6 +52,7 @@
             }
 
             $(".divCheckBox1").click(function () {
+                $('.labelErrorTalle').css('display', 'none')
 
                 if ($("#chkTalle1").is(":checked")) {
                     $("#chkTalle1").prop("checked", false);
@@ -72,6 +73,7 @@
             });
 
             $(".divCheckBox2").click(function () {
+                $('.labelErrorTalle').css('display', 'none')
                 if ($("#chkTalle2").is(":checked")) {
                     $("#chkTalle2").prop("checked", false);
                     $(".divCheckBox2").removeClass("Selected");
@@ -81,6 +83,7 @@
                     $("#chkTalle1").prop("checked", false);
                     $(".divCheckBox2").addClass("Selected");
                     $(".divCheckBox1").removeClass("Selected");
+
 
                 }
 
@@ -175,7 +178,8 @@
 
         function validarTalle() {
             if (!$("#chkTalle1").prop("checked") && !$("#chkTalle2").prop("checked")) {
-                alert('Seleccionar talle');
+                /*$('.modalSeleccionarTalles').css('display','flex')*/
+                $('.labelErrorTalle').css('display', 'flex')
                 return false;
             }
 
@@ -188,13 +192,13 @@
     <div class="producto">
         <div class="columnaImagen mb-5">
             <div class="carousel">
-            <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes img-fluid mt-2" />
-            <asp:Repeater ID="rpFotosProductosPC" runat="server">
-                <ItemTemplate>
-                    <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes img-fluid mt-2" />
-                </ItemTemplate>
-            </asp:Repeater>
-                </div>
+                <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes img-fluid mt-2" />
+                <asp:Repeater ID="rpFotosProductosPC" runat="server">
+                    <ItemTemplate>
+                        <asp:Image ClientIDMode="AutoID" ID="imgProducto1" ImageUrl='<%#Eval("imgUrl") %>' runat="server" CssClass="Imagenes img-fluid mt-2" />
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
         </div>
 
 
@@ -205,14 +209,17 @@
                 <asp:Label ID="lblDescripcion" runat="server"></asp:Label></h1>
             <h4>
                 <asp:Label ID="lblPrecio" runat="server"></asp:Label></h4>
-            <div class="row m-0">
-                <div class="divCheckBox1 mr-3 mb-2">
+            <div class="row m-0 mb-1">
+                <div class="divCheckBox1 mr-3">
                     <asp:CheckBox ID="chkTalle1" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
                     <asp:Label ID="lblTalle1" CssClass="lblTalle1" Text="Talle 1" runat="server" />
                 </div>
                 <div class="divCheckBox2">
                     <asp:CheckBox ID="chkTalle2" CssClass="chkTalle" ClientIDMode="Static" runat="server" />
                     <asp:Label ID="lblTalle2" CssClass="lblTalle1" Text="Talle 2" runat="server" />
+                </div>
+                <div class="labelErrorTalle mt-2">
+                    <asp:Label runat="server" ><i class="fa-sharp fa-solid fa-circle-exclamation mt-1 mr-1" style="color: #ea0b0b;"></i> Elegí una opción</asp:Label>
                 </div>
             </div>
             <a href="#">Medidas de talles</a>
@@ -250,9 +257,9 @@
             <asp:Button ID="btnAgregarAlCarrito" CssClass="btn btn-dark" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()" />
         </div>
     </div>
-    <script>
-
-
-
-</script>
+    <div class="modalSeleccionarTalles">
+        <div class="modalAdvertencia ">
+            Se debe seleccionar un talle!
+        </div>
+    </div>
 </asp:Content>

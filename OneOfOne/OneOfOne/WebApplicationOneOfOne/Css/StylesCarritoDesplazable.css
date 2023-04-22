@@ -65,76 +65,97 @@
 .contenidoCarrito {
     max-height: 60%;
     overflow-y: scroll;
-    height: 100%
+    height: 100%;
+}
+.divisor {
+    margin-left:6%;
+    width: 92%;
+    height: 1px;
+    border-bottom: 1px solid rgb(0 0 0/0.1);
 }
 
 .itemCarrito {
-    border-bottom: 1px solid rgb(0 0 0/0.1);
+    /*border-bottom: 1px solid rgb(0 0 0/0.1);*/
     height: 120px !important;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top:7px;
 }
 
-
-    .itemCarrito .descripcion {
-        text-align: left;
-        height: 100% !important;
-        width: 30%;
-        margin-top:23px;
-    }
-
-
-
-    .itemCarrito .descripcion .desc {
+    .itemCarrito .desc {
         font-size: 18px;
+        display: flex;
+        justify-content: left;
     }
 
-
-    .itemCarrito .imagen {
-        height: 100% !important;
+    .itemCarrito .talle {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 37%;
+        justify-content: left;
+        margin-bottom:5px;
+    }
+
+    .itemCarrito .precio {
+        display: flex;
+        justify-content: right;
+        margin-bottom: 5px;
     }
 
     .itemCarrito img {
         max-height: 80px !important;
     }
 
+.contenedorCantidad {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    margin-bottom: 5px;
+}
 
+.itemCarrito .cantidad {
+    margin-top: 4px;
+    min-width: 140px;
+    width: 50%;
+    display: inline-flex;
+    border-radius: 20px;
+    /*background: rgb(128 128 128/0.1);*/
+    border: 1px solid rgb(0 0 0/0.1);
+    padding:4px;
+}
 
-
-    .itemCarrito a {
-        display: flex;
-        justify-content: center;
-        color: black;
-        text-decoration: none;
+    .itemCarrito .txtCantidad {
+        width:100%;
+        min-width: 60px;
     }
 
-    .itemCarrito .precioEliminar {
-        height: 100% !important;
-        width: 30%;
-        position: relative;
-        display: flex;
+    .itemCarrito .btnRestar, .btnSumar {
+        text-align: center;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        background-color: black;
+        color: white;
+        border: none;
+        text-decoration:none;
     }
 
-    .itemCarrito .precio {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        position: absolute;
-        bottom: 30px;
-    }
 
-    .itemCarrito .btnEliminar {
-        height: 16px;
-        display: flex;
-        width: 100%;
-        justify-content: right;
-    }
+
+
+.divBtnEliminar {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.itemCarrito .btnEliminar {
+    color: black;
+    text-decoration: none;
+    position: absolute;
+    top: 5px;
+}
+
 
 .tituloCarritoDesplazable {
     height: 50px;
@@ -159,20 +180,9 @@
 
 
 
-/*BOTON DENTRO DE CARRITO*/
-.btnRestar, .btnSumar {
-    text-align: center;
-    height: 28px;
-    width: 28px;
-    border-radius: 50%;
-    background-color: black;
-    color: white;
-    border: none;
-}
 
-.txtCantidad{
-    width:15%;
-}
+
+
 /*LISTA CARRITO*/
 /*#rpCarrito img {
     width: 100px;

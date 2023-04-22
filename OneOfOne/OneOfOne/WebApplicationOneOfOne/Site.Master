@@ -93,35 +93,49 @@
                     <div class="contenidoCarrito">
                         <asp:Repeater ID="rpCarrito" runat="server">
                             <ItemTemplate>
-                                <div>
-                                    <div class='itemCarrito mt-2'>
-                                        <div class='imagen'>
+                                    <div class='itemCarrito'>
+                                        <div class="col-4 text-center">
                                             <img src='<%#Eval("imgURL") %>' class='img-fluid' alt='Alternate Text' />
-                                            <br />
-                                        </div>
-                                        <div class='descripcion'>
+                                            </div>
+                                        <div class="col-7">
+                                            <div class="divBtnEliminar">
+                                            <asp:LinkButton Text="text" CssClass="btnEliminar" OnClientClick="return false;" data-index='<%# Eval("id") + "," + Eval("Talle") %>' runat="server" ><i class="fa-solid fa-trash"></i></asp:LinkButton>
+                                                </div>
                                             <b> <asp:Label CssClass="desc" Text='<%# Eval("Descripcion") %>' runat="server" /></b>
                                             <div class="talle">
                                             <asp:Label  Text='Talle: ' runat="server" />
-                                            <asp:Label Text='<%#Eval("Talle")%>' runat="server" /> </div>
-                                            <asp:Button ClientIDMode="Static" class="btnRestar" data-index='<%# Container.ItemIndex %>' Text="-" OnClientClick="return false" runat="server" />
+                                            <asp:Label Text='<%#Eval("Talle")%>' runat="server" />
+                                                </div>
+                                            
+                                            <div class="contenedorCantidad">
+                                            <div class="cantidad">
+                                                <div class="text-right">
+                                            <%--<asp:Button ClientIDMode="Static" CssClass="btnRestar" data-index='<%# Container.ItemIndex %>' Text="-" OnClientClick="return false" runat="server" />--%>
+                                                     <button class="btnRestar" data-index='<%# Container.ItemIndex %>' onclick="return false" ><i class="fa-solid fa-minus" style="color: #fcfcfc;"></i></button>
+
+                                                    </div>
+                                                <div class="text-center">
                                             <asp:TextBox ClientIDMode="Static" runat="server" CssClass="txtCantidad text-center" Text='<%#Eval("Cantidad") %>' disabled="true"></asp:TextBox>
-                                            <asp:Button ClientIDMode="Static" class="btnSumar" data-index='<%# Container.ItemIndex %>' CssClass="" Text="+" OnClientClick="return false" runat="server" />
-                                        </div>
-                                        <div class='precioEliminar'>
-                                            <asp:LinkButton Text="text" CssClass="btnEliminar" class="btnEliminar" OnClientClick="return false;" data-index='<%# Eval("id") + "," + Eval("Talle") %>' runat="server" ><i class="fa-solid fa-trash"></i></asp:LinkButton>
+                                                    </div>
+                                                <div class="text-right ">
+                                                     <button class="btnSumar" data-index='<%# Container.ItemIndex %>' onclick="return false" ><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                                            <%--<asp:Button ClientIDMode="Static" CssClass="btnSumar" data-index='<%# Container.ItemIndex %>' Text="+" OnClientClick="return false" runat="server" />--%>
+                                                    </div>
+                                                </div>
+                                                </div>
                                             <div class="precio">
                                             <asp:Label Text="$" runat="server" />
                                             <asp:Label Text='<%#Eval("Precio") %>' runat="server" /><br />
                                                 </div>
-                                        </div>
+                                            </div>
+
                                     </div>
-                                    </div>
+                                <div class="divisor"></div>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>
 
-                    <footer class="footerCarrito container ConfirmarCarrito ">
+                    <footer class="footerCarrito ConfirmarCarrito ">
                         <div class="SubTotalEnvio">
                             <div class="SubTotal">
                                 <div>
