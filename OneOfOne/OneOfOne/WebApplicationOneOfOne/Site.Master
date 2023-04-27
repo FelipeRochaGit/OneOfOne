@@ -111,36 +111,36 @@
                                             <div class="cantidad">
                                                 <div class="text-right">
                                             <%--<asp:Button ClientIDMode="Static" CssClass="btnRestar" data-index='<%# Container.ItemIndex %>' Text="-" OnClientClick="return false" runat="server" />--%>
-                                                     <button class="btnRestar" data-index='<%# Container.ItemIndex %>' onclick="return false" ><i class="fa-solid fa-minus" style="color: #fcfcfc;"></i></button>
+                                                     <button class="btnRestar" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false" ><i class="fa-solid fa-minus" style="color: #fcfcfc;"></i></button>
 
                                                     </div>
                                                 <div class="text-center">
                                             <asp:TextBox ClientIDMode="Static" runat="server" CssClass="txtCantidad text-center" Text='<%#Eval("Cantidad") %>' disabled="true"></asp:TextBox>
                                                     </div>
                                                 <div class="text-right ">
-                                                     <button class="btnSumar" data-index='<%# Container.ItemIndex %>' onclick="return false" ><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                                                     <button class="btnSumar" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false" ><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
                                             <%--<asp:Button ClientIDMode="Static" CssClass="btnSumar" data-index='<%# Container.ItemIndex %>' Text="+" OnClientClick="return false" runat="server" />--%>
                                                     </div>
                                                 </div>
                                                 </div>
                                             <div class="precio">
                                             <asp:Label Text="$" runat="server" />
-                                            <asp:Label Text='<%#Eval("Precio") %>' runat="server" /><br />
+                                            <asp:Label CssClass="precioTotal" Text='<%#Eval("PrecioTotal")%>' runat="server" /><br />
                                                 </div>
                                             </div>
 
                                     </div>
-                                <div class="divisor"></div>
                             </ItemTemplate>
                         </asp:Repeater>
+                        <asp:Label Visible="true" ID="lblCarritoVacio" Text="Su carrito esta vacio" CssClass="carritoVacio d-flex justify-content-center" runat="server" />
                     </div>
 
                     <footer class="footerCarrito ConfirmarCarrito ">
                         <div class="SubTotalEnvio">
                             <div class="SubTotal">
                                 <div>
-                                    <asp:Label Text="SubTotal: " runat="server" />
-                                    <asp:Label Text="123" runat="server" />
+                                    <asp:Label  Text="SubTotal: " runat="server" />
+                                    <asp:Label ID="lblSubTotal" Text="" runat="server" />
                                 </div>
                             </div>
                             <div class="Envio">
@@ -150,7 +150,7 @@
                         </div>
                         <div class="Total">
                             <asp:Label Text="Total:" runat="server" />
-                            <asp:Label Text="123" runat="server" />
+                            <asp:Label ID="lblTotal" Text="" runat="server" />
                         </div>
                         <asp:Button ID="btnComprar" Text="Comprar" CssClass="btn btn-dark" runat="server" OnClick="btnComprar_Click" />
                     </footer>
@@ -425,27 +425,37 @@
         }
 
         $('.btnRestar').click(function () {
+
             var index = $(this).data('index');
             var btnRestar = $(this);
             var txtCantidad = btnRestar.closest('.itemCarrito').find('.txtCantidad');
+            var precioIndividual = $(this).data('value');
+            var lblPrecioTotalArticulo = btnRestar.closest('.itemCarrito').find('.precioTotal');
             var cantidad = parseInt(txtCantidad.val());
             if (cantidad > 1) {
                 cantidad--;
                 txtCantidad.val(cantidad);
             }
+            lblPrecioTotalArticulo.text(cantidad * precioIndividual)
+
 
             $.ajax({
                 type: "POST",
                 url: "LlamadosAjax.asmx/ActualizarCantidad",
                 data: {
                     index: index,
-                    cantidad: cantidad
+                    cantidad: cantidad,
+                    precio: precioIndividual
+
                 },
                 success: function (response) {
-                    // hacer algo con la respuesta del servidor
+                    var xmlDoc = $(response);
+                    var xmlString = xmlDoc.find("string");
+                    var stringValue = xmlString.text();
+                    $('[id$=lblSubTotal]').text(stringValue)
                 },
                 error: function (xhr, status, error) {
-                    // manejar el error
+                
                 }
             });
         });
@@ -455,23 +465,31 @@
             var btnSumar = $(this);
             var txtCantidad = btnSumar.closest('.itemCarrito').find('.txtCantidad');
             var cantidad = parseInt(txtCantidad.val());
+            var precioIndividual = $(this).data('value');
+            var lblPrecioTotalArticulo = btnSumar.closest('.itemCarrito').find('.precioTotal');
 
+
+            //suma la cantidad
             cantidad++;
             txtCantidad.val(cantidad);
+            //multiplica la cantidad por el precio individual y lo asigna al lbl
+            lblPrecioTotalArticulo.text(cantidad * precioIndividual)
 
             $.ajax({
                 type: "POST",
                 url: "LlamadosAjax.asmx/ActualizarCantidad",
                 data: {
                     index: index,
-                    cantidad: cantidad
+                    cantidad: cantidad,
+                    precio: precioIndividual
                 },
                 success: function (response) {
-                    // hacer algo con la respuesta del servidor
-                },
-                error: function (xhr, status, error) {
-                    // manejar el error
+                    var xmlDoc = $(response);
+                    var xmlString = xmlDoc.find("string");
+                    var stringValue = xmlString.text();
+                    $('[id$=lblSubTotal]').text(stringValue);
                 }
+                
             });
 
         });
@@ -484,6 +502,20 @@
                 url: "LlamadosAjax.asmx/EliminarItem",
                 data: {
                     index: index
+                },
+                success: function (response) {
+                    var xmlDoc = $(response);
+                    var xmlString = xmlDoc.find("string");
+                    var stringValue = xmlString.text();
+                    if (stringValue === "Carrito Vacio") {
+                        $('.carritoVacio').text("Su carrito esta vacio")
+                        $('.carritoVacio').css("display", "block")
+                        $('[id$=lblSubTotal]').text("");
+
+                    } else {
+                        $('.carritoVacio').css("display", "none")
+                        $('[id$=lblSubTotal]').text(stringValue);
+                    }
                 }
             });
         });

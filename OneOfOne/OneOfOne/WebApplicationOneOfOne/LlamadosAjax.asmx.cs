@@ -39,17 +39,31 @@ namespace WebApplicationOneOfOne
         //}
 
         [WebMethod(EnableSession = true)]
-        public void EliminarItem(string index)
+        public string EliminarItem(string index)
         {
             try
             {
+                bool carritoVacio = false;
                 string id = index.Split(',')[0];
                 string talle = index.Split(',')[1];
+                float Total = 0;
                 DataTable carrito = (DataTable)Session["dtCarrito"];
                 DataRow rowProducto = carrito.Select($"Id = {id} and Talle = {talle}")[0];
                 rowProducto.Delete();
                 carrito.AcceptChanges();
                 Session["dtcarrito"] = carrito;
+                if (((DataTable)Session["dtcarrito"]).Rows.Count > 0)
+                {
+                    foreach (DataRow row in carrito.Rows)
+                    {
+                        Total += float.Parse(row["PrecioTotal"].ToString());
+                    }
+                    return Total.ToString();
+                }
+                else
+                {
+                    return "Carrito Vacio";
+                }
 
 
             }
@@ -61,15 +75,24 @@ namespace WebApplicationOneOfOne
         }
 
         [WebMethod(EnableSession = true)]
-        public void ActualizarCantidad(int index,int cantidad)
+        public string ActualizarCantidad(string index,int cantidad,int precio)
         {
             try
             {
+                string id = index.Split(',')[0];
+                string talle = index.Split(',')[1];
+                float Total = 0;
                 DataTable carrito = (DataTable)Session["dtCarrito"];
-                carrito.Rows[index]["cantidad"] = cantidad;
-                carrito.AcceptChanges();
+                DataRow rowProducto = carrito.Select($"Id = {id} and Talle = {talle}")[0];
+                rowProducto["cantidad"] = cantidad;
+                rowProducto["PrecioTotal"] = cantidad * precio;
                 Session["carrito"] = carrito;
-
+                foreach (DataRow row in carrito.Rows)
+                {
+                     Total+= float.Parse(row["PrecioTotal"].ToString());
+                }
+                return Total.ToString();
+                
             }
             catch (Exception ex)
             {

@@ -41,7 +41,7 @@ namespace WebApplicationOneOfOne
             switch (e.CommandName)
             {
                 case "VerProducto":
-                    Response.Redirect($"Producto.aspx?IdProducto={idProducto}&Agregar=False");
+                    Response.Redirect($"Producto.aspx?IdProducto={idProducto}");
                     break;
                 default:
                     break;

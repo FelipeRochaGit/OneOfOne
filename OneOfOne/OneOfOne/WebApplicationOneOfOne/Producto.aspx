@@ -191,7 +191,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
     <div class="producto">
         <div class="columnaImagen mb-5">
-            <div class="carousel">
+            <div class="carousel text-center">
                 <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes img-fluid mt-2" />
                 <asp:Repeater ID="rpFotosProductosPC" runat="server">
                     <ItemTemplate>
@@ -254,6 +254,7 @@
                 </div>
             </div>
             <asp:HiddenField runat="server" ID="hfCantidadSeleccionada" Value="1" />
+            
             <asp:Button ID="btnAgregarAlCarrito" CssClass="btn btn-dark" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()" />
         </div>
     </div>

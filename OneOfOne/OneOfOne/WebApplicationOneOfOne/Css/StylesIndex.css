@@ -7,3 +7,50 @@
     max-height: 100vh;
 }
 
+.contenedor{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+    .video-container video {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+
+.UltimoLanzamiento {
+    display:flex;
+    width:100%;
+
+}
+    .UltimoLanzamiento .Imagen {
+        display: flex;
+        width: 50%;
+        text-align: center;
+        margin: 0.4%;
+    }
+    .UltimoLanzamiento  img{
+
+        width: 100%;
+        border: 1px solid;
+    }
+
+
+.Logo1Of1{
+    display:flex;
+    background:rgb(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+    margin-top:-10px;
+}
+.Logo1Of1 img{
+    width:30%;
+}

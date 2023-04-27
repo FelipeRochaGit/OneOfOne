@@ -28,19 +28,26 @@ namespace WebApplicationOneOfOne
             {
                 if (!IsPostBack)
                 {
-                    idProducto = long.Parse(Request["idProducto"].ToString());
-                    bool MostrarCarrito = Convert.ToBoolean(Request["Agregar"].ToString());
-                    dtProductoGeneral = _productoService.ObtenerProducto(idProducto);
-                    DataTable dtFotos = _productoService.ObtenerFotosProducto(idProducto);
-                    ValidarStockTalles(dtProductoGeneral);
-                    VerProducto(dtProductoGeneral);
-                    CargarFotosDelProducto(dtFotos);
-                    DataTable dtCarrito = (DataTable)Session["dtCarrito"];
-                    if (MostrarCarrito)
+                    if (string.IsNullOrEmpty(Request.QueryString["IdProducto"]))
                     {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "clientScript", "$(function (){" +
-                       "$('[id$=btnCarrito]').click(); $('[id$=hfCantidadSeleccionada]').val(1) })", true);
+                        Response.Redirect("Home.aspx");
                     }
+                    else
+                    {
+                        idProducto = long.Parse(Request["idProducto"].ToString());
+                        dtProductoGeneral = _productoService.ObtenerProducto(idProducto);
+                        DataTable dtFotos = _productoService.ObtenerFotosProducto(idProducto);
+                        ValidarStockTalles(dtProductoGeneral);
+                        VerProducto(dtProductoGeneral);
+                        CargarFotosDelProducto(dtFotos);
+                        DataTable dtCarrito = (DataTable)Session["dtCarrito"];
+                        if (!string.IsNullOrEmpty(Request.QueryString["Agregar"]))
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "clientScript", "$(function (){" +
+                           "$('[id$=btnCarrito]').click(); $('[id$=hfCantidadSeleccionada]').val(1) })", true);
+                        }
+                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -90,6 +97,8 @@ namespace WebApplicationOneOfOne
         {
             long idProducto;
             int cantidad;
+            float Precio;
+            float PrecioTotal;
             string talle;
 
             try
@@ -97,7 +106,8 @@ namespace WebApplicationOneOfOne
                 idProducto = long.Parse(dtProducto.Rows[0]["Id"].ToString());
                 cantidad = int.Parse(dtProducto.Rows[0]["Cantidad"].ToString());
                 talle = dtProducto.Rows[0]["Talle"].ToString();
-
+                Precio= int.Parse(dtProducto.Rows[0]["Precio"].ToString());
+                PrecioTotal =cantidad*Precio;
                 //buscamos en el carrito el producto elegido y el talle
                 var rowProducto = dtCarrito.Select($"Id = {idProducto} and Talle = {talle}");
 
@@ -109,8 +119,13 @@ namespace WebApplicationOneOfOne
                 else //si el producto y talle ya estaban agregados, incrementamos la cantidad
                 {
                     int c = int.Parse(rowProducto[0]["Cantidad"].ToString());
+                    float pt = int.Parse(rowProducto[0]["PrecioTotal"].ToString());
+                    float p = int.Parse(rowProducto[0]["Precio"].ToString());
                     c += cantidad;
                     rowProducto[0]["Cantidad"] = c;
+                    //multiplicamos la columna cantidad por el precio individual y seteamos el precio total del articulo
+                    pt = c * p;
+                    rowProducto[0]["PrecioTotal"] = pt;
                 }
             }
             catch (Exception ex)
@@ -163,6 +178,13 @@ namespace WebApplicationOneOfOne
                 //agregamos columna Cantidad y la seteamos
                 dtProductoIndividual.Columns.Add("Cantidad");
                 dtProductoIndividual.Rows[0]["Cantidad"] = hfCantidadSeleccionada.Value;
+                //agregamos columna PrecioTotal (Precio*Cantidad) y la seteamos
+                dtProductoIndividual.Columns.Add("PrecioTotal");
+                float PrecioIndividual = float.Parse(dtProductoIndividual.Rows[0]["Precio"].ToString());
+                dtProductoIndividual.Rows[0]["PrecioTotal"] = PrecioIndividual * Convert.ToInt32(hfCantidadSeleccionada.Value);
+
+
+
 
                 //si el carrito es null copiamos directamente
                 if (Session["dtCarrito"] == null)
@@ -176,8 +198,11 @@ namespace WebApplicationOneOfOne
                 }
 
                 Session["dtCarrito"] = dtCarrito;
-                var url = Request.Url.ToString().Split('&')[0];
-                url += "&Agregar=True";
+                var url = Request.Url.ToString();
+                if (string.IsNullOrEmpty(Request.QueryString["Agregar"]))
+                {
+                    url += "&Agregar=True";
+                }
                 Response.Redirect(url);
 
             }
