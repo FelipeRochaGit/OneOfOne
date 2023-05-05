@@ -1,0 +1,21 @@
+﻿body {
+}
+
+nav{
+    display:flex;
+    position:absolute;
+    top:0;
+    width:100vw;
+    height:80px;
+    background-color:black;
+}
+
+.logo{
+    width:100%;
+}
+
+.logo img {
+    max-height: 80px;
+}
+
+

@@ -19,40 +19,80 @@ namespace WebApplicationOneOfOne
     public class WebService1 : System.Web.Services.WebService
     {
 
+        //[WebMethod(EnableSession = true)]
+        //public void CargarCarrito()
+        //{
+        //    try
+        //    {
+        //        if (Session["dtCarrito"] != null)
+        //        {
+        //            rpCarrito.datasource = Session["dtCarrito"];
+        //            rpCarrito.dataBind()
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw;
+        //    }
+            
+        //}
+
         [WebMethod(EnableSession = true)]
-        public string CargarCarrito()
+        public string EliminarItem(string index)
         {
             try
             {
-                if (Session["dtCarrito"] != null)
+                bool carritoVacio = false;
+                string id = index.Split(',')[0];
+                string talle = index.Split(',')[1];
+                float Total = 0;
+                DataTable carrito = (DataTable)Session["dtCarrito"];
+                DataRow rowProducto = carrito.Select($"Id = {id} and Talle = {talle}")[0];
+                rowProducto.Delete();
+                carrito.AcceptChanges();
+                Session["dtcarrito"] = carrito;
+                if (((DataTable)Session["dtcarrito"]).Rows.Count > 0)
                 {
-
-                
-                string jsonString = JsonConvert.SerializeObject(Session["dtCarrito"]);
-                return jsonString;
+                    foreach (DataRow row in carrito.Rows)
+                    {
+                        Total += float.Parse(row["PrecioTotal"].ToString());
+                    }
+                    return Total.ToString();
                 }
+                else
+                {
+                    return "Carrito Vacio";
+                }
+
+
             }
             catch (Exception ex)
             {
-                
                 throw;
             }
-            return JsonConvert.SerializeObject("");
+            
         }
-        
+
         [WebMethod(EnableSession = true)]
-        public string EliminarItem(string itemIndex)
+        public string ActualizarCantidad(string index,int cantidad,int precio)
         {
             try
             {
-                int index=Convert.ToInt32(itemIndex.ToString());
+                string id = index.Split(',')[0];
+                string talle = index.Split(',')[1];
+                float Total = 0;
                 DataTable carrito = (DataTable)Session["dtCarrito"];
-                carrito.Rows[index].Delete();
-                carrito.AcceptChanges();
+                DataRow rowProducto = carrito.Select($"Id = {id} and Talle = {talle}")[0];
+                rowProducto["cantidad"] = cantidad;
+                rowProducto["PrecioTotal"] = cantidad * precio;
                 Session["carrito"] = carrito;
-                return CargarCarrito();
-
-
+                foreach (DataRow row in carrito.Rows)
+                {
+                     Total+= float.Parse(row["PrecioTotal"].ToString());
+                }
+                return Total.ToString();
+                
             }
             catch (Exception ex)
             {

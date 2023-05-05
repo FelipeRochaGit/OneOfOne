@@ -39,7 +39,10 @@
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/ba5307ef8c.js" crossorigin="anonymous"></script>
 
-
+    <%--FUENTE--%>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
 
     <!-- SweetAlert -->
@@ -75,8 +78,8 @@
                 </div>
                 <div class="menu">
                     <ul class="ul">
-                        <li><a href="index.aspx">index.aspx</a></li>
-                        <li><a href="home.aspx">home.aspx</a></li>
+                        <li><a href="index.aspx">Inicio</a></li>
+                        <li><a href="home.aspx">Tienda</a></li>
                         <li><a href="#">Opción 3</a></li>
                         <li><a href="#">Opción 4</a></li>
                     </ul>
@@ -87,16 +90,59 @@
                         <asp:LinkButton ID="cerrarCarrito" runat="server" CssClass="CerrarCarrito fas fa-xmark fa-xl" OnClientClick="return false;"></asp:LinkButton>
                     </div>
 
-                    <div id="rpCarrito" class="contenidoCarrito pt-2">
+                    <div class="contenidoCarrito">
+                        <asp:Repeater ID="rpCarrito" runat="server">
+                            <ItemTemplate>
+                                <div class='itemCarrito'>
+                                    <div class="col-4 text-center">
+                                        <img src='<%#Eval("imgURL") %>' class='img-fluid' alt='Alternate Text' />
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="divBtnEliminar">
+                                            <asp:LinkButton Text="text" CssClass="btnEliminar" OnClientClick="return false;" data-index='<%# Eval("id") + "," + Eval("Talle") %>' runat="server"><i class="fa-solid fa-trash"></i></asp:LinkButton>
+                                        </div>
+                                        <b>
+                                            <asp:Label CssClass="desc" Text='<%# Eval("Descripcion") %>' runat="server" /></b>
+                                        <div class="talle">
+                                            <asp:Label Text='Talle: ' runat="server" />
+                                            <asp:Label Text='<%#Eval("Talle")%>' runat="server" />
+                                        </div>
+
+                                        <div class="contenedorCantidad">
+                                            <div class="cantidad">
+                                                <div class="text-right">
+                                                    <%--<asp:Button ClientIDMode="Static" CssClass="btnRestar" data-index='<%# Container.ItemIndex %>' Text="-" OnClientClick="return false" runat="server" />--%>
+                                                    <button class="btnRestar" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false"><i class="fa-solid fa-minus" style="color: #fcfcfc;"></i></button>
+
+                                                </div>
+                                                <div class="text-center">
+                                                    <asp:TextBox ClientIDMode="Static" runat="server" CssClass="txtCantidad text-center" Text='<%#Eval("Cantidad") %>' disabled="true"></asp:TextBox>
+                                                </div>
+                                                <div class="text-right ">
+                                                    <button class="btnSumar" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                                                    <%--<asp:Button ClientIDMode="Static" CssClass="btnSumar" data-index='<%# Container.ItemIndex %>' Text="+" OnClientClick="return false" runat="server" />--%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="precio">
+                                            <asp:Label Text="$" runat="server" />
+                                            <asp:Label CssClass="precioTotal" Text='<%#Eval("PrecioTotal")%>' runat="server" /><br />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:Label Visible="true" ID="lblCarritoVacio" Text="Su carrito esta vacio" CssClass="carritoVacio d-flex justify-content-center" runat="server" />
                     </div>
 
-                    <footer class="footerCarrito container ConfirmarCarrito ">
+                    <footer class="footerCarrito ConfirmarCarrito ">
                         <div class="SubTotalEnvio">
                             <div class="SubTotal">
                                 <div>
-                                <asp:Label Text="SubTotal: " runat="server" />
-                                <asp:Label Text="123" runat="server" />
-                                    </div>
+                                    <asp:Label Text="SubTotal: " runat="server" />
+                                    <asp:Label ID="lblSubTotal" Text="" runat="server" />
+                                </div>
                             </div>
                             <div class="Envio">
                                 <asp:Label Text="Envio:" runat="server" />
@@ -105,22 +151,20 @@
                         </div>
                         <div class="Total">
                             <asp:Label Text="Total:" runat="server" />
-                            <asp:Label Text="123" runat="server" />
+                            <asp:Label ID="lblTotal" Text="" runat="server" />
                         </div>
                         <asp:Button ID="btnComprar" Text="Comprar" CssClass="btn btn-dark" runat="server" OnClick="btnComprar_Click" />
                     </footer>
                 </div>
-
-
-            </nav>
+        </nav>
             <div class="overlay">
             </div>
 
 
 
 
-            <asp:ContentPlaceHolder ID="body" runat="server">
-            </asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="body" runat="server">
+        </asp:ContentPlaceHolder>
         </div>
 
         <footer class="footerContainer">
@@ -302,117 +346,15 @@
 
         $(".Cart").click(function () {
 
-            //CARGAR CARRITO
-
-            $.ajax({
-                type: "POST",
-                url: "LlamadosAjax.asmx/CargarCarrito",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var data = JSON.parse(response.d);
-                    var html = "";
-                    $.each(data, function (index, item) {
-                        html += "<div class='ContainerCarrito'>";
-                        html += "<div class='itemCarrito'>";
-                        html += "<div class=' col-4'>";
-                        html += "<img src='" + item.ImgURL + "' class='img-fluid' alt='Alternate Text' /> <br />";
-                        html += "</div > ";
-                        html += "<div class='col-4 '>";
-                        html += item.Descripcion + "<br />";
-                        html += "Talle: " + item.Talle + "<br />";
-                        html += item.Cantidad + "<br />";
-                        html += "Precio: " + item.Precio + "<br />";
-                        html += "</div > ";
-                        html += "<div class='col-3 '>";
-                        html += "<a href='#' class='fa-solid fa-trash eliminarItem' data-id='" + index + "'></a>";
-                        html += "</div > ";
-                        html += "</div > ";
-                        html += "</div > ";
-
-
-                    });
-                    if (html == "") {
-                        html += "<div class='ContainerCarrito'>";
-                        html += "Su carrito esta vacio";
-                        html += "</div > ";
-
-                    }
-                    $('[id=rpCarrito]').html(html);
-
-
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-
-
-
-
-            });
-
             if ($('.Cart').hasClass('fa-cart-plus')) {
                 $('.carrito').css('transform', 'translateX(0)');
                 $('.overlay').css('display', 'block');
                 menuAbierto = true;
             }
 
-            /*console.log(parseInt($('.menu').css('left')));*/
         });
 
 
-
-
-
-
-        $(document).on('click', '.eliminarItem', function () {
-            var index = $(this).data('id');
-
-            $.ajax({
-                method: 'POST',
-                url: "LlamadosAjax.asmx/EliminarItem",
-                data: JSON.stringify({ itemIndex: index }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-
-                    var data = JSON.parse(response.d);
-                    var html = "";
-                    $.each(data, function (index, item) {
-                        html += "<div class='ContainerCarrito'>";
-                        html += "<div class='itemCarrito ml-2 mt-2'>";
-                        html += "<div class=' col-4'>";
-                        html += "<img src='" + item.ImgURL + "' alt='Alternate Text' /> <br />";
-                        html += "</div > ";
-                        html += "<div class='col-4 '>";
-                        html += item.Descripcion + "<br />";
-                        html += "Talle: " + item.Talle + "<br />";
-                        html += item.Cantidad + "<br />";
-                        html += "Precio: " + item.Precio + "<br />";
-                        html += "</div > ";
-                        html += "<div class='col-3 '>";
-                        html += "<a href='#' class='fa-solid fa-trash eliminarItem' data-id='" + index + "'></a>";
-                        html += "</div > ";
-                        html += "</div > ";
-                        html += "</div > ";
-
-
-                    });
-                    if (html == "") {
-                        html += "<div class='ContainerCarrito '>";
-                        html += "Su carrito esta vacio";
-                        html += "</div > ";
-
-                    }
-                    $('[id=rpCarrito]').html(html);
-
-
-                },
-                error: function (xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
 
 
 
@@ -479,9 +421,104 @@
 
             });
 
-
-
         }
+
+        $('.btnRestar').click(function () {
+
+            var index = $(this).data('index');
+            var btnRestar = $(this);
+            var txtCantidad = btnRestar.closest('.itemCarrito').find('.txtCantidad');
+            var precioIndividual = $(this).data('value');
+            var lblPrecioTotalArticulo = btnRestar.closest('.itemCarrito').find('.precioTotal');
+            var cantidad = parseInt(txtCantidad.val());
+            if (cantidad > 1) {
+                cantidad--;
+                txtCantidad.val(cantidad);
+            }
+            lblPrecioTotalArticulo.text(cantidad * precioIndividual)
+
+
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/ActualizarCantidad",
+                data: {
+                    index: index,
+                    cantidad: cantidad,
+                    precio: precioIndividual
+
+                },
+                success: function (response) {
+                    var xmlDoc = $(response);
+                    var xmlString = xmlDoc.find("string");
+                    var stringValue = xmlString.text();
+                    $('[id$=lblSubTotal]').text(stringValue)
+                },
+                error: function (xhr, status, error) {
+
+                }
+            });
+        });
+
+        $('.btnSumar').click(function () {
+            var index = $(this).data('index');
+            var btnSumar = $(this);
+            var txtCantidad = btnSumar.closest('.itemCarrito').find('.txtCantidad');
+            var cantidad = parseInt(txtCantidad.val());
+            var precioIndividual = $(this).data('value');
+            var lblPrecioTotalArticulo = btnSumar.closest('.itemCarrito').find('.precioTotal');
+
+
+            //suma la cantidad
+            cantidad++;
+            txtCantidad.val(cantidad);
+            //multiplica la cantidad por el precio individual y lo asigna al lbl
+            lblPrecioTotalArticulo.text(cantidad * precioIndividual)
+
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/ActualizarCantidad",
+                data: {
+                    index: index,
+                    cantidad: cantidad,
+                    precio: precioIndividual
+                },
+                success: function (response) {
+                    var xmlDoc = $(response);
+                    var xmlString = xmlDoc.find("string");
+                    var stringValue = xmlString.text();
+                    $('[id$=lblSubTotal]').text(stringValue);
+                }
+
+            });
+
+        });
+
+        $('.btnEliminar').click(function () {
+            $(this).closest('.itemCarrito').remove();
+            var index = $(this).data('index');
+            $.ajax({
+                type: "POST",
+                url: "LlamadosAjax.asmx/EliminarItem",
+                data: {
+                    index: index
+                },
+                success: function (response) {
+                    var xmlDoc = $(response);
+                    var xmlString = xmlDoc.find("string");
+                    var stringValue = xmlString.text();
+                    if (stringValue === "Carrito Vacio") {
+                        $('.carritoVacio').text("Su carrito esta vacio")
+                        $('.carritoVacio').css("display", "block")
+                        $('[id$=lblSubTotal]').text("");
+
+                    } else {
+                        $('.carritoVacio').css("display", "none")
+                        $('[id$=lblSubTotal]').text(stringValue);
+                    }
+                }
+            });
+        });
+
 
 
 
@@ -490,3 +527,6 @@
 </body>
 
 </html>
+
+
+

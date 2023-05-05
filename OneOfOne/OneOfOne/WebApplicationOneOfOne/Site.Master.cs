@@ -14,8 +14,31 @@ namespace WebApplicationOneOfOne
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var dtCarrito = (DataTable)Session["dtCarrito"];
+            DataTable dtCarrito = (DataTable)Session["dtCarrito"];
+            
+            if (!IsPostBack)
+            {
+                float SubTotal = 0;
+                if (dtCarrito != null)
+                {
+                    if (dtCarrito.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dtCarrito.Rows)
+                        {
+                            SubTotal += float.Parse(row["PrecioTotal"].ToString());
+                        }
+                        lblSubTotal.Text = SubTotal.ToString();
+                        lblCarritoVacio.Text = "";
+                        rpCarrito.DataSource = dtCarrito;
+                        rpCarrito.DataBind();
+                    }
+
+                }
+            }
+
         }
+
+
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
