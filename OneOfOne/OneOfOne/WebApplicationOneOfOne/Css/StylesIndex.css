@@ -1,17 +1,6 @@
 ﻿body {
 }
-.fotoInicio {
-    justify-content: center;
-    position: center;
-    width: 100%;
-    max-height: 100vh;
-}
 
-.contenedor{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
 .video-container {
     position: relative;
@@ -22,35 +11,288 @@
     .video-container video {
         position: relative;
         width: 100%;
-        height: 100%;
+        height: 90vh;
+        object-fit: cover;
     }
 
+
+.Overlay-Video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*background: rgb(255 255 255/0.2);*/
+    z-index: 1;
+    height: 90vh;
+    width: 100%;
+}
+
+.contenedor-texto-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+    .contenedor-texto-botones .comprar-ahora {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid white;
+        background-color: transparent;
+        height: 50px;
+        width: 200px;
+        transition: 0.5s;
+        font-size: 18px;
+        color: white;
+    }
+
+
+        .contenedor-texto-botones .comprar-ahora:hover {
+            background-color: white;
+            color: black;
+        }
+
+
+    .contenedor-texto-botones .titulo {
+        font-size: 130px;
+        font-weight: 700;
+    }
+
+    .contenedor-texto-botones .titulo-One1 {
+        transform: translate(0,-20%);
+        opacity: 0.4;
+    }
+
+    .contenedor-texto-botones .titulo-Of {
+        opacity: 0.4;
+    }
+
+    .contenedor-texto-botones .titulo-One2 {
+        transform: translate(0,20%);
+        opacity: 0.4;
+    }
+
+.contenedor-texto-video {
+    display: flex;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    height: 30%;
+    /*flex-direction: column;*/
+    /*   transform:translate(0,-20%)*/
+}
+
+    .contenedor-texto-video .Logo {
+        height: 10%;
+        transform: translate(0,0);
+        width: auto;
+    }
 
 .UltimoLanzamiento {
-    display:flex;
-    width:100%;
-
+    padding: 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
-    .UltimoLanzamiento .Imagen {
-        display: flex;
+
+    .UltimoLanzamiento .columna-imagen {
         width: 50%;
-        text-align: center;
-        margin: 0.4%;
-    }
-    .UltimoLanzamiento  img{
-
-        width: 100%;
-        border: 1px solid;
+        max-height: 1100px;
+        margin: 0 1% 2% 1%;
+        position: relative;
     }
 
+        .UltimoLanzamiento .columna-imagen img {
+            height: 100%;
+        }
 
-.Logo1Of1{
-    display:flex;
-    background:rgb(0,0,0,0.9);
-    justify-content:center;
-    align-items:center;
-    margin-top:-10px;
+
+.titulo-ultimosLanzamientos {
+    display: flex;
+    align-items: center;
+    height: 90px;
 }
-.Logo1Of1 img{
-    width:30%;
+
+.boton-ultimosLanzamientos {
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+}
+
+    .boton-ultimosLanzamientos .verTodo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        height: 50px;
+        width: 200px;
+        border: 3px solid black;
+        background: rgb(10 10 10);
+    }
+
+.UltimoLanzamiento .columna-imagen:hover .verTodo {
+    transition: 0.5s;
+    color: black;
+    background-color: transparent;
+}
+
+
+.UltimoLanzamiento img {
+    width: 100%;
+    background: rgb(128 128 128 /0.1);
+}
+
+    .UltimoLanzamiento img:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
+
+
+
+.Logo1Of1 {
+    display: flex;
+    background: rgb(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    margin-top: -10px;
+    rotation: 40deg;
+}
+
+    .Logo1Of1 img {
+        width: 30%;
+    }
+
+
+
+/*STYLES CAROUSEL*/
+.slick-prev,
+.slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    z-index: 1
+}
+
+.slick-prev {
+    left: 60px;
+}
+
+.slick-next {
+    right: 60px;
+}
+
+.carousel {
+    width: 100% !important;
+    /*height: 800px;*/
+}
+
+.destacados {
+    margin: 0.5%;
+}
+
+.card-destacados {
+    margin: 0.5%;
+    height: 70%;
+}
+    .card-destacados a{
+        text-decoration:none;
+        color:black;
+    }
+
+    .imagen-destacados {
+        display: flex;
+        justify-content: center;
+        background: rgb(148 148 148 /0.1);
+    }
+
+    .imagen-destacados img {
+        max-height: 430px;
+    }
+
+.descripcion-destacados {
+    margin-left: 0.5%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.descripcion-prenda-destacados {
+    color:darkgrey;
+}
+
+
+@media (max-width: 732px) {
+    .contenedor-texto-botones .titulo {
+        font-size: 80px;
+        font-weight: 700;
+    }
+
+    .contenedor-texto-botones .comprar-ahora {
+        height: 50px;
+        width: 180px;
+    }
+
+    .contenedor-texto-video {
+        height: 20%;
+    }
+
+    .boton-ultimosLanzamientos .verTodo {
+        height: 50px;
+        width: 180px;
+    }
+
+    .UltimoLanzamiento {
+        padding: 0;
+        display: block;
+        width: 100%;
+    }
+
+        .UltimoLanzamiento .columna-imagen {
+            width: 100%;
+            padding: 0 1% 2% 1%;
+        }
+
+    .boton-ultimosLanzamientos {
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+    }
+}
+
+@media (max-width: 416px) {
+    .contenedor-texto-botones .titulo {
+        font-size: 50px;
+        font-weight: 700;
+    }
+
+    .contenedor-texto-botones .comprar-ahora {
+        height: 30px;
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .contenedor-texto-video {
+        height: 15%;
+    }
+
+
+    .boton-ultimosLanzamientos .verTodo {
+        height: 40px;
+        width: 120px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    .boton-ultimosLanzamientos {
+        position: absolute;
+        bottom: 20px;
+        left: 10px;
+    }
 }
