@@ -227,7 +227,7 @@
 }
 
 
-@media (max-width: 732px) {
+@media (max-width: 1024px) {
     .contenedor-texto-botones .titulo {
         font-size: 80px;
         font-weight: 700;

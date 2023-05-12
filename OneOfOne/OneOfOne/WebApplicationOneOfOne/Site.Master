@@ -69,6 +69,33 @@
         <div>
             <nav class="navContainer">
                 <div class="mainNav">
+                    <%--CARRUSEL DE AVISOS/DESCUENTOS--%>
+                    <div id="carouselAvisos" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="avisos">Oferta1</div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="avisos">Oferta2</div>
+
+                            </div>
+                            <div class="carousel-item">
+                                <div class="avisos">Oferta3</div>
+
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAvisos" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselAvisos" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+
+
                     <asp:LinkButton runat="server" CssClass="Bars fa-solid fa-bars fa-xl" OnClientClick="return false;"></asp:LinkButton>
                     <div class="divNavLogo">
                         <a href="index.aspx">
@@ -79,7 +106,7 @@
                 <div class="menu">
                     <ul class="ul">
                         <li><a href="index.aspx">Inicio</a></li>
-                        <li><a href="home.aspx">Tienda</a></li>
+                        <li><a href="Catalogo.aspx">Tienda</a></li>
                         <li><a href="#">Opción 3</a></li>
                         <li><a href="#">Opción 4</a></li>
                     </ul>
@@ -156,15 +183,15 @@
                         <asp:Button ID="btnComprar" Text="Comprar" CssClass="btn btn-dark" runat="server" OnClick="btnComprar_Click" />
                     </footer>
                 </div>
-        </nav>
+            </nav>
             <div class="overlay">
             </div>
 
 
 
 
-        <asp:ContentPlaceHolder ID="body" runat="server">
-        </asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="body" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
 
         <footer class="footerContainer">
@@ -213,10 +240,33 @@
         var subiendo = false;
         var menuAbierto = false
         var width = $(window).width();
+        var nombrePagina = window.location.pathname.split("/").pop();
         //console.log(width)
-        if (width >= 733) {
+
+        function desactivarNav() {
+
+            if (nombrePagina == 'index.aspx') {
+                $('.navContainer').removeClass('active');
+                image.src = 'Imagenes/Logo.png';
+            }
+        }
+        function activarNav() {
+            if (nombrePagina == 'index.aspx') {
+                $('.navContainer').addClass('active');
+                image.src = 'Imagenes/LogoNegro.png';
+                image.style.opacity = '1';
+            }
+        }
 
 
+        if (width >= 1025) {
+
+            if (nombrePagina == 'index.aspx') {
+                image.src = 'Imagenes/Logo.png';
+            } else {
+                $('.navContainer').addClass('active');
+                image.src = 'Imagenes/LogoNegro.png';
+            }
 
             btnMenu.addEventListener('mouseover', function () {
 
@@ -224,7 +274,6 @@
                 image.style.opacity = '1';
                 $(".menu").stop().slideDown();
                 menuAbierto = true;
-
                 $('.Bars').addClass('fa-xmark');
 
 
@@ -232,11 +281,11 @@
 
             });
 
-            menu.addEventListener('mouseover', function () {
-                image.src = 'Imagenes/LogoNegro.png';
-                image.style.opacity = '1';
+            //menu.addEventListener('mouseover', function () {
+            //    image.src = 'Imagenes/LogoNegro.png';
+            //    image.style.opacity = '1';
 
-            });
+            //});
 
             menu.addEventListener('mouseleave', function () {
                 image.src = 'Imagenes/LogoNegro.png';
@@ -247,26 +296,21 @@
                 $('.Bars').removeClass('fa-xmark');
                 $('.Bars').addClass('fa-bars');
                 if ($(window).scrollTop() == 0) {
-                    $('.navContainer').removeClass('active');
-                    image.src = 'Imagenes/Logo.png';
+                    desactivarNav()
                 }
 
             });
 
             container.addEventListener('mouseover', function () {
                 if ($(window).scrollTop() == 0) {
-                    $('.navContainer').addClass('active');
-                    image.src = 'Imagenes/LogoNegro.png';
-                    image.style.opacity = '1';
+                    activarNav();
                 }
             });
 
             container.addEventListener('mouseleave', function () {
                 if ($(window).scrollTop() == 0) {
                     if (menuAbierto == false) {
-                        $('.navContainer').removeClass('active');
-                        image.src = 'Imagenes/Logo.png';
-                        image.style.opacity = '1';
+                        desactivarNav()
                     }
 
 
@@ -303,8 +347,7 @@
                 $(window).scroll(function () {
                     if ($(this).scrollTop() > 0) {
                         if (menuAbierto == false) {
-                            $('.navContainer').addClass('active');
-                            image.src = 'Imagenes/LogoNegro.png';
+                            activarNav();
                             subiendo = false;
                         }
                     }
@@ -316,8 +359,7 @@
                 $(window).scroll(function () {
                     if ($(this).scrollTop() == 0) {
                         if (menuAbierto == false) {
-                            $('.navContainer').removeClass('active');
-                            image.src = 'Imagenes/Logo.png';
+                            desactivarNav()
                             subiendo = false;
                         }
                     }
@@ -361,9 +403,54 @@
 
 
         //MOVIMIENTO DEL MENU EN CELULAR
-        if (width <= 732) {
-            //console.log(width);
-            image.src = 'Imagenes/Logo.png';
+        if (width <= 1024) {
+            if (nombrePagina == 'index.aspx' || nombrePagina=='Producto.aspx') {
+                /*$('.mainNav').css('background', 'rgba(0, 0, 0, .3)');*/
+                    image.src = 'Imagenes/Logo.png';
+                if (nombrePagina == 'Producto.aspx')
+                    $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
+
+
+                $(document).ready(function () {
+
+                    $(window).on("scroll", function () {
+                        var scrollTop = $(this).scrollTop();
+                        if (scrollTop < lastScrollTop && scrollTop != 0 && menuAbierto == false) {
+                            /*console.log(scrollTop);*/
+                            //color del header
+                            $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
+                            $('.mainNav').css('transform', 'translateY(0)');
+                            subiendo = true;
+                        }
+                        else {
+                            if (scrollTop == 0) {
+                                if (menuAbierto == false) {
+                                    if (nombrePagina == 'index.aspx') {
+                                        $('.mainNav').css('background-color', 'transparent');
+                                    }
+                                    image.src = 'Imagenes/Logo.png';
+                                    subiendo = false;
+                                }
+                            } else {
+                                if (menuAbierto == false)
+                                    $('.mainNav').css('transform', 'translateY(-100%)');
+                            }
+
+                        }
+                        lastScrollTop = scrollTop;
+                    });
+
+
+
+                });
+
+            } else if (nombrePagina!='index') {
+                image.src = 'Imagenes/LogoNegro.png';
+            }
+
+
+
+
             $(btnMenu).click(function () {
 
 
@@ -390,36 +477,7 @@
             });
 
 
-            $(document).ready(function () {
-
-                $(window).on("scroll", function () {
-                    var scrollTop = $(this).scrollTop();
-                    if (scrollTop < lastScrollTop && scrollTop != 0 && menuAbierto == false) {
-                        /*console.log(scrollTop);*/
-                        //color del header
-                        $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
-                        $('.mainNav').css('transform', 'translateY(0)');
-                        subiendo = true;
-                    }
-                    else {
-                        if (scrollTop == 0) {
-                            if (menuAbierto == false) {
-                                $('.mainNav').css('background-color', 'transparent');
-                                image.src = 'Imagenes/Logo.png';
-                                subiendo = false;
-                            }
-                        } else {
-                            if (menuAbierto == false)
-                                $('.mainNav').css('transform', 'translateY(-100%)');
-                        }
-                        lastScrollTop = scrollTop;
-                    }
-
-                });
-
-
-
-            });
+            
 
         }
 

@@ -28,15 +28,15 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 93px;
     background-color: transparent;
-    transition: all 0.9s ease-in-out;
+    transition: all 0.3s ease-in-out;
     z-index: 9996;
 }
     /*ICONO MENU*/
     .mainNav .Bars {
         position: fixed;
-        top: 35px;
+        top: 55px;
         margin-left: 20px;
         color: white;
         /*color: #ced2d9;*/
@@ -57,7 +57,7 @@
 /*ICONO CARRITO*/
 .mainNav .Cart {
     position: fixed;
-    top: 35px;
+    top: 55px;
     right: 20px;
     color: white;
     text-decoration: none;
@@ -189,9 +189,34 @@
 }
 
 
+/*CARRUSEL AVISOS*/
+.carousel {
+
+}
+
+.carousel-inner {
+    background: rgb(0 0 0);
+    color: white;
+}
+
+.carousel-item {
+    transition-duration: 0.3s !important;
+}
+
+    .carousel-item .avisos {
+        min-height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.carousel-control-next, .carousel-control-prev {
+    width: 5% !important;
+}
+
 /*MOVIL*/
 /*NAV*/
-@media (max-width: 732px) {
+@media (max-width: 1024px) {
 
 
 
@@ -202,13 +227,14 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 70px;
+        height: 93px;
         opacity: 1;
         transform: translateY(0);
         transition: transform 0.3s ease-out;
         transition: all 0.3s ease-in-out;
         z-index: 9996;
     }
+
 
 
     /*ICONO LOGO*/
@@ -236,10 +262,11 @@
         color: white;
         /*color: #ced2d9;*/
     }
+
 }
 
 /*ICONOS FLOTANTES*/
-@media (max-width:732px) {
+@media (max-width:1024px) {
     .container-red {
         position: fixed;
         bottom: 2%;

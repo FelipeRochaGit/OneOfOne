@@ -4,7 +4,7 @@
 .menu {
     display: none;
     position: fixed;
-    top: 70px;
+    top: 93px;
     left: 0;
     width: 100%;
     height: 80%;
@@ -34,15 +34,12 @@
         }
 
 
-@media (max-width: 732px) {
+@media (max-width: 1024px) {
 
 
     .menu {
         display: block;
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 50%;
+        /*width: 50%;*/
         height: 100%;
         background: rgba(0, 0, 0, .8);
         z-index: 9996;

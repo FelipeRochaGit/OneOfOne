@@ -19,7 +19,7 @@
         
         
         $(document).ready(function () {
-            if (width <= 733) {
+            if (width <= 1025) {
 
                 $('.destacados').slick({
                     /*dots: true,*/
@@ -82,7 +82,7 @@
                     <label class="titulo titulo-One2">One</label>
                     <img src="Imagenes/Logo.png" class="Logo" alt="Alternate Text" />
                 </div>
-                <a href="Home.aspx" class="text-decoration-none">
+                <a href="Catalogo.aspx" class="text-decoration-none">
                     <div class="comprar-ahora">
                         <span>Comprar ahora</span>
                     </div>
@@ -90,7 +90,7 @@
 
             </div>
         </div>
-        <video src="Videos/Vídeo promocional Moda.mp4" autoplay muted loop></video>
+        <video src="Videos/VideoPromocionalModa.mp4" autoplay muted loop></video>
     </div>
 
     <div class="row w-100" style="margin-top: 10%">

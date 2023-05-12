@@ -199,7 +199,7 @@
 }
 
 
-@media (max-width: 732px) {
+@media (max-width: 1024px) {
     /*CARRITO*/
     .carrito {
         display: block;

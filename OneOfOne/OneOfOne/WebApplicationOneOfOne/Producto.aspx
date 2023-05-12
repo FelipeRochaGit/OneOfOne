@@ -17,9 +17,9 @@
 
             var width = $(window).width();
             //INICIA EL CAROUSEL
-            if (width < 732) {
+            if (width <= 1024) {
                 $(document).ready(function () {
-                    $('.carousel').slick({
+                    $('.divCarouselProducto').slick({
                         dots: true,
                         slidesToShow: 1,
 
@@ -192,7 +192,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
     <div class="producto">
         <div class="columnaImagen mb-5">
-            <div class="carousel text-center">
+            <div class="divCarouselProducto text-center">
                 <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes img-fluid mt-2" />
                 <asp:Repeater ID="rpFotosProductosPC" runat="server">
                     <ItemTemplate>

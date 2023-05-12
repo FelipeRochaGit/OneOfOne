@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,21 +64,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Css\StylesCarritoDesplazable.css" />
-    <Content Include="Css\StylesHome.css" />
+    <Content Include="Css\StylesCompraMaster.css" />
+    <Content Include="Css\StylesDatos.css" />
+    <Content Include="Css\StylesCatalogo.css" />
     <Content Include="Css\StylesIndex.css" />
     <Content Include="Css\StylesMaster.css" />
     <Content Include="Css\StylesMenuDesplazable.css" />
     <Content Include="Css\StylesProducto.css" />
     <Content Include="Datos.aspx" />
-    <Content Include="Home.aspx" />
+    <Content Include="Catalogo.aspx" />
     <Content Include="Imagenes\1Of1.png" />
     <Content Include="Imagenes\Buzo1.png" />
+    <Content Include="Imagenes\Buzos.jpg" />
+    <Content Include="Imagenes\DALL·E 2023-04-29 23.59.02.png" />
     <Content Include="Imagenes\FondoCatalogo.png" />
     <Content Include="Imagenes\FondoCatalogo1.png" />
     <Content Include="Imagenes\FondoInicio.png" />
@@ -87,14 +85,25 @@
     <Content Include="Imagenes\Logo.png" />
     <Content Include="Imagenes\Logo1Of1.png" />
     <Content Include="Imagenes\LogoNegro.png" />
+    <Content Include="Imagenes\portada1.jpg" />
+    <Content Include="Imagenes\Portada2.jpg" />
     <Content Include="Imagenes\Remera1.png" />
     <Content Include="Imagenes\Remera2.png" />
+    <Content Include="Imagenes\Remeras.jpg" />
     <Content Include="Index.aspx" />
     <Content Include="Producto.aspx" />
+    <Content Include="Videos\VideoPromocionalModa.mp4" />
     <Content Include="Web.config" />
     <Content Include="LlamadosAjax.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compra.Master.cs">
+      <DependentUpon>Compra.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Compra.Master.designer.cs">
+      <DependentUpon>Compra.Master</DependentUpon>
+    </Compile>
     <Compile Include="Datos.aspx.cs">
       <DependentUpon>Datos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -102,12 +111,12 @@
     <Compile Include="Datos.aspx.designer.cs">
       <DependentUpon>Datos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Catalogo.aspx.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="Catalogo.aspx.designer.cs">
+      <DependentUpon>Catalogo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -137,6 +146,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Compra.Master" />
     <None Include="packages.config" />
     <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
@@ -178,12 +188,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
