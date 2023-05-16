@@ -1,7 +1,9 @@
 ﻿body {
 }
 
-
+.mainContainer{
+    width:100vw;
+}
 .video-container {
     position: relative;
     width: 100%;
@@ -101,8 +103,9 @@
     .UltimoLanzamiento .columna-imagen {
         width: 50%;
         max-height: 1100px;
-        margin: 0 1% 2% 1%;
+        padding: 0 1% 2% 1%;
         position: relative;
+        margin-bottom:20px;
     }
 
         .UltimoLanzamiento .columna-imagen img {

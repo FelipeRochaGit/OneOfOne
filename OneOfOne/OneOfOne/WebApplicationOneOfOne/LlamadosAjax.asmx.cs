@@ -43,7 +43,6 @@ namespace WebApplicationOneOfOne
         {
             try
             {
-                bool carritoVacio = false;
                 string id = index.Split(',')[0];
                 string talle = index.Split(',')[1];
                 float Total = 0;

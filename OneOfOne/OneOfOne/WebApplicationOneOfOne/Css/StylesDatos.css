@@ -1,8 +1,11 @@
 ﻿body {
-    padding-top:80px
+    padding-top: 80px
 }
 
 
+.divContainer {
+    display: flex;
+}
 
 .form-border {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -12,28 +15,52 @@
     border-radius: 10px;
 }
 
-.form-control{
-    margin-bottom:2%;
-    
+.form-control {
+    margin-bottom: 2%;
 }
 
 .divformulario {
-    display:flex;
+    display: flex;
     margin: 0 auto;
     min-width: 600px;
-    width:80%;
+    width: 80%;
     /*padding-left:5%;*/
-    justify-content:right;
-}
-.formulario {
-    width: 70%;
-    min-width:600px;
+    justify-content: right;
 }
 
-.columnaDivProducto{
-    width:50%;
-    min-width:400px;
-    padding:0 5% 0 1% ;
+.formulario {
+    position: relative;
+    width: 70%;
+    min-width: 600px;
+    min-height: 100vh;
+}
+
+.divBtnContinuar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 100%;
+}
+
+    .divBtnContinuar input {
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 3px solid black;
+        background: rgb(0 0 0);
+        height: 50px;
+        width: 150px;
+        transition: 0.5s;
+        font-size: 18px;
+        color: white;
+    }
+
+
+.columnaDivProducto {
+    width: 50%;
+    min-width: 400px;
+    padding: 0 5% 0 1%;
 }
 
 .divProductos {
@@ -42,13 +69,12 @@
     top: 135px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 5px;
-    padding:2%;
+    padding: 2%;
 }
 
-.divProductos img{
-   width:100px;
-   
-}
+    .divProductos img {
+        width: 100px;
+    }
 
 
 .ItemCompras {
@@ -56,11 +82,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 10px -20px;
+    padding: 10px -20px;
     /*height:100px;*/
 }
+
 .divitemsCarrito {
-    margin:0 5%;
+    padding: 0 5%;
 }
 
 
@@ -83,16 +110,151 @@
 .divPrecioDatos {
     border-top: 1px solid rgb(0,0,0, 0.1);
 }
+
     .divPrecioDatos .precioDatos {
         display: flex;
         justify-content: space-between;
         margin: 5px 0;
     }
 
-.precioDatos .Total{
-    font-size:20px;
+.precioDatos .Total {
+    font-size: 20px;
 }
 
-@media (min-width:1046px) {
+.verDetalle {
+    display: none;
+}
 
+.container-tbl-producto-movil{
+    display:none;
+}
+
+@media (max-width:1046px) {
+    .columnaDivProducto {
+        display:none;
+    }
+
+    .verDetalle {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+    .divContainer {
+        display: block;
+    }
+
+    .divBtnContinuar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .divformulario {
+        display: flex;
+        margin: 0 auto;
+        min-width: 0px;
+        width: 100vw;
+        /*padding-left:5%;*/
+        justify-content: right;
+    }
+
+    .formulario {
+        width: 100vw;
+        min-width: 0px;
+    }
+
+    .container-tbl-producto-movil {
+        display:block;
+        position:absolute;
+        transform:translateY(-6px);
+        max-height: 0px;
+        overflow: hidden;
+        background: white;
+        z-index: 2;
+        transition: max-height 0.7s;
+        width: 100vw;
+        border-radius:5px;
+    }
+
+        .container-tbl-producto-movil.open {
+            max-height: 400px;
+            transition: max-height 0.7s;
+        }
+
+    .table-producto-movil {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+    }
+
+        
+
+    .tbl-producto-movil {
+        max-width: 576px;
+        width: 100vw;
+        border: none;
+        border-bottom: 1px solid rgb(0 0 0/0.1);
+    }
+
+        .tbl-producto-movil img {
+            width: 75px;
+        }
+
+        .tbl-producto-movil .img {
+            text-align: center;
+        }
+
+        .tbl-producto-movil .descripcion {
+            text-align: left;
+            padding-left: 16px;
+            width: 100%;
+        }
+
+        .tbl-producto-movil .precio {
+            text-align: center;
+            width: 95px;
+        }
+
+    .footer-tbl-producto-movil {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .contenido-footer-producto-movil {
+        max-width: 576px;
+        width: 100vw;
+        border: none;
+        border-bottom: 1px solid rgb(0 0 0/0.1);
+    }
+    .footer-tbl-producto-movil .precioDatos {
+        display: flex;
+        justify-content: space-between;
+        padding:0 2%;
+    }
+    
+
+    .overlay-verDetalle {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        transition: background-color 0.7s ease;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+        .overlay-verDetalle.visible {
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: background-color 0.7s ease;
+            pointer-events: auto;
+        }
 }

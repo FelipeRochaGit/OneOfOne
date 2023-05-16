@@ -15,7 +15,7 @@
             if (width <= 1025) {
                 $('.flecha').removeClass('fa-chevron-up').addClass('fa-chevron-down');
             }
-            
+
             $('.desplegable').click(function () {
                 var flecha = $(this).find('.flecha');
                 var container = $(this).closest('.container-filtro');
@@ -23,9 +23,6 @@
 
                 if (opciones.css('display') == 'none') {
                     opciones.slideDown();
-                    //if (opciones.hasClass('filtro-colores')) {
-                    //    $('.filtro-colores').css('display', 'flex');
-                    //}
 
                     flecha.removeClass('fa-chevron-down').addClass('fa-chevron-up');
 
@@ -71,7 +68,6 @@
                 }
             });
 
-
             $('.col-btn-filtro').click(function () {
                 if ($('.col-filtros').css('display') == 'none') {
                     $('.col-filtros').css('display', 'block');
@@ -83,11 +79,42 @@
                 })
             })
 
+            
+
+            
+            $(document).click(function (event) {
+                var target = $(event.target);
+                if (!target.closest('.col-btn-orden').length && !target.closest('.Ordenar').length) {
+                    $('.Ordenar').removeClass('active');
+                    $('.desplegableOrdenar .flecha').removeClass('fa-chevron-down').addClass('fa-chevron-down');
+                }
+            });
+
+            $('.col-btn-orden .desplegableOrdenar').click(function () {
+                if ($('.Ordenar').css('max-height') == '0px') {
+                    $('.Ordenar').addClass('active');
+                    $('.desplegableOrdenar .flecha').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+
+                }
+                else {
+                    $('.Ordenar').removeClass('active');
+                    $('.desplegableOrdenar .flecha').removeClass('fa-chevron-down').addClass('fa-chevron-down');
+
+
+                }
+            })
+
+            $('.Ordenar span').click(function () {
+                $('.Ordenar span').removeClass('active');
+                $(this).addClass('active');
+            })
 
         })
     </script>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
+
+
 
     <div class="overlay-filtro-movil"></div>
 
@@ -173,7 +200,19 @@
                 <div class="filtros-movil">
                     <div class="col-titulo">Catalogo</div>
                     <div class="col-btn-filtro"><i class="fa-solid fa-sliders mr-1"></i>Filtro</div>
-                    <div class="col-btn-orden">Ordenar por</div>
+                    <div class="col-btn-orden">
+                        <span class="desplegableOrdenar">Ordenar por <i class="flecha fa-solid fa-chevron-up"></i></span>
+                        <%--<div class="divOrdenar">--%>
+                            <div class="Ordenar">
+                                <span class="active">Destacados </span>
+                                <span>Recientes</span>
+                                <span>Mayor Precio</span>
+                                <span>Menor Precio</span>
+                            </div>
+                        <%--</div>--%>
+                    </div>
+
+
 
                 </div>
                 <asp:Repeater ID="rpCatalogo" runat="server" OnItemCommand="rpCatalogo_ItemCommand">
@@ -209,6 +248,7 @@
 
 
         </div>
+
 
 
     </div>

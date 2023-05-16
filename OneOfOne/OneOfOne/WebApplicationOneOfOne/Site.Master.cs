@@ -15,7 +15,7 @@ namespace WebApplicationOneOfOne
         protected void Page_Load(object sender, EventArgs e)
         {
             DataTable dtCarrito = (DataTable)Session["dtCarrito"];
-            
+
             if (!IsPostBack)
             {
                 float SubTotal = 0;
@@ -37,8 +37,7 @@ namespace WebApplicationOneOfOne
             }
 
         }
-
-
+        
 
         protected void btnComprar_Click(object sender, EventArgs e)
         {
@@ -51,6 +50,21 @@ namespace WebApplicationOneOfOne
                 throw ex;
             }
         }
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
     }
 
 

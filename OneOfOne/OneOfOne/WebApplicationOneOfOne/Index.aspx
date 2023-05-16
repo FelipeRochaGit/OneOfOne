@@ -90,9 +90,10 @@
 
             </div>
         </div>
-        <video src="Videos/VideoPromocionalModa.mp4" autoplay muted loop></video>
-    </div>
+        <video src="Videos/VideoPromocionalModa.mp4" autoplay muted playsinline loop></video>
 
+    </div>
+    <main class="mainContainer">
     <div class="row w-100" style="margin-top: 10%">
         <div class="col-7 ml-5">
             <img src="Imagenes/portada1.jpg" style="background: rgb(172 169 169 / 0.2); width: 100%; max-height: 80%" class="img-fluid" alt="" />
@@ -160,7 +161,7 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
-
+</main>
 
 
 </asp:Content>
