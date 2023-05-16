@@ -100,10 +100,12 @@
                     $('#btnCantidad').text(cantidadSeleccionada);
                     $("[id$=hfCantidadSeleccionada]").val(parseInt(cantidadSeleccionada));
                     $(".dropdown-content").slideUp();
-
+                    if (width <= 1024) {
+                        $('.overlay').css('display', 'none')
+                    }
                 } else {
                     $("[id$=btnAplicar]").prop("disabled", true);
-                    $(".anadirCantidad").attr("style", "display: block;")
+                    $(".anadirCantidad").attr("style", "display: flex;")
 
                 }
             });
@@ -118,12 +120,18 @@
                     $('.dropdown-content').slideDown();
                     $('.iconoDdl').removeClass('fa-chevron-down')
                     $('.iconoDdl').addClass('fa-chevron-up')
-
+                    if (width <= 1024) {
+                        $('.overlay').css('display', 'block')
+                    }
                     // Cierra el drop down si se toca otro lugar de la pantalla
                     $(document).on('click.dropdown', function (event) {
                         // Si el clic ha sido en un elemento que no es el dropdown ni sus hijos
                         if (!$(event.target).closest('.dropdown').length) {
                             // Ocultamos el dropdown
+                            if (width <= 1024) {
+                                $('.overlay').css('display', 'none')
+                            }
+                            $("[id$=txtCantidad]").val("");
                             $('.dropdown-content').slideUp();
                             $('.iconoDdl').removeClass('fa-chevron-up')
                             $('.iconoDdl').addClass('fa-chevron-down')
@@ -133,6 +141,9 @@
                     });
 
                 } else {
+                    if (width <= 1024) {
+                        $('.overlay').css('display', 'none')
+                    }
                     $('.dropdown-content').slideUp();
                     $('.iconoDdl').removeClass('fa-chevron-up')
                     $('.iconoDdl').addClass('fa-chevron-down')
@@ -164,7 +175,9 @@
                 $("[id$=txtCantidad]").val("");
                 $('.iconoDdl').removeClass('fa-chevron-up')
                 $('.iconoDdl').addClass('fa-chevron-down')
-                /*alert($("[id$=hfCantidadSeleccionada]").val())*/
+                if (width <= 1024) {
+                    $('.overlay').css('display', 'none')
+                }
             });
 
             var botones = document.getElementsByTagName("button");
@@ -191,6 +204,7 @@
 
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
     <div class="producto">
+        <div class="overlay"></div>
         <div class="columnaImagen mb-5">
             <div class="divCarouselProducto text-center">
                 <asp:Image ID="imgProductoPC" runat="server" CssClass="Imagenes img-fluid mt-2" />
@@ -237,7 +251,7 @@
                             <label class="iconoDdl fa-solid fa-chevron-down "></label>
                         </div>
                     </div>
-                    <div class="dropdown-content">
+                    <div class="dropdown-content aparecer">
                         <div class="divSpan"><span>1 Unidad</span></div>
                         <div class="divSpan"><span>2 Unidades</span></div>
                         <div class="divSpan"><span>3 Unidades</span></div>
@@ -247,7 +261,7 @@
                         <div class="anadirCantidad mb-3">
                             Cantidad:
                                 <div class="formAnadir">
-                                    <asp:TextBox ID="txtCantidad" CssClass="textboxDentroDdl" runat="server" />
+                                    <asp:TextBox ID="txtCantidad" CssClass="textboxDentroDdl" autocomplete="off" runat="server" />
                                     <button id="btnAplicar" disabled>Aplicar</button>
                                 </div>
                         </div>
@@ -257,11 +271,6 @@
             <asp:HiddenField runat="server" ID="hfCantidadSeleccionada" Value="1" />
             
             <asp:Button ID="btnAgregarAlCarrito" CssClass="btn btn-dark" runat="server" Text="Agregar al carrito" OnClick="btnAgregarAlCarrito_Click" OnClientClick="return validarTalle()" />
-        </div>
-    </div>
-    <div class="modalSeleccionarTalles">
-        <div class="modalAdvertencia ">
-            Se debe seleccionar un talle!
         </div>
     </div>
 </asp:Content>
