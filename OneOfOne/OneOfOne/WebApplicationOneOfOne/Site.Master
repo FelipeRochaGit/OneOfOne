@@ -137,17 +137,15 @@
 
                                         <div class="contenedorCantidad">
                                             <div class="cantidad">
-                                                <div class="text-right">
-                                                    <%--<asp:Button ClientIDMode="Static" CssClass="btnRestar" data-index='<%# Container.ItemIndex %>' Text="-" OnClientClick="return false" runat="server" />--%>
-                                                    <button class="btnRestar" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false"><i class="fa-solid fa-minus" style="color: #fcfcfc;"></i></button>
+                                                <div class="text-center">
+                                                    <button class="btnRestar text-center" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false"><span class="fa-solid fa-minus" style="color: #fcfcfc;"><span /></button>
 
                                                 </div>
                                                 <div class="text-center">
                                                     <asp:TextBox ClientIDMode="Static" runat="server" CssClass="txtCantidad text-center" Text='<%#Eval("Cantidad") %>' disabled="true"></asp:TextBox>
                                                 </div>
-                                                <div class="text-right ">
-                                                    <button class="btnSumar" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
-                                                    <%--<asp:Button ClientIDMode="Static" CssClass="btnSumar" data-index='<%# Container.ItemIndex %>' Text="+" OnClientClick="return false" runat="server" />--%>
+                                                <div class="text-center ">
+                                                    <button class="btnSumar text-center" data-index='<%# Eval("id") + "," + Eval("Talle") %>' data-value="<%#Eval("Precio")%>" onclick="return false"><span class="fa-solid fa-plus" style="color: #ffffff;"></span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -404,9 +402,9 @@
 
         //MOVIMIENTO DEL MENU EN CELULAR
         if (width <= 1024) {
-            if (nombrePagina == 'index.aspx' || nombrePagina=='Producto.aspx') {
+            if (nombrePagina == 'index.aspx' || nombrePagina == 'Producto.aspx') {
                 /*$('.mainNav').css('background', 'rgba(0, 0, 0, .3)');*/
-                    image.src = 'Imagenes/Logo.png';
+                image.src = 'Imagenes/Logo.png';
                 if (nombrePagina == 'Producto.aspx')
                     $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
 
@@ -444,41 +442,67 @@
 
                 });
 
-            } else if (nombrePagina!='index') {
+            }
+            else if (nombrePagina != 'index') {
                 image.src = 'Imagenes/LogoNegro.png';
             }
 
 
-
-
             $(btnMenu).click(function () {
-
-
-                if ($('.Bars').hasClass('fa-bars')) {
-                    $('.menu').css('transform', 'translateX(0)');
-                    //color del header
-                    $('.mainNav').css('background', 'rgba(0, 0, 0, .8)');
-                } else {
-                    $('.menu').css('transform', 'translateX(-100%)');
-                    $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
-
-                }
-                /*console.log(parseInt($('.menu').css('left')));*/
-
-                //SI ESTA ABIERTO EL MENU CAMBIA EL BOTON DE MENU DE HAMBURGUESA A CRUZ
-                $('.Bars').toggleClass('fa-bars fa-xmark');
-                if ($('.Bars').hasClass('fa-bars')) {
-                    menuAbierto = false;
+                if (nombrePagina == 'Catalogo.aspx') {
+/*                    $('.menu').css('top', '0');*/
+                    activarMenuMovilCatalogo();
                 }
                 else {
-                    menuAbierto = true;
+                    activarMenuMovil();
                 }
-
             });
 
 
-            
 
+        }
+
+        function activarMenuMovil() {
+            if ($('.Bars').hasClass('fa-bars')) {
+                $('.menu').css('transform', 'translateX(0)');
+                //color del header
+                $('.mainNav').css('background', 'rgba(0, 0, 0, .8)');
+            } else {
+                $('.menu').css('transform', 'translateX(-100%)');
+                $('.mainNav').css('background', 'rgba(0, 0, 0, .3)');
+
+            }
+            /*console.log(parseInt($('.menu').css('left')));*/
+
+            //SI ESTA ABIERTO EL MENU CAMBIA EL BOTON DE MENU DE HAMBURGUESA A CRUZ
+            $('.Bars').toggleClass('fa-bars fa-xmark');
+            if ($('.Bars').hasClass('fa-bars')) {
+                menuAbierto = false;
+            }
+            else {
+                menuAbierto = true;
+            }
+        }
+        function activarMenuMovilCatalogo() {
+            if ($('.Bars').hasClass('fa-bars')) {
+                $('.menu').css('transform', 'translateX(0)');
+                //color del header
+                $('.mainNav').css('position', 'fixed');
+            } else {
+                $('.menu').css('transform', 'translateX(-100%)');
+                $('.mainNav').css('position', 'unset');
+
+            }
+            /*console.log(parseInt($('.menu').css('left')));*/
+
+            //SI ESTA ABIERTO EL MENU CAMBIA EL BOTON DE MENU DE HAMBURGUESA A CRUZ
+            $('.Bars').toggleClass('fa-bars fa-xmark');
+            if ($('.Bars').hasClass('fa-bars')) {
+                menuAbierto = false;
+            }
+            else {
+                menuAbierto = true;
+            }
         }
 
         $('.btnRestar').click(function () {

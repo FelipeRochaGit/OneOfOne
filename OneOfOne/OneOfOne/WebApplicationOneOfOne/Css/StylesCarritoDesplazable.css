@@ -128,7 +128,9 @@
     }
 
     .itemCarrito .btnRestar, .btnSumar {
-        text-align: center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
         height: 30px;
         width: 30px;
         border-radius: 50%;

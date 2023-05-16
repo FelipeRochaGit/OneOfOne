@@ -218,7 +218,15 @@
     /*NAV*/
     .mainNav {
         position: unset;
-        background-color: white;
+        background: white;
+    }
+    
+    .menu {
+        background: white;
+        color:black!important;
+    }
+    .menu a{
+        color:black!important;
     }
         /*ICONO MENU*/
         .mainNav .Bars {
