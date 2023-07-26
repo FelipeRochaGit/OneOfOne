@@ -178,8 +178,10 @@
                             <asp:Label Text="Total:" runat="server" />
                             <asp:Label ID="lblTotal" Text="" runat="server" />
                         </div>
-                        <asp:Button ID="btnComprar" Text="Comprar" CssClass="btn btn-dark" runat="server" OnClick="btnComprar_Click" />
-                    </footer>
+                        <div class="div-btn-comprar" id="divBtnComprar">
+                        
+                        </div>
+                      </footer>
                 </div>
             </nav>
             <div class="overlay">
@@ -385,7 +387,16 @@
 
 
         $(".Cart").click(function () {
+            let divBtnComprar = document.getElementById("divBtnComprar");
+            $(divBtnComprar).empty();
 
+            let btnComprar = document.createElement("a");
+            btnComprar.setAttribute("id", "btnComprar");
+            btnComprar.setAttribute("class", "btn btn-dark");
+            btnComprar.setAttribute("href", "Datos.aspx");
+            btnComprar.textContent = "Comprar";
+
+            divBtnComprar.appendChild(btnComprar);
             if ($('.Cart').hasClass('fa-cart-plus')) {
                 $('.carrito').css('transform', 'translateX(0)');
                 $('.overlay').css('display', 'block');
