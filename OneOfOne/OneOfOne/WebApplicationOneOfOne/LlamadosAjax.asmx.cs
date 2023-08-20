@@ -19,7 +19,8 @@ namespace WebApplicationOneOfOne
     public class WebService1 : System.Web.Services.WebService
     {
 
-        //[WebMethod(EnableSession = true)]
+        //[WebMethod(Enable
+        //= true)]
         //public void CargarCarrito()
         //{
         //    try

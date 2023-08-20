@@ -41,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Daos\Interfaces\IMasterDao.cs" />
     <Compile Include="Daos\Interfaces\IProductoDao.cs" />
+    <Compile Include="Daos\MasterDao.cs" />
     <Compile Include="Daos\ProductoDao.cs" />
+    <Compile Include="Modelos\Producto.cs" />
+    <Compile Include="Modelos\VentaDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MasterService.cs" />
+    <Compile Include="Services\Interfaces\IMasterService.cs" />
     <Compile Include="Services\Interfaces\IProductoService.cs" />
     <Compile Include="Services\ProductoService.cs" />
   </ItemGroup>
@@ -53,5 +59,6 @@
       <Name>DBConnection</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

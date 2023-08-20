@@ -11,11 +11,11 @@ using System.Web.UI.WebControls;
 
 namespace WebApplicationOneOfOne
 {
-    public partial class Producto : System.Web.UI.Page
+    public partial class Productos : System.Web.UI.Page
     {
         IProductoService _productoService;
 
-        public Producto()
+        public Productos()
         {
             _productoService = new ProductoService();
         }

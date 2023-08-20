@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using OneOfOne.Core.Services;
+using OneOfOne.Core.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,13 +39,22 @@ namespace WebApplicationOneOfOne
             }
 
         }
-        
+
+        protected void btnSuscribirMail_Click(object sender, EventArgs e)
+        {
+           IMasterService masterService = new MasterService();
+            if (!masterService.registrarMail(txtMail.Text)){
+                lblErrorMail.Text = "El email ingresado ya se encuentra suscrito";
+            }
+            
+        }
+
 
         //protected void btnComprar_Click(object sender, EventArgs e)
         //{
         //    try
         //    {
-                
+
         //        Response.Redirect("Datos.aspx");
         //    }
         //    catch (Exception ex)
@@ -61,7 +72,7 @@ namespace WebApplicationOneOfOne
 
 
 
-        
+
 
 
 

@@ -11,7 +11,7 @@ namespace WebApplicationOneOfOne
 {
 
 
-    public partial class Producto
+    public partial class Productos
     {
 
         /// <summary>

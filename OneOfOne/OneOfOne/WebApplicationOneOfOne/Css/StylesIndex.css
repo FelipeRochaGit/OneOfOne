@@ -1,8 +1,9 @@
 ﻿body {
 }
 
-.mainContainer{
-    width:100vw;
+
+.mainContainer {
+    width: 100vw;
 }
 .video-container {
     position: relative;
@@ -210,7 +211,9 @@
 
     .imagen-destacados {
         display: flex;
+        max-height: 200px;
         justify-content: center;
+        height: 35vh;
         background: rgb(148 148 148 /0.1);
     }
 
