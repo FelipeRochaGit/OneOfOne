@@ -45,8 +45,9 @@
     <Compile Include="Daos\Interfaces\IProductoDao.cs" />
     <Compile Include="Daos\MasterDao.cs" />
     <Compile Include="Daos\ProductoDao.cs" />
-    <Compile Include="Modelos\Producto.cs" />
-    <Compile Include="Modelos\VentaDetalle.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Venta.cs" />
+    <Compile Include="Models\VentaDetalle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MasterService.cs" />
     <Compile Include="Services\Interfaces\IMasterService.cs" />
