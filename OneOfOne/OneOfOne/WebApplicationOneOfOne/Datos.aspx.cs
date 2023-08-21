@@ -20,13 +20,13 @@ namespace WebApplicationOneOfOne
                 rpItemsCarrito.DataBind();
 
                 SetearTotales(dt);
-                GuardarDatos(dt);
             }
         }
 
         protected void btnContinuar_Click(object sender, EventArgs e)
         {
-            var a = 0;
+            DataTable dt = (DataTable)Session["dtCarrito"];
+            Guardar(dt);
         }
 
         protected void SetearTotales(DataTable dtCarrito)
@@ -35,12 +35,7 @@ namespace WebApplicationOneOfOne
             float costoDeEnvio = 1;
             float total = 0;
 
-            //hacer con linQ
-            foreach (DataRow row in dtCarrito.Rows)
-            {
-                subTotal += float.Parse(row["PrecioTotal"].ToString());
-            }
-
+            subTotal = dtCarrito.Rows.Cast<DataRow>().Select(x => float.Parse(x.Field<string>("PrecioTotal"))).Sum();
             total = subTotal + costoDeEnvio;
 
             lblSubTotal.Text = subTotal.ToString();
@@ -48,18 +43,20 @@ namespace WebApplicationOneOfOne
             lblTotal.Text = total.ToString();
         }
 
-        protected void GuardarDatos(DataTable dtCarrito)
+        protected void Guardar(DataTable dtCarrito)
         {
+            Venta venta = new Venta();
             List<VentaDetalle> lVentaDetalle = new List<VentaDetalle>();
 
             foreach (DataRow row in dtCarrito.Rows)
             {
                 VentaDetalle vd = new VentaDetalle();
-                vd.IdProducto = 123;
+                vd.IdProducto = long.Parse(row["Id"].ToString());
 
-                lVentaDetalle.Add(vd
-                    );
+                lVentaDetalle.Add(vd);
             }
+
+            venta.VentasDetalle = lVentaDetalle;
         }
     }
 }
