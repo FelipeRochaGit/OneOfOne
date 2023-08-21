@@ -59,12 +59,12 @@ namespace WebApplicationOneOfOne
             {
                 DataSet dsCarrito = new DataSet("ds");
                 dtCarrito.TableName = "dt";
-                dsCarrito.Tables.Add(dtCarrito.Copy());
+                dsCarrito.Tables.Add(dtCarrito.Copy()); //TODO
 
                 _ventaService.Insert(dsCarrito);
 
-                Session["dtCarrito"] = null;
-                Response.Redirect("Index.aspx");
+                Session["dtCarrito"] = null; //TODO
+                Response.Redirect("Index.aspx"); //TODO
             }
             catch (Exception ex)
             {
