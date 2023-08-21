@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneOfOne.Core.Modelos
+namespace OneOfOne.Core.Models
 {
     public class Producto
     {

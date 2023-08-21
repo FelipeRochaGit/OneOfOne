@@ -34,7 +34,8 @@ namespace OneOfOne.Core.Daos
             List<SqlParameter> lParameter = new List<SqlParameter>();
             try
             {
-                lParameter.Add(new SqlParameter("Xml", IdProducto));
+                //lParameter.Add(new SqlParameter("Xml", IdProducto));
+                lParameter.Add(new SqlParameter("IdProducto", IdProducto));
                 dt = base.ListarSP("Producto_Obtener", lParameter).Tables[0];            
             }
             catch (Exception ex)

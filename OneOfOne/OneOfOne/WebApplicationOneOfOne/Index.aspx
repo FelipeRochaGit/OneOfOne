@@ -147,7 +147,7 @@
         <asp:Repeater ID="rpDestacados" runat="server">
             <ItemTemplate>
                 <div class="card-destacados">
-                    <a href="Producto.aspx?IdProducto=<%# Eval("Id") %>">
+                    <a href="Productos.aspx?IdProducto=<%# Eval("Id") %>">
                         <div class="imagen-destacados mb-4">
                             <img src="<%#Eval("imgUrl") %>" class="img-fluid" />
                         </div>
