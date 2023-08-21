@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="Daos\Interfaces\IMasterDao.cs" />
     <Compile Include="Daos\Interfaces\IProductoDao.cs" />
+    <Compile Include="Daos\Interfaces\IVentaDao.cs" />
     <Compile Include="Daos\MasterDao.cs" />
     <Compile Include="Daos\ProductoDao.cs" />
+    <Compile Include="Daos\VentaDao.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Venta.cs" />
     <Compile Include="Models\VentaDetalle.cs" />

@@ -6,11 +6,19 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Runtime.CompilerServices;
 
 namespace WebApplicationOneOfOne
 {
     public partial class Datos : System.Web.UI.Page
     {
+        IVentaService _ventaService;
+
+        public Datos()
+        {
+            _ventaService = new VentaService();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -45,18 +53,21 @@ namespace WebApplicationOneOfOne
 
         protected void Guardar(DataTable dtCarrito)
         {
-            Venta venta = new Venta();
-            List<VentaDetalle> lVentaDetalle = new List<VentaDetalle>();
-
-            foreach (DataRow row in dtCarrito.Rows)
+            try
             {
-                VentaDetalle vd = new VentaDetalle();
-                vd.IdProducto = long.Parse(row["Id"].ToString());
+                DataSet dsCarrito = new DataSet("ds");
+                dtCarrito.TableName = "dt";
+                dsCarrito.Tables.Add(dtCarrito.Copy());
 
-                lVentaDetalle.Add(vd);
+                _ventaService.Insert(dsCarrito);
+
+                Session["dtCarrito"] = null;
+                Response.Redirect("Index.aspx");
             }
-
-            venta.VentasDetalle = lVentaDetalle;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
