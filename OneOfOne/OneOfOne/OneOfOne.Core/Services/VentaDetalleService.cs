@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OneOfOne.Core.Services
 {
-    internal class VentaDetalleService : IVentaDetalleService
+    public class VentaDetalleService : IVentaDetalleService
     {
         public List<VentaDetalle> ListarVentaDetalle()
         {

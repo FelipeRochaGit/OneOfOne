@@ -9,7 +9,7 @@ using System.Xml.Xsl;
 
 namespace OneOfOne.Core.Services
 {
-    internal class VentaService : IVentaService
+    public class VentaService : IVentaService
     {
         public List<Venta> listarVenta()
         {

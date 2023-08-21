@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OneOfOne.Core.Daos.Interfaces
 {
-    internal interface IVentaDetalleDao
+    public interface IVentaDetalleDao
     {
     }
 }

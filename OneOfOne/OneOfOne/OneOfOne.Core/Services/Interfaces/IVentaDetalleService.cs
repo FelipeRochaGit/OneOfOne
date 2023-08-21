@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OneOfOne.Core.Services.Interfaces
 {
-    internal interface IVentaDetalleService
+    public interface IVentaDetalleService
     {
         List<VentaDetalle> ListarVentaDetalle();
     }

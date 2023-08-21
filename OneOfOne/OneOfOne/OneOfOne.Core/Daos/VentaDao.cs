@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OneOfOne.Core.Daos
 {
-    internal class VentaDao
+    public class VentaDao
     {
     }
 }

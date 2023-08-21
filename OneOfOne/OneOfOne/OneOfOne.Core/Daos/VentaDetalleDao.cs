@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OneOfOne.Core.Daos
 {
-    internal class VentaDetalleDao : RepositoryBase, IVentaDetalleDao
+    public class VentaDetalleDao : RepositoryBase, IVentaDetalleDao
     {
     }
 }
